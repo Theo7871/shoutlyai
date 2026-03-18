@@ -1,17 +1,10 @@
 "use client";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import React from "react";
-import Link from "next/link";
+import React, { useRef, useState, useEffect } from "react";
 import { SparklesIcon } from "@heroicons/react/24/outline";
-import { useRef, useState } from "react";
-import IndustrySection from "@/components/IndustrySection";
+import { RefreshCcw } from "lucide-react";
 import PricingSection from "@/components/PricingSection";
-import { CheckCircle, ArrowRight, Star, Zap, RefreshCcw } from "lucide-react";
-import HeroSection from "@/components/HeroSection";
-import { useEffect } from "react";
-import HeroPremium from "@/components/HeroSection";
 import Calender from "@/components/calender";
+import { fetchImages, fetchIndustries } from "@/api/homeApi";
 
 import {
     FaFacebookF,
@@ -27,7 +20,31 @@ import {
     FaWhatsapp,
     FaDiscord,
 } from "react-icons/fa";
-import AIPapersSection from "@/components/AIPapersSection";
+
+// Type definitions
+interface SubIndustry {
+    id: string | number;
+    name: string;
+}
+
+interface ImageItem {
+    id?: string;
+    file?: string;
+    url?: string;
+    name?: string;
+    title?: string;
+}
+
+interface SubIndustry {
+    id: string | number;
+    name: string;
+}
+
+interface Industry {
+    id: string | number;
+    name: string;
+    subIndustries: SubIndustry[];
+}
 
 export default function LandingPage() {
     const icons = [
@@ -56,7 +73,11 @@ export default function LandingPage() {
         document.getElementById(id2)!.style.display = "block";
         document.getElementById(id3)!.style.display = "none";
     }
-    function useTypingEffect(words: string[], speed: number = 50, pause: number = 2000) {
+    function useTypingEffect(
+        words: string[],
+        speed: number = 50,
+        pause: number = 2000,
+    ) {
         const [index, setIndex] = React.useState(0);
         const [subIndex, setSubIndex] = React.useState(0);
         const [reverse, setReverse] = React.useState(false);
@@ -74,22 +95,18 @@ export default function LandingPage() {
                 return;
             }
 
-            const timeout = setTimeout(() => {
-                setSubIndex((prev) => prev + (reverse ? -1 : 1));
-            }, reverse ? 1 : 15);
+            const timeout = setTimeout(
+                () => {
+                    setSubIndex((prev) => prev + (reverse ? -1 : 1));
+                },
+                reverse ? 1 : 15,
+            );
 
             return () => clearTimeout(timeout);
         }, [subIndex, index, reverse, words, speed, pause]);
 
         return words[index].substring(0, subIndex);
     }
-    const socials = [
-        { icon: <FaTwitter />, label: "Twitter" },
-        { icon: <FaInstagram />, label: "Instagram" },
-        { icon: <FaLinkedinIn />, label: "LinkedIn" },
-        { icon: <FaFacebookF />, label: "Facebook" },
-        { icon: <FaYoutube />, label: "YouTube" },
-    ];
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -105,146 +122,61 @@ export default function LandingPage() {
             setIsPlaying(false);
         }
     };
-
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [showSubIndustries, setShowSubIndustries] = useState(false);
     const [selectedIndustry, setSelectedIndustry] = useState<string>("");
-    const [subIndustries, setSubIndustries] = useState<any[]>([]);
-    const [images, setImages] = useState<any[]>([]);
-    const [etag, setEtag] = useState<string | null>(null);
+    const [subIndustries, setSubIndustries] = useState<SubIndustry[]>([]);
+    const [images, setImages] = useState<ImageItem[]>([]);
     const [loadingImages, setLoadingImages] = useState(false);
 
-    const [industries, setIndustries] = useState<any[]>([]);
+    const [industries, setIndustries] = useState<Industry[]>([]);
     const [loadingIndustries, setLoadingIndustries] = useState(true);
-    const [selectedSubIndustry, setSelectedSubIndustry] = useState<
-        string | null
-    >(null);
+    const [selectedSubIndustry, setSelectedSubIndustry] = useState<string | null>(null);
     const refreshImages = async () => {
         setLoadingImages(true);
-
-        try {
-            let url =
-                "https://ai-shoutly-backend.onrender.com/api/display-images";
-            if (selectedIndustry) {
-                url += `?industryId=${selectedIndustry}`;
-            }
-
-            // Reset cache so backend returns new random images
-            setEtag(null);
-
-            const res = await fetch(url);
-            const data = await res.json();
-
-            let imagesArray: any[] = [];
-
-            if (Array.isArray(data)) {
-                imagesArray = data;
-            } else if (Array.isArray(data.images)) {
-                imagesArray = data.images;
-            } else if (Array.isArray(data.data)) {
-                imagesArray = data.data;
-            }
-
-            setImages(imagesArray);
-        } catch (error) {
-            console.error("Refresh failed:", error);
-        } finally {
-            setLoadingImages(false);
-        }
+        const data = await fetchImages(selectedSubIndustry);
+        setImages(data);
+        setLoadingImages(false);
     };
     useEffect(() => {
-        const fetchImages = async () => {
+        const loadImages = async () => {
             setLoadingImages(true);
-
-            try {
-                let url =
-                    "https://ai-shoutly-backend.onrender.com/api/display-images";
-                if (selectedIndustry) {
-                    url += `?industryId=${selectedIndustry}`;
-                }
-
-                const res = await fetch(url);
-                const data = await res.json();
-
-                console.log("Images API response:", data);
-
-                // Normalize response
-                let imagesArray: any[] = [];
-
-                if (Array.isArray(data)) {
-                    imagesArray = data;
-                } else if (Array.isArray(data.images)) {
-                    imagesArray = data.images;
-                } else if (Array.isArray(data.data)) {
-                    imagesArray = data.data;
-                }
-
-                setImages(imagesArray);
-            } catch (error) {
-                console.error("Failed to fetch images:", error);
-            } finally {
-                setLoadingImages(false);
-            }
+            const data = await fetchImages(selectedSubIndustry);
+            setImages(data);
+            setLoadingImages(false);
         };
-
-        fetchImages();
-    }, [selectedIndustry]);
+        loadImages();
+    }, [selectedSubIndustry]);
     // store selected industry id or name
-    const [searchTerm, setSearchTerm] = useState(""); // store search input
+    const [filterTerm, setFilterTerm] = useState(""); // store search input
     // Filter images locally based on search input
     const filteredImages = images.filter((img) => {
-        if (!searchTerm) return true;
+        if (!filterTerm) return true;
         return (
-            img.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            img.title?.toLowerCase().includes(searchTerm.toLowerCase())
+            img.name?.toLowerCase().includes(filterTerm.toLowerCase()) ||
+            img.title?.toLowerCase().includes(filterTerm.toLowerCase())
         );
     });
+    // REPLACE WITH:
     useEffect(() => {
-        const fetchIndustries = async () => {
-            try {
-                const res = await fetch(
-                    "https://ai-shoutly-backend.onrender.com/api/industries/with-subindustries",
-                );
-
-                const data = await res.json();
-                console.log("API response:", data);
-
-                // Normalize API response
-                const industriesArray = Array.isArray(data)
-                    ? data
-                    : data?.industries || data?.data || [];
-
-                const formatted = industriesArray.map((ind: any) => ({
-                    id: ind.id,
-                    name: ind.name,
-                    subIndustries: ind.subIndustries || [],
-                }));
-
-                setIndustries(formatted);
-            } catch (error) {
-                console.error("Industry fetch failed:", error);
-            } finally {
-                setLoadingIndustries(false);
-            }
+        const loadIndustries = async () => {
+            const data = await fetchIndustries();
+            setIndustries(data);
+            setLoadingIndustries(false);
         };
-
-        fetchIndustries();
+        loadIndustries();
     }, []);
-    console.log("Industries state:", industries);
-    const placeholders = [
+    const placeholderOptions = [
         "Promote my coffee shop in Bangalore. Cozy vibe, cold brew specialist...",
         "Real estate agent in Austin. Luxury homes, modern architecture...",
         "Personal trainer for busy CEOs. 15-min workouts, high energy...",
     ];
 
-    const animatedPlaceholder = useTypingEffect(placeholders);
+    const animatedPlaceholder = useTypingEffect(placeholderOptions);
     return (
         <div className="relative bg-white dark:bg-gray-950 font-arial min-h-screen text-gray-900 dark:text-white selection:text-white overflow-hidden">
             {/* GLOBAL FLOATING AI + SOCIAL MEDIA BUBBLES */}
             <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
                 {icons.map((Icon, i) => {
-                    const startX = Math.random() * 100;
-                    const startY = Math.random() * 100;
-
                     return (
                         <div key={i} className="absolute">
                             <div className="text-gray-400/30 text-2xl md:text-3xl bg-white/40 backdrop-blur-md p-4 rounded-full shadow-lg">
@@ -263,8 +195,11 @@ export default function LandingPage() {
                     </div>
                 ))}
             </div>
-            
-            <section id="generator" className="py-14 sm:py-24 bg-white text-slate-900 overflow-hidden">
+
+            <section
+                id="generator"
+                className="py-14 sm:py-24 bg-white text-slate-900 overflow-hidden"
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     {/* Floating Badge - Changed to Brand Orange Gradient */}
                     <div className="flex justify-center mb-5 sm:mb-6">
@@ -275,7 +210,10 @@ export default function LandingPage() {
 
                     {/* Title - Applied Brand Font Weight & Tracking */}
                     <div className="text-3xl sm:text-4xl md:text-6xl text-center mb-3 sm:mb-4 font-black tracking-tighter text-slate-900">
-                        Generate Your <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">Year of Content</span>
+                        Generate Your{" "}
+                        <span className="bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+                            Year of Content
+                        </span>
                     </div>
 
                     {/* Subtitle */}
@@ -300,11 +238,19 @@ export default function LandingPage() {
 
                             <select
                                 value={selectedIndustry}
+                                // REPLACE WITH:
                                 onChange={(e) => {
                                     const id = e.target.value;
                                     setSelectedIndustry(id);
-                                    const selected = industries.find((ind: any) => String(ind.id) === String(id));
-                                    setSubIndustries(selected?.subIndustries || []);
+                                    setSelectedSubIndustry(null); // 👈 reset sub-industry selection
+                                    setImages([]); // 👈 clear images until new sub-industry is picked
+                                    const selected = industries.find(
+                                        (ind: Industry) =>
+                                            String(ind.id) === String(id),
+                                    );
+                                    setSubIndustries(
+                                        selected?.subIndustries || [],
+                                    );
                                 }}
                                 className="w-full mb-6 sm:mb-8 px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm sm:text-base font-medium text-slate-700"
                             >
@@ -312,8 +258,11 @@ export default function LandingPage() {
                                 {loadingIndustries ? (
                                     <option>Loading industries...</option>
                                 ) : (
-                                    industries.map((industry: any) => (
-                                        <option key={industry.id} value={industry.id}>
+                                    industries.map((industry: Industry) => (
+                                        <option
+                                            key={industry.id}
+                                            value={industry.id}
+                                        >
                                             {industry.name}
                                         </option>
                                     ))
@@ -327,19 +276,27 @@ export default function LandingPage() {
                                     </p>
                                 ) : (
                                     subIndustries.map((sub, i) => {
-                                        const isActive = selectedSubIndustry === String(sub.id);
+                                        const isActive =
+                                            selectedSubIndustry ===
+                                            String(sub.id);
                                         return (
                                             <div
                                                 key={sub.id || i}
-                                                onClick={() => setSelectedSubIndustry(String(sub.id))}
+                                                onClick={() => {
+                                                    setSelectedSubIndustry(String(sub.id));
+                                                    window.location.hash = "#gcontent"; // Scroll to content section on sub-industry select
+                                                }}
                                                 className={`group cursor-pointer relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300
-                                                ${isActive
-                                                    ? "border-orange-500 bg-white shadow-lg shadow-orange-100 scale-[1.02] ring-1 ring-orange-500"
-                                                    : "border-slate-200 bg-white hover:border-orange-300 hover:shadow-md"
+                                                ${
+                                                    isActive
+                                                        ? "border-orange-500 bg-white shadow-lg shadow-orange-100 scale-[1.02] ring-1 ring-orange-500"
+                                                        : "border-slate-200 bg-white hover:border-orange-300 hover:shadow-md"
                                                 }`}
                                             >
                                                 <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 flex items-center justify-center mb-2 sm:mb-3 mx-auto group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
-                                                    <span className="text-xs sm:text-sm font-bold">{i + 1}</span>
+                                                    <span className="text-xs sm:text-sm font-bold">
+                                                        {i + 1}
+                                                    </span>
                                                 </div>
                                                 <span className="text-xs sm:text-sm text-center block font-bold text-slate-600 group-hover:text-slate-900">
                                                     {sub.name}
@@ -368,21 +325,15 @@ export default function LandingPage() {
                                 </h3>
                             </div>
 
-                            
+                            {/* ... existing code ... */}
 
-                            
-                                
-                                    {/* ... existing code ... */}
+                            <textarea
+                                className="w-full min-h-[140px] sm:min-h-[180px] p-4 bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-sm sm:text-base mb-4 font-medium text-slate-700 shadow-inner"
+                                // INSERT ANIMATED PLACEHOLDER HERE
+                                placeholder={animatedPlaceholder}
+                            />
 
-                                    <textarea
-                                        className="w-full min-h-[140px] sm:min-h-[180px] p-4 bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-sm sm:text-base mb-4 font-medium text-slate-700 shadow-inner"
-                                        // INSERT ANIMATED PLACEHOLDER HERE
-                                        placeholder={animatedPlaceholder} 
-                                    />
-
-                                    {/* ... rest of the buttons and CTA ... */}
-                                
-                            
+                            {/* ... rest of the buttons and CTA ... */}
 
                             <div className="flex flex-col sm:flex-row gap-3 mb-8">
                                 <button className="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-700 text-xs sm:text-sm font-bold hover:border-orange-500 hover:text-orange-500 transition-all">
@@ -394,8 +345,8 @@ export default function LandingPage() {
                             </div>
 
                             <p className="text-center text-xs sm:text-sm text-slate-900 mb-8 font-medium">
-                              No credit card required • 2-min setup <br />
-                              100+ founders already automating
+                                No credit card required • 2-min setup <br />
+                                100+ founders already automating
                             </p>
 
                             {/* Power CTA Button - Changed to Brand Black/Orange */}
@@ -406,11 +357,8 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
-            <section className="py-14 sm:py-24 bg-white overflow-hidden">
+            <section id="gcontent" className="py-14 sm:py-24 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                    {/* Floating Badge */}
-                    <div className="flex justify-center mb-5 sm:mb-6"></div>
-
                     {/* Title */}
                     <h2 className="text-2xl sm:text-3xl md:text-5xl text-center text-black mb-3 sm:mb-4">
                         Preview AI-Generated Posts Tailored for Your Business
@@ -423,11 +371,9 @@ export default function LandingPage() {
                     </p>
 
                     {/* Main Card */}
-                    <div className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-200 overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-
+                    <div className="relative bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-lg border border-gray-100">
                         {/* Top Controls */}
-                        <div className="flex flex-col gap-6 mb-8 sm:mb-10 relative z-10">
+                        <div className="flex flex-col gap-6 mb-8 sm:mb-10">
                             {/* Tabs */}
                             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                                 {[
@@ -437,12 +383,12 @@ export default function LandingPage() {
                                 ].map((tab, i) => (
                                     <button
                                         key={i}
-                                        className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition
-                    ${
-                        i === 0
-                            ? "bg-black text-white shadow-lg"
-                            : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
-                    }`}
+                                        className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200
+                                            ${
+                                                i === 0
+                                                    ? "bg-black text-white shadow-md"
+                                                    : "bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100"
+                                            }`}
                                     >
                                         {tab}
                                     </button>
@@ -451,37 +397,57 @@ export default function LandingPage() {
                         </div>
 
                         {/* Templates Grid */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                            {filteredImages.length === 0 ? (
-                                <p className="col-span-full text-center text-gray-500">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
+                            {loadingImages ? (
+                                <p className="col-span-full text-center text-gray-400 py-12">
+                                    Loading templates... (may take up to 60s on
+                                    first load)
+                                </p>
+                            ) : filteredImages.length === 0 ? (
+                                <p className="col-span-full text-center text-gray-400 py-12">
                                     No images found
                                 </p>
                             ) : (
-                                filteredImages.map((img, index) => (
+                                filteredImages.slice(0, 8).map((img, index) => (
                                     <div
                                         key={img.id || index}
-                                        className="relative w-full h-48 rounded-xl overflow-hidden"
+                                        className="relative group aspect-square rounded-xl overflow-hidden bg-gray-50"
                                     >
+                                        {/* Lazy loading image with low-quality placeholder */}
                                         <img
-                                            src={
-                                                img.file
-                                                    ? img.file.startsWith(
-                                                          "http",
-                                                      )
-                                                        ? img.file
-                                                        : `https://ai-shoutly-backend.onrender.com${img.file}`
-                                                    : img.url
-                                            }
+                                            src={img.file || img.url}
                                             alt={img.name || "Template"}
-                                            className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                                            loading="lazy"
+                                            decoding="async"
+                                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                            onError={(e) => {
+                                                e.currentTarget.src =
+                                                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%23f3f4f6'/%3E%3Ctext x='8' y='25' font-family='Arial' font-size='14' fill='%239ca3af'%3E📷%3C/text%3E%3C/svg%3E";
+                                            }}
                                         />
-                                        <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 text-xs rounded">
+                                        <span className="absolute bottom-2 left-2 text-white bg-black/60 backdrop-blur-sm px-2 py-1 text-xs rounded-md font-medium">
                                             {img.name}
                                         </span>
+
+                                        {/* Quick view overlay - only on hover */}
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                                            <button className="bg-white text-black px-3 py-1.5 rounded-lg text-xs font-medium shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-200">
+                                                Quick view
+                                            </button>
+                                        </div>
                                     </div>
                                 ))
                             )}
                         </div>
+
+                        {/* Load more button if needed */}
+                        {filteredImages.length > 8 && (
+                            <div className="flex justify-center mt-8">
+                                <button className="px-6 py-2.5 bg-gray-900 text-white text-sm font-medium rounded-full hover:bg-gray-800 transition-colors duration-200 shadow-md">
+                                    Load more templates
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
@@ -514,9 +480,12 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
-        <Calender />
+            <Calender />
 
-            <section id="who-we-help" className="py-12 bg-white overflow-hidden">
+            <section
+                id="who-we-help"
+                className="py-12 bg-white overflow-hidden"
+            >
                 <div className="max-w-7xl mx-auto px-6 text-center">
                     {/* Gradient Badge with Floating Particle Motion */}
                     <div className="flex justify-center mb-6">
@@ -586,8 +555,6 @@ export default function LandingPage() {
                                     <li>• Weight Loss / Body Transformation</li>
                                 </div>
                             </ul>
-                            <script src="script.js"></script>
-
                             {/* More Link */}
                             <a
                                 id="more1"
@@ -1228,13 +1195,13 @@ export default function LandingPage() {
                                 >
                                     <li>• Kids Clothing</li>
                                     <li>• Laptops & Computers</li>
-                                    <li>• Men's Clothing</li>
+                                    <li>• Men&apos;s Clothing</li>
                                     <li>• Online Stores</li>
                                     <li>• Smartphones</li>
                                     <li>• Supermarkets</li>
                                     <li>• Toy Stores</li>
                                     <li>• Wearables</li>
-                                    <li>• Women's Clothing</li>
+                                    <li>• Women&apos;s Clothing</li>
                                 </div>
                             </ul>
 
@@ -1556,7 +1523,10 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
-            <section id="library" className="pt-2 pb-5 sm:pt-2 sm:pb-5 bg-white overflow-hidden">
+            <section
+                id="library"
+                className="pt-2 pb-5 sm:pt-2 sm:pb-5 bg-white overflow-hidden"
+            >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
                     {/* Floating Badge */}
                     <div className="flex justify-center mb-5 sm:mb-6">
@@ -1610,29 +1580,113 @@ export default function LandingPage() {
                                     type="text"
                                     placeholder="Search templates"
                                     className="w-full px-4 py-2 rounded-xl bg-white text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
-                                    value={searchTerm}
+                                    value={filterTerm}
                                     onChange={(e) =>
-                                        setSearchTerm(e.target.value)
+                                        setFilterTerm(e.target.value)
                                     }
                                 />
 
-                                <select
-                                    className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none text-sm"
-                                    value={selectedIndustry}
-                                    onChange={(e) =>
-                                        setSelectedIndustry(e.target.value)
-                                    }
-                                >
-                                    <option value="">All Industries</option>
-                                    {industries.map((industry: any) => (
+                                
+
+                            <select
+                                value={selectedIndustry}
+                                // REPLACE WITH:
+                                onChange={(e) => {
+                                    const id = e.target.value;
+                                    setSelectedIndustry(id);
+                                    setSelectedSubIndustry(null); // 👈 reset sub-industry selection
+                                    setImages([]); // 👈 clear images until new sub-industry is picked
+                                    const selected = industries.find(
+                                        (ind: Industry) =>
+                                            String(ind.id) === String(id),
+                                    );
+                                    setSubIndustries(
+                                        selected?.subIndustries || [],
+                                    );
+                                    setShowSubIndustries(true); // 👈 show sub-industry modal
+                                }}
+                                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none text-sm"
+                            >
+                                <option value="">Choose your industry</option>
+                                {loadingIndustries ? (
+                                    <option>Loading industries...</option>
+                                ) : (
+                                    industries.map((industry: Industry) => (
                                         <option
                                             key={industry.id}
                                             value={industry.id}
                                         >
                                             {industry.name}
                                         </option>
-                                    ))}
-                                </select>
+                                        
+                                    ))
+                                )}
+                            </select>
+                           
+
+                                
+
+                                {showSubIndustries && (
+                                    <div className="fixed inset-0 flex justify-center items-center z-50 bg-black/20 backdrop-blur-sm">
+                                        <div className="relative bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8 w-full max-w-2xl mx-4">
+                                            
+                                            {/* Close button */}
+                                            <button 
+                                                onClick={() => setShowSubIndustries(false)} 
+                                                className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors"
+                                            >
+                                                ✕
+                                            </button>
+
+                                            <h3 className="text-base sm:text-lg font-bold text-slate-700 mb-4 text-center">
+                                                Select a Sub-Industry
+                                            </h3>
+
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+                                                {subIndustries.length === 0 ? (
+                                                    <p className="text-sm text-slate-400 col-span-full text-center py-10 font-medium">
+                                                        Select an industry to see sub-categories
+                                                    </p>
+                                                ) : (
+                                                    subIndustries.map((sub, i) => {
+                                                        const isActive = selectedSubIndustry === String(sub.id);
+                                                        return (
+                                                            <div
+                                                                key={sub.id || i}
+                                                                onClick={() => {
+                                                                    setSelectedSubIndustry(String(sub.id));
+                                                                    setShowSubIndustries(false);
+                                                                }}
+                                                                className={`group cursor-pointer relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300 z-10
+                                                                    ${
+                                                                        isActive
+                                                                            ? "border-orange-500 bg-white shadow-xl shadow-orange-200/70 scale-[1.04] ring-1 ring-orange-500 -translate-y-1"
+                                                                            : "border-slate-200 bg-white shadow-md shadow-slate-200/60 hover:border-orange-300 hover:shadow-xl hover:shadow-slate-200/80 hover:-translate-y-1 hover:scale-[1.02]"
+                                                                    }`}
+                                                            >
+                                                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 flex items-center justify-center mb-2 sm:mb-3 mx-auto group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
+                                                                    <span className="text-xs sm:text-sm font-bold">
+                                                                        {i + 1}
+                                                                    </span>
+                                                                </div>
+                                                                <span className="text-xs sm:text-sm text-center block font-bold text-slate-600 group-hover:text-slate-900">
+                                                                    {sub.name}
+                                                                </span>
+                                                                {isActive && (
+                                                                    <div className="absolute top-2 right-2 w-2 h-2 rounded-full bg-orange-500" />
+                                                                )}
+                                                            </div>
+                                                        );
+                                                    })
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                
+
+                                
 
                                 {/* Refresh Button */}
                                 <button
@@ -1649,26 +1703,23 @@ export default function LandingPage() {
 
                         {/* Templates Grid */}
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-8 gap-4">
-                            {filteredImages.length === 0 ? (
-                                <p className="col-span-full text-center text-gray-500">
+                            {loadingImages ? (
+                                <p className="col-span-full text-center text-gray-400 py-12">
+                                    Loading templates... (may take up to 60s on
+                                    first load)
+                                </p>
+                            ) : filteredImages.length === 0 ? (
+                                <p className="col-span-full text-center text-gray-400 py-12">
                                     No images found
                                 </p>
                             ) : (
-                                filteredImages.map((img, index) => (
+                                filteredImages.slice(0, 8).map((img, index) => (
                                     <div
                                         key={img.id || index}
                                         className="relative w-full h-48 rounded-xl overflow-hidden"
                                     >
                                         <img
-                                            src={
-                                                img.file
-                                                    ? img.file.startsWith(
-                                                          "http",
-                                                      )
-                                                        ? img.file
-                                                        : `https://ai-shoutly-backend.onrender.com${img.file}`
-                                                    : img.url
-                                            }
+                                            src={img.file || img.url}
                                             alt={img.name || "Template"}
                                             className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
                                         />

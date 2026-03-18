@@ -28,6 +28,7 @@ export default function Header() {
     };
 
     return (
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
         <div className="relative bg-white font-arial py-10 text-gray-900 dark:text-white selection:text-white overflow-hidden">
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
@@ -255,5 +256,6 @@ export default function Header() {
                 )}
             </nav>
         </div>
+        </header>
     );
 }

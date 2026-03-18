@@ -101,7 +101,7 @@ const Footer = () => {
                     {category.sublinks.map((linkText: string, linkIdx: number) => (
                       <li key={linkIdx}>
                         <a 
-                          href={`/industries/${linkText.toLowerCase().replace(/\s+/g, '-')}`} 
+                          
                           className="text-gray-400 hover:text-white text-sm transition-colors duration-200 flex items-center group"
                         >
                           <ChevronRight className="w-3 h-3 mr-1 opacity-0 group-hover:opacity-100 transition-opacity" />

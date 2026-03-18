@@ -2,11 +2,23 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation"; // ✅ Fixed import
+import { signIn } from "next-auth/react";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 
 export default function SignInAccountPage() {
-    const router = useRouter();
+    const router = useRouter(); // ✅ Added router
+    const searchParams = useSearchParams();
+    const error = searchParams.get("error");
+
+    const onGoogleSignIn = () => {
+        signIn("google", { callbackUrl: "/account-setup" });
+    };
+
+    const onEmailSignIn = () => {
+        // Add your email/password sign-in logic here
+        router.push("/account-setup");
+    };
 
     return (
         <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
@@ -43,6 +55,7 @@ export default function SignInAccountPage() {
 
                 {/* Google Sign-in */}
                 <button
+                    onClick={onGoogleSignIn}
                     className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-xl py-3 mb-6 hover:bg-gray-50 transition"
                 >
                     <Image
@@ -58,6 +71,12 @@ export default function SignInAccountPage() {
                         Sign in with Google
                     </span>
                 </button>
+
+                {error && (
+                    <div className="mb-6 rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
+                        Sign-in failed: {error}
+                    </div>
+                )}
 
                 {/* Email */}
                 <label
@@ -109,9 +128,9 @@ export default function SignInAccountPage() {
                     </Link>
                 </div>
 
-                {/* Sign In Button */}
+                {/* Sign In Button - ✅ Fixed */}
                 <button
-                    onClick={() => router.push("/account-setup")}
+                    onClick={onEmailSignIn}
                     className="w-full h-12 bg-[#000000] text-white rounded-xl hover:opacity-90 transition mb-4"
                     style={{ fontFamily: "Arial", fontWeight: 400 }}
                 >
@@ -119,7 +138,7 @@ export default function SignInAccountPage() {
                 </button>
 
                 <p className="text-center text-sm text-gray-600 font-arial">
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <Link href="/sign-up" className="font-semibold text-[#000000] hover:underline font-arial">
                         Sign up
                     </Link>
