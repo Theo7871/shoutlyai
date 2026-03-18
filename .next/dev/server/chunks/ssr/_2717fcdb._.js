@@ -9,7 +9,7 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/react/index.js [app-ssr] (ecmascript)"); // ✅ Add useSession
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next-auth/react/index.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/image.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$heroicons$2f$react$2f$24$2f$outline$2f$esm$2f$UserIcon$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__UserIcon$3e$__ = __turbopack_context__.i("[project]/node_modules/@heroicons/react/24/outline/esm/UserIcon.js [app-ssr] (ecmascript) <export default as UserIcon>");
@@ -24,59 +24,21 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f40$heroicons$
 ;
 function CreateAccountPage() {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
-    const { data: session, status } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSession"])(); // ✅ Get session
+    const { data: session, status } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useSession"])();
     const [name, setName] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [email, setEmail] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("");
-    // ✅ Check if user is already logged in
-    if (status === "authenticated" && session) {
-        console.log("✅ User is authenticated:", session.user);
-        console.log("✅ Access Token:", session.accessToken); // Your token!
-        console.log("✅ ID Token:", session.idToken); // For backend
-    // Redirect if needed
-    // router.push("/dashboard");
-    }
-    const handleGoogleSignIn = async ()=>{
-        setLoading(true);
-        try {
-            // This will redirect to Google and come back
-            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["signIn"])("google", {
-                callbackUrl: "/",
-                redirect: true // Let NextAuth handle redirect
-            });
-        // Note: Code after signIn won't run because of redirect
-        // The token will be available in useSession after redirect
-        } catch (err) {
-            console.error("Google sign-in error:", err);
-            setError("Something went wrong with Google sign-in. Please try again.");
-            setLoading(false);
-        }
-    };
-    // ✅ Function to manually get token and send to backend
-    const handleGoogleSignInWithBackend = async ()=>{
-        setLoading(true);
-        try {
-            // Use redirect: false to stay on page and handle response
-            const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["signIn"])("google", {
-                redirect: true,
-                callbackUrl: "/"
-            });
-            console.log("Sign in result:", result);
-            if (result?.error) {
-                setError(result.error);
-                setLoading(false);
-                return;
-            }
-            if (result?.ok) {
-                // Get session to access tokens
-                const session = await fetch("/api/auth/session").then((res)=>res.json());
-                console.log("✅ Session data:", session);
-                console.log("✅ Access Token:", session.accessToken);
-                console.log("✅ ID Token:", session.idToken);
-                // Send to your backend
-                if (session.idToken) {
-                    const backendRes = await fetch("https://ai-shoutly-backend.onrender.com/api/auth/google/login", {
+    // ✅ This runs when session changes (after Google login)
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        if (status === "authenticated" && session) {
+            console.log("✅ User is authenticated:", session.user);
+            console.log("✅ Access Token:", session.accessToken); // Fixed!
+            console.log("✅ ID Token:", session.idToken);
+            // Send token to your backend
+            const sendTokenToBackend = async ()=>{
+                try {
+                    const response = await fetch("https://ai-shoutly-backend.onrender.com/api/auth/google/login", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
@@ -85,20 +47,36 @@ function CreateAccountPage() {
                             idToken: session.idToken
                         })
                     });
-                    const data = await backendRes.json();
+                    const data = await response.json();
                     console.log("✅ Backend response:", data);
                     // Store backend token if needed
                     if (data.token) {
                         localStorage.setItem("backendToken", data.token);
                     }
+                    // Redirect to home or dashboard
+                    router.push("/");
+                } catch (error) {
+                    console.error("Backend error:", error);
                 }
-                // Redirect after everything is done
-                router.push("/");
-            }
+            };
+            sendTokenToBackend();
+        }
+    }, [
+        status,
+        session,
+        router
+    ]);
+    const handleGoogleSignIn = async ()=>{
+        setLoading(true);
+        setError("");
+        try {
+            // This will redirect to Google and come back
+            await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2d$auth$2f$react$2f$index$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["signIn"])("google", {
+                callbackUrl: "/"
+            });
         } catch (err) {
             console.error("Google sign-in error:", err);
             setError("Something went wrong with Google sign-in. Please try again.");
-        } finally{
             setLoading(false);
         }
     };
@@ -127,6 +105,7 @@ function CreateAccountPage() {
                 setLoading(false);
                 return;
             }
+            // Success: OTP sent
             alert(`OTP sent to ${data.email}`);
             router.push("/verification?email=" + encodeURIComponent(email));
         } catch (err) {
@@ -150,12 +129,12 @@ function CreateAccountPage() {
                     className: "mx-auto"
                 }, void 0, false, {
                     fileName: "[project]/app/sign-up/page.tsx",
-                    lineNumber: 143,
+                    lineNumber: 111,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/sign-up/page.tsx",
-                lineNumber: 142,
+                lineNumber: 110,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -163,14 +142,18 @@ function CreateAccountPage() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
                         className: "text-2xl text-center text-black mb-2",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
                         children: "Create Account"
                     }, void 0, false, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 156,
+                        lineNumber: 124,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: handleGoogleSignInWithBackend,
+                        onClick: handleGoogleSignIn,
                         disabled: loading,
                         className: "w-full flex items-center justify-center gap-3 h-14 border border-gray-100 rounded-2xl text-sm font-bold text-gray-900 hover:bg-gray-50 transition-all mb-8 shadow-sm disabled:opacity-70",
                         children: [
@@ -185,7 +168,7 @@ function CreateAccountPage() {
                                         fill: "#4285F4"
                                     }, void 0, false, {
                                         fileName: "[project]/app/sign-up/page.tsx",
-                                        lineNumber: 167,
+                                        lineNumber: 135,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -193,7 +176,7 @@ function CreateAccountPage() {
                                         fill: "#34A853"
                                     }, void 0, false, {
                                         fileName: "[project]/app/sign-up/page.tsx",
-                                        lineNumber: 168,
+                                        lineNumber: 136,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -201,7 +184,7 @@ function CreateAccountPage() {
                                         fill: "#FBBC05"
                                     }, void 0, false, {
                                         fileName: "[project]/app/sign-up/page.tsx",
-                                        lineNumber: 169,
+                                        lineNumber: 137,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
@@ -209,28 +192,63 @@ function CreateAccountPage() {
                                         fill: "#EA4335"
                                     }, void 0, false, {
                                         fileName: "[project]/app/sign-up/page.tsx",
-                                        lineNumber: 170,
+                                        lineNumber: 138,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 166,
+                                lineNumber: 134,
                                 columnNumber: 21
                             }, this),
                             loading ? "Signing in..." : "Sign up with Google"
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 161,
+                        lineNumber: 129,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex items-center gap-3 mb-6",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "h-px bg-gray-200 flex-1"
+                            }, void 0, false, {
+                                fileName: "[project]/app/sign-up/page.tsx",
+                                lineNumber: 145,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "text-sm text-gray-500",
+                                children: "or"
+                            }, void 0, false, {
+                                fileName: "[project]/app/sign-up/page.tsx",
+                                lineNumber: 146,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "h-px bg-gray-200 flex-1"
+                            }, void 0, false, {
+                                fileName: "[project]/app/sign-up/page.tsx",
+                                lineNumber: 147,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/sign-up/page.tsx",
+                        lineNumber: 144,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                         className: "block text-sm text-gray-700 mb-1",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
                         children: "Full Name"
                     }, void 0, false, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 176,
+                        lineNumber: 151,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -240,7 +258,7 @@ function CreateAccountPage() {
                                 className: "w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 180,
+                                lineNumber: 155,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -248,24 +266,32 @@ function CreateAccountPage() {
                                 placeholder: "John Doe",
                                 value: name,
                                 onChange: (e)=>setName(e.target.value),
-                                className: "w-full pl-10 pr-4 py-3 border border-gray-300 text-black rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                                className: "w-full pl-10 pr-4 py-3 border border-gray-300 text-black rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400",
+                                style: {
+                                    fontFamily: "Arial",
+                                    fontWeight: 400
+                                }
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 181,
+                                lineNumber: 156,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 179,
+                        lineNumber: 154,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                         className: "block text-sm text-gray-700 mb-1",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
                         children: "Email Address"
                     }, void 0, false, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 190,
+                        lineNumber: 167,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -275,7 +301,7 @@ function CreateAccountPage() {
                                 className: "w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2"
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 194,
+                                lineNumber: 171,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -283,7 +309,57 @@ function CreateAccountPage() {
                                 placeholder: "you@company.com",
                                 value: email,
                                 onChange: (e)=>setEmail(e.target.value),
-                                className: "w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                                className: "w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400",
+                                style: {
+                                    fontFamily: "Arial",
+                                    fontWeight: 400
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/app/sign-up/page.tsx",
+                                lineNumber: 172,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/sign-up/page.tsx",
+                        lineNumber: 170,
+                        columnNumber: 17
+                    }, this),
+                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-red-500 text-sm mb-2",
+                        children: error
+                    }, void 0, false, {
+                        fileName: "[project]/app/sign-up/page.tsx",
+                        lineNumber: 182,
+                        columnNumber: 27
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: handleRegister,
+                        disabled: loading,
+                        className: "w-full h-12 bg-[#000000] text-white rounded-xl hover:opacity-90 transition mb-4",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
+                        children: loading ? "Creating Account..." : "Create Account"
+                    }, void 0, false, {
+                        fileName: "[project]/app/sign-up/page.tsx",
+                        lineNumber: 184,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-center text-sm text-gray-600 mb-4",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
+                        children: [
+                            "Already have an account?",
+                            " ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/sign-in",
+                                className: "font-semibold text-[#000000] hover:underline",
+                                children: "Sign in"
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
                                 lineNumber: 195,
@@ -295,46 +371,12 @@ function CreateAccountPage() {
                         lineNumber: 193,
                         columnNumber: 17
                     }, this),
-                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-red-500 text-sm mb-2",
-                        children: error
-                    }, void 0, false, {
-                        fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 204,
-                        columnNumber: 27
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                        onClick: handleRegister,
-                        disabled: loading,
-                        className: "w-full h-12 bg-[#000000] text-white rounded-xl hover:opacity-90 transition mb-4",
-                        children: loading ? "Creating Account..." : "Create Account"
-                    }, void 0, false, {
-                        fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 206,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "text-center text-sm text-gray-600 mb-4",
-                        children: [
-                            "Already have an account?",
-                            " ",
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: "/sign-in",
-                                className: "font-semibold text-[#000000] hover:underline",
-                                children: "Sign in"
-                            }, void 0, false, {
-                                fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 216,
-                                columnNumber: 21
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 214,
-                        columnNumber: 17
-                    }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "text-center text-xs text-gray-500",
+                        style: {
+                            fontFamily: "Arial",
+                            fontWeight: 400
+                        },
                         children: [
                             "By creating an account, you agree to our",
                             " ",
@@ -343,7 +385,7 @@ function CreateAccountPage() {
                                 children: "Terms of Service"
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 223,
+                                lineNumber: 202,
                                 columnNumber: 21
                             }, this),
                             " and",
@@ -353,25 +395,25 @@ function CreateAccountPage() {
                                 children: "Privacy Policy"
                             }, void 0, false, {
                                 fileName: "[project]/app/sign-up/page.tsx",
-                                lineNumber: 224,
+                                lineNumber: 203,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/sign-up/page.tsx",
-                        lineNumber: 221,
+                        lineNumber: 200,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/sign-up/page.tsx",
-                lineNumber: 154,
+                lineNumber: 122,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/sign-up/page.tsx",
-        lineNumber: 139,
+        lineNumber: 107,
         columnNumber: 9
     }, this);
 }

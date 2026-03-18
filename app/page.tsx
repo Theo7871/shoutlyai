@@ -122,6 +122,33 @@ export default function LandingPage() {
             setIsPlaying(false);
         }
     };
+    const scrollToSectionInOneSecond = (sectionId: string) => {
+        const target = document.getElementById(sectionId);
+        if (!target) return;
+
+        const startY = window.scrollY;
+        const targetY = target.getBoundingClientRect().top + window.scrollY;
+        const distance = targetY - startY;
+        const duration = 1000;
+        const startTime = performance.now();
+
+        const easeInOutCubic = (t: number) =>
+            t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+        const step = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = easeInOutCubic(progress);
+
+            window.scrollTo(0, startY + distance * eased);
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            }
+        };
+
+        requestAnimationFrame(step);
+    };
     const [showSubIndustries, setShowSubIndustries] = useState(false);
     const [selectedIndustry, setSelectedIndustry] = useState<string>("");
     const [subIndustries, setSubIndustries] = useState<SubIndustry[]>([]);
@@ -131,6 +158,8 @@ export default function LandingPage() {
     const [industries, setIndustries] = useState<Industry[]>([]);
     const [loadingIndustries, setLoadingIndustries] = useState(true);
     const [selectedSubIndustry, setSelectedSubIndustry] = useState<string | null>(null);
+    const [pendingSubIndustry, setPendingSubIndustry] = useState<string | null>(null);
+    const [brandDescription, setBrandDescription] = useState<string>("");
     const refreshImages = async () => {
         setLoadingImages(true);
         const data = await fetchImages(selectedSubIndustry);
@@ -243,6 +272,7 @@ export default function LandingPage() {
                                     const id = e.target.value;
                                     setSelectedIndustry(id);
                                     setSelectedSubIndustry(null); // 👈 reset sub-industry selection
+                                    setPendingSubIndustry(null);
                                     setImages([]); // 👈 clear images until new sub-industry is picked
                                     const selected = industries.find(
                                         (ind: Industry) =>
@@ -277,14 +307,14 @@ export default function LandingPage() {
                                 ) : (
                                     subIndustries.map((sub, i) => {
                                         const isActive =
-                                            selectedSubIndustry ===
+                                            pendingSubIndustry ===
                                             String(sub.id);
                                         return (
                                             <div
                                                 key={sub.id || i}
                                                 onClick={() => {
-                                                    setSelectedSubIndustry(String(sub.id));
-                                                    window.location.hash = "#gcontent"; // Scroll to content section on sub-industry select
+                                                    setPendingSubIndustry(String(sub.id));
+                                                    
                                                 }}
                                                 className={`group cursor-pointer relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300
                                                 ${
@@ -328,8 +358,9 @@ export default function LandingPage() {
                             {/* ... existing code ... */}
 
                             <textarea
+                                value={brandDescription}
+                                onChange={(e) => setBrandDescription(e.target.value)}
                                 className="w-full min-h-[140px] sm:min-h-[180px] p-4 bg-white rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-sm sm:text-base mb-4 font-medium text-slate-700 shadow-inner"
-                                // INSERT ANIMATED PLACEHOLDER HERE
                                 placeholder={animatedPlaceholder}
                             />
 
@@ -350,7 +381,27 @@ export default function LandingPage() {
                             </p>
 
                             {/* Power CTA Button - Changed to Brand Black/Orange */}
-                            <button className="w-full py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-base sm:text-lg font-black tracking-tight hover:brightness-110 transition-all active:scale-95 shadow-xl shadow-orange-200 uppercase">
+                            <button 
+                                disabled={!selectedIndustry || !pendingSubIndustry || !brandDescription.trim()}
+                                onClick={async () => {
+                                    if (selectedIndustry && pendingSubIndustry && brandDescription.trim()) {
+                                        setSelectedSubIndustry(pendingSubIndustry); // Set the selected sub-industry to trigger useEffect for fetching images
+                                        // Redirect first for faster UX
+                                        scrollToSectionInOneSecond("gcontent");
+
+                                        // Fetch images for the selected sub-industry
+                                        setLoadingImages(true);
+                                        const data = await fetchImages(pendingSubIndustry);
+                                        setImages(data);
+                                        setLoadingImages(false);
+                                    }
+                                }}
+                                className={`w-full py-3 sm:py-4 rounded-2xl text-white text-base sm:text-lg font-black tracking-tight transition-all active:scale-95 shadow-xl uppercase ${
+                                    selectedIndustry && pendingSubIndustry && brandDescription.trim()
+                                        ? "bg-gradient-to-r from-orange-500 to-red-600 hover:brightness-110 cursor-pointer"
+                                        : "bg-gray-400 cursor-not-allowed opacity-60"
+                                }`}
+                            >
                                 Generate 365 Days of Content
                             </button>
                         </div>
@@ -1595,6 +1646,7 @@ export default function LandingPage() {
                                     const id = e.target.value;
                                     setSelectedIndustry(id);
                                     setSelectedSubIndustry(null); // 👈 reset sub-industry selection
+                                    setPendingSubIndustry(null); // 👈 reset pending sub-industry
                                     setImages([]); // 👈 clear images until new sub-industry is picked
                                     const selected = industries.find(
                                         (ind: Industry) =>
@@ -1649,12 +1701,12 @@ export default function LandingPage() {
                                                     </p>
                                                 ) : (
                                                     subIndustries.map((sub, i) => {
-                                                        const isActive = selectedSubIndustry === String(sub.id);
+                                                        const isActive = pendingSubIndustry === String(sub.id);
                                                         return (
                                                             <div
                                                                 key={sub.id || i}
                                                                 onClick={() => {
-                                                                    setSelectedSubIndustry(String(sub.id));
+                                                                    setPendingSubIndustry(String(sub.id));
                                                                     setShowSubIndustries(false);
                                                                 }}
                                                                 className={`group cursor-pointer relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300 z-10
