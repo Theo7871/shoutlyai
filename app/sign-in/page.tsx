@@ -17,6 +17,7 @@ function SignInAccountContent() {
         try {
             const { user } = await googleLogin(credentialResponse.credential!);
             localStorage.setItem("shoutly_user", JSON.stringify(user));
+            window.dispatchEvent(new Event("auth-changed"));
             console.log("Logged in as:", user.name);
             router.push("/account-setup");
         } catch (err) {

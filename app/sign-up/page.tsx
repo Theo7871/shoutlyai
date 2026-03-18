@@ -18,6 +18,7 @@ export default function CreateAccountPage() {
         try {
             const { user } = await googleLogin(credentialResponse.credential!);
             localStorage.setItem("shoutly_user", JSON.stringify(user));
+            window.dispatchEvent(new Event("auth-changed"));
             router.push("/account-setup");
         } catch (err) {
             console.error("Google sign-up failed:", err);

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { User, SparklesIcon, ChevronDown, Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
 import ShoutlyLogo from "@/components/common/ShoutlyLogo";
@@ -22,19 +23,53 @@ export default function Header() {
     const [user, setUser] = useState<UserProfile | null>(null);
     const pathname = usePathname();
     const router = useRouter();
+    const { data: session, status } = useSession();
     const profileRef = useRef<HTMLDivElement>(null);
 
     const icons = [User, SparklesIcon, User, SparklesIcon];
 
-    // Read token & stored user info on mount
-    useEffect(() => {
+    const refreshAuthState = () => {
         const token = localStorage.getItem("shoutly_token");
         if (token) {
             const stored = localStorage.getItem("shoutly_user");
-            if (stored) setUser(JSON.parse(stored));
+            if (stored) {
+                try {
+                    setUser(JSON.parse(stored));
+                } catch {
+                    setUser({});
+                }
+            }
             else setUser({}); // logged in but no profile data yet
+            return;
         }
-    }, []);
+
+        if (status === "authenticated" && session?.user) {
+            setUser({
+                name: session.user.name ?? undefined,
+                email: session.user.email ?? undefined,
+                picture: session.user.image ?? undefined,
+            });
+            return;
+        }
+
+        setUser(null);
+    };
+
+    // Keep header state in sync with login/logout and route changes
+    useEffect(() => {
+        refreshAuthState();
+    }, [pathname, status, session]);
+
+    useEffect(() => {
+        const handler = () => refreshAuthState();
+        window.addEventListener("storage", handler);
+        window.addEventListener("auth-changed", handler);
+
+        return () => {
+            window.removeEventListener("storage", handler);
+            window.removeEventListener("auth-changed", handler);
+        };
+    }, [status, session]);
 
     // Close profile dropdown when clicking outside
     useEffect(() => {
@@ -50,6 +85,7 @@ export default function Header() {
     const handleLogout = () => {
         logout();
         localStorage.removeItem("shoutly_user");
+        window.dispatchEvent(new Event("auth-changed"));
         setUser(null);
         setProfileOpen(false);
         router.push("/");
