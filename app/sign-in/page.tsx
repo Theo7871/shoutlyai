@@ -3,11 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { EnvelopeIcon, LockClosedIcon } from "@heroicons/react/24/outline";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 import { googleLogin } from "@/api/authApi";
 
-export default function SignInAccountPage() {
+function SignInAccountContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const error = searchParams.get("error");
@@ -143,5 +144,13 @@ export default function SignInAccountPage() {
 
             </div>
         </div>
+    );
+}
+
+export default function SignInAccountPage() {
+    return (
+        <Suspense fallback={null}>
+            <SignInAccountContent />
+        </Suspense>
     );
 }
