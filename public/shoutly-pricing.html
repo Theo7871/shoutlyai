@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shoutly AI - Pricing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #fafafa;
+      color: #111;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      background: white;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #111;
+    }
+
+    .header p {
+      font-size: 20px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+
+    /* Billing Toggle */
+    .billing-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .billing-toggle span {
+      font-size: 16px;
+      font-weight: 500;
+      color: #666;
+    }
+
+    .toggle-btn {
+      display: flex;
+      background: #f0f0f0;
+      border: none;
+      border-radius: 24px;
+      padding: 4px;
+      cursor: pointer;
+      gap: 4px;
+    }
+
+    .toggle-option {
+      padding: 10px 24px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      color: #666;
+    }
+
+    .toggle-option.active {
+      background: #111;
+      color: white;
+    }
+
+    .save-badge {
+      background: #fff3e0;
+      color: #ff9800;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+
+    /* Pricing Cards */
+    .pricing-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+
+    .pricing-card {
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 40px 32px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .pricing-card.featured {
+      border-color: #ff9800;
+      box-shadow: 0 0 0 1px #ff9800, 0 10px 30px rgba(255, 152, 0, 0.15);
+    }
+
+    .pricing-card.featured .badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff9800;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .plan-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 8px;
+    }
+
+    .plan-description {
+      font-size: 14px;
+      color: #999;
+      margin-bottom: 24px;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .price-amount {
+      font-size: 48px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    .price-currency {
+      font-size: 24px;
+      color: #666;
+    }
+
+    .price-period {
+      font-size: 16px;
+      color: #999;
+    }
+
+    .price-note {
+      font-size: 13px;
+      color: #ccc;
+      margin-bottom: 32px;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 6px;
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 14px 24px;
+      background: #ff9800;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 32px;
+    }
+
+    .cta-button:hover {
+      background: #f57c00;
+      transform: scale(1.02);
+    }
+
+    /* Feature Highlights */
+    .highlights {
+      margin-bottom: 32px;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 32px;
+    }
+
+    .highlight-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .feature-icon.included {
+      color: #ff9800;
+      font-weight: bold;
+    }
+
+    .feature-icon.excluded {
+      color: #ddd;
+    }
+
+    /* Comparison Table */
+    .comparison-section {
+      background: white;
+      padding: 60px 32px;
+      border-radius: 12px;
+      margin-bottom: 80px;
+    }
+
+    .comparison-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-x: auto;
+    }
+
+    .comparison-table thead {
+      background: #f9f9f9;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .comparison-table th {
+      padding: 24px 20px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 16px;
+      color: #111;
+    }
+
+    .comparison-table th:first-child {
+      width: 40%;
+    }
+
+    .comparison-table td {
+      padding: 20px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .comparison-table tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: #111;
+    }
+
+    .feature-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .feature-check.yes {
+      color: #ff9800;
+    }
+
+    .feature-check.no {
+      color: #ddd;
+    }
+
+    .feature-row-category {
+      background: #f9f9f9;
+      font-weight: 700;
+      color: #111;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 1024px) {
+      .pricing-section {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .comparison-table {
+        font-size: 13px;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 16px 12px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header h1 {
+        font-size: 32px;
+      }
+
+      .header p {
+        font-size: 16px;
+      }
+
+      .pricing-section {
+        grid-template-columns: 1fr;
+      }
+
+      .billing-toggle {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .comparison-section {
+        padding: 40px 20px;
+      }
+
+      .comparison-table {
+        font-size: 12px;
+      }
+
+      .comparison-table th:first-child {
+        width: auto;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px 8px;
+      }
+
+      .price-amount {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Simple, Transparent Pricing</h1>
+    <p>Everything you need to automate your social media. No hidden fees.</p>
+
+    <div class="billing-toggle">
+      <span>Billing:</span>
+      <div class="toggle-btn">
+        <button class="toggle-option active" onclick="setBilling('monthly')">Monthly</button>
+        <button class="toggle-option" onclick="setBilling('annual')">Annual</button>
+      </div>
+      <span class="save-badge" id="saveBadge" style="display:none;">Save 20%</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="pricing-section" id="pricingCards"></div>
+
+    <div class="comparison-section">
+      <h2>Complete Feature Comparison</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Features</th>
+            <th style="text-align: center;">Starter</th>
+            <th style="text-align: center;">Business</th>
+            <th style="text-align: center;">Autopilot</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Core Features -->
+          <tr class="feature-row-category">
+            <td colspan="4">🔧 Core Features</td>
+          </tr>
+          <tr>
+            <td>Connected Social Accounts</td>
+            <td style="text-align: center;"><span class="feature-check yes">2</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">5</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">10</span></td>
+          </tr>
+
+          <!-- Content Generation -->
+          <tr class="feature-row-category">
+            <td colspan="4">📝 Content Generation</td>
+          </tr>
+          <tr>
+            <td>AI Caption Generator</td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Hashtag Generator</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Content Generator (Auto Drafts)</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+
+          <!-- Image & Design -->
+          <tr class="feature-row-category">
+            <td colspan="4">🎨 Image & Design</td>
+          </tr>
+          <tr>
+            <td>Template Library (12,000+ Images & Reels)</td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Image Generator</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Reel Generator</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Logo Overlay & Brand Customization</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Festival Content Auto-Generation</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Custom Image Creation</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+
+          <!-- Publishing & Scheduling -->
+          <tr class="feature-row-category">
+            <td colspan="4">📅 Publishing & Scheduling</td>
+          </tr>
+          <tr>
+            <td>Multi-Platform Publishing</td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Social Scheduler</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Best Time Posting Detection</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Bulk Scheduling</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+
+          <!-- Community Management -->
+          <tr class="feature-row-category">
+            <td colspan="4">💬 Community Management</td>
+          </tr>
+          <tr>
+            <td>Unified Response Management (All Platforms)</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+
+          <!-- Support -->
+          <tr class="feature-row-category">
+            <td colspan="4">🤝 Support</td>
+          </tr>
+          <tr>
+            <td>Email Support</td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Priority Support</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>24/7 Phone & Dedicated Manager</td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check no">—</span></td>
+            <td style="text-align: center;"><span class="feature-check yes">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const plans = [
+      {
+        name: "Starter",
+        description: "Perfect for beginners",
+        monthlyPrice: 29,
+        yearlyPrice: 278.40,
+        featured: false,
+        highlights: [
+          { text: "2 Connected Accounts", included: true },
+          { text: "Template library (12K+)", included: true },
+          { text: "AI caption generation", included: true },
+          { text: "Multi-platform publishing", included: true },
+          { text: "Email support", included: true },
+          { text: "AI hashtag generator", included: false }
+        ],
+        checkoutUrl: "shoutlyai.com/checkout?plan=starter&billing="
+      },
+      {
+        name: "Business",
+        description: "For growing teams",
+        monthlyPrice: 79,
+        yearlyPrice: 758.40,
+        featured: true,
+        highlights: [
+          { text: "5 Connected Accounts", included: true },
+          { text: "Everything in Starter, plus:", included: true },
+          { text: "AI hashtag & content generation", included: true },
+          { text: "AI image & reel generators", included: true },
+          { text: "Logo overlay & branding", included: true },
+          { text: "Unified response management", included: true }
+        ],
+        checkoutUrl: "shoutlyai.com/checkout?plan=business&billing="
+      },
+      {
+        name: "Autopilot",
+        description: "Full automation",
+        monthlyPrice: 119,
+        yearlyPrice: 1142.40,
+        featured: false,
+        highlights: [
+          { text: "10 Connected Accounts", included: true },
+          { text: "Everything in Business, plus:", included: true },
+          { text: "Festival content auto-generation", included: true },
+          { text: "Custom image creation", included: true },
+          { text: "AI best time posting", included: true },
+          { text: "Bulk scheduling", included: true }
+        ],
+        checkoutUrl: "shoutlyai.com/checkout?plan=autopilot&billing="
+      }
+    ];
+
+    let currentBilling = "monthly";
+
+    function renderPricingCards() {
+      const container = document.getElementById("pricingCards");
+      container.innerHTML = plans.map(plan => {
+        const price = currentBilling === "monthly" ? plan.monthlyPrice : plan.yearlyPrice;
+        const period = currentBilling === "monthly" ? "month" : "year";
+        const checkoutUrl = plan.checkoutUrl + currentBilling;
+        
+        return `
+          <div class="pricing-card ${plan.featured ? "featured" : ""}">
+            ${plan.featured ? '<span class="badge">MOST POPULAR</span>' : ""}
+            <div class="plan-name">${plan.name}</div>
+            <div class="plan-description">${plan.description}</div>
+            <div class="price">
+              <span class="price-currency">$</span>
+              <span class="price-amount">${price.toFixed(2).split('.')[0]}</span>
+              <span class="price-period">/${period}</span>
+            </div>
+            ${currentBilling === "annual" ? `<div class="price-note">Save $${((plan.monthlyPrice * 12) - plan.yearlyPrice).toFixed(0)} per year</div>` : ""}
+            <button class="cta-button" onclick="window.location.href='${checkoutUrl}'">Get Started</button>
+            <div class="highlights">
+              <div class="highlight-title">Key Features</div>
+              <div class="features-list">
+                ${plan.highlights.map(f => `
+                  <div class="feature-item">
+                    <span class="feature-icon ${f.included ? "included" : "excluded"}">
+                      ${f.included ? "✓" : "—"}
+                    </span>
+                    <span>${f.text}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function setBilling(type) {
+      currentBilling = type;
+      
+      document.querySelectorAll(".toggle-option").forEach(btn => {
+        btn.classList.remove("active");
+      });
+      event.target.classList.add("active");
+
+      const badge = document.getElementById("saveBadge");
+      if (type === "annual") {
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      renderPricingCards();
+    }
+
+    renderPricingCards();
+  </script>
+</body>
+</html>

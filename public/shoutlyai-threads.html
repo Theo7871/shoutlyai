@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Threads Post Generator &mdash; AI-Powered Threads Content | Shoutly AI</title>
+<meta name="description" content="Shoutly AI generates conversational Threads posts, thread chains, opinion posts, and community questions for your business automatically. Zero hashtags, right tone, official Threads API.">
+<link rel="canonical" href="https://shoutlyai.com/channel/threads">
+<meta property="og:title" content="Threads Post Generator &mdash; Shoutly AI">
+<meta property="og:description" content="AI writes Threads posts in your brand voice. Conversational, hook-first, zero hashtags. Published automatically via the official Threads API.">
+<meta property="og:url" content="https://shoutlyai.com/channel/threads">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shoutly AI">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#0f0f0f;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+:root{
+  --p:#6c3bf5; --pg:linear-gradient(135deg,#6c3bf5,#a855f7);
+  --p-wash:#f5f0ff; --p-border:#dcc7ff;
+  --dark:#08021a; --glow:rgba(108,59,245,.32);
+  --ink:#0f0f0f; --ink2:#262626; --ink3:#525252; --ink4:#a3a3a3;
+  --surface:#f7f7fb; --border:#e5e4f0; --border2:#ccc9ea;
+  --green:#16a34a;
+  --max:1200px; --r:8px; --r2:12px; --r3:16px; --r4:22px; --r5:30px;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:62px;display:flex;align-items:center;transition:box-shadow .2s}
+.nav.scrolled{box-shadow:0 1px 14px rgba(0,0,0,.07)}
+.nav-inner{display:flex;align-items:center;width:100%;max-width:var(--max);margin:0 auto;padding:0 28px;gap:8px}
+.nav-logo{display:flex;align-items:center;gap:9px;font-size:15.5px;font-weight:800;color:var(--ink)}
+.nav-mark{width:32px;height:32px;border-radius:9px;background:var(--pg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:16px;height:16px;fill:#fff}
+.feat-badge{display:inline-flex;align-items:center;gap:5px;background:#f0f0f0;border:1px solid #ddd;color:#000;border-radius:100px;padding:3px 10px;font-size:11.5px;font-weight:700;margin-left:6px}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:18px}
+.nav-links a{font-size:13.5px;color:var(--ink3);padding:5px 12px;border-radius:var(--r);font-weight:500;transition:all .14s}
+.nav-links a:hover{color:var(--p);background:var(--p-wash)}
+.nav-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;border-radius:var(--r2);padding:9px 20px;transition:all .15s;cursor:pointer;border:1.5px solid transparent;white-space:nowrap}
+.btn-ghost{color:var(--ink2);border-color:var(--border2)}.btn-ghost:hover{background:var(--surface)}
+.btn-primary{background:var(--pg);color:#fff;border:none;box-shadow:0 2px 10px var(--glow)}.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-th{background:var(--pg);color:#fff;border:none;box-shadow:0 2px 10px var(--glow)}.btn-th:hover{opacity:.88;transform:translateY(-1px)}
+.btn-white{background:#fff;color:var(--p);font-weight:700;border:none}.btn-white:hover{background:var(--p-wash);transform:translateY(-1px)}
+.btn-wh-ghost{background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.3)}.btn-wh-ghost:hover{border-color:rgba(255,255,255,.65);color:#fff}
+.btn-lg{padding:13px 28px;font-size:15.5px;font-weight:700;border-radius:var(--r3)}
+.btn-xl{padding:15px 34px;font-size:16px;font-weight:700;border-radius:var(--r3)}
+.btn-sm{padding:7px 16px;font-size:13px}
+.bc{background:var(--surface);border-bottom:1px solid var(--border);padding:11px 0}
+.bc-inner{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink4)}
+.bc-inner a{color:var(--ink4)}.bc-inner a:hover{color:var(--p)}
+.hero{background:var(--dark);padding:80px 0 76px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+.hero-orb-1{width:700px;height:700px;background:radial-gradient(circle,rgba(108,59,245,.45),transparent 68%);top:-250px;left:-180px}
+.hero-orb-2{width:450px;height:450px;background:radial-gradient(circle,rgba(168,85,247,.4),transparent 65%);bottom:-120px;right:-80px}
+.hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:5px 14px 5px 9px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:22px}
+.ey-dot{width:7px;height:7px;border-radius:50%;background:#a855f7;animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-h1{font-family:'Inter Tight',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-2.8px;line-height:.96;color:#fff;margin-bottom:22px}
+.hero-h1 .grad{background:linear-gradient(135deg,#fff,#d4bfff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.6);line-height:1.72;max-width:480px;margin-bottom:34px}
+.hero-ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.hero-proof{display:flex;flex-direction:column;gap:8px}
+.hp{display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(255,255,255,.5)}
+.hp-check{color:#a855f7;font-size:14px;flex-shrink:0}
+.th-window{background:#fff;border:1px solid rgba(255,255,255,.12);border-radius:var(--r5);overflow:hidden;box-shadow:0 32px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08)}
+.thw-bar{background:#000;border-bottom:1px solid rgba(255,255,255,.1);padding:11px 16px;display:flex;align-items:center;gap:10px}
+.thw-dots{display:flex;gap:6px}
+.thw-dot{width:10px;height:10px;border-radius:50%}
+.thw-dot.r{background:#ff5f57}.thw-dot.y{background:#febc2e}.thw-dot.g{background:#28c840}
+.thw-title{font-size:11px;color:rgba(255,255,255,.35);margin-left:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.thw-tabs{display:flex;gap:6px;padding:10px 14px 0;flex-wrap:wrap;background:#fff;border-bottom:1px solid #f0f0f0}
+.thw-tab{font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid #ddd;color:#666;cursor:pointer;transition:all .18s;background:#fff}
+.thw-tab.active{background:#000;color:#fff;border-color:#000}
+.thw-body{padding:14px;background:#fff}
+.th-post{background:#fff;border-radius:var(--r2);margin-bottom:8px;transition:opacity .3s}
+.th-post.fading{opacity:.3}
+.thp-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+.thp-av-col{display:flex;flex-direction:column;align-items:center}
+.thp-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.thp-thread-line{width:2px;background:#e8e8e8;flex:1;min-height:20px;margin-top:4px;border-radius:1px}
+.thp-meta{flex:1}
+.thp-name{font-size:14px;font-weight:700;color:#000}
+.thp-handle{font-size:12.5px;color:#888}
+.thp-time{font-size:12px;color:#aaa;margin-left:auto;flex-shrink:0;padding-top:2px}
+.thp-body{padding-left:48px}
+.thp-hook{font-size:14px;font-weight:700;color:#000;line-height:1.5;margin-bottom:6px;display:block}
+.thp-text{font-size:14px;color:#1a1a1a;line-height:1.65;margin-bottom:8px}
+.thp-img{width:100%;border-radius:var(--r2);aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:8px;background:#f5f5f5;position:relative}
+.thp-img-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);border-radius:100px;padding:2px 8px;font-size:10px;font-weight:700;color:#fff}
+.thp-actions{display:flex;gap:16px;align-items:center}
+.thp-action{display:flex;align-items:center;gap:5px;font-size:12.5px;color:#888;cursor:pointer}
+.thp-action:hover{color:#000}
+.th-reply{display:flex;gap:10px;align-items:flex-start;padding-top:4px}
+.thr-av{width:28px;height:28px;border-radius:50%;background:#e8e8e8;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#888;flex-shrink:0}
+.thr-body{flex:1;font-size:13px;color:#444;line-height:1.55}
+.thr-name{font-size:12px;font-weight:700;color:#000;margin-right:4px}
+.thw-gen{display:none;align-items:center;gap:10px;padding:12px;background:#f5f5f5;border:1px solid #e8e8e8;border-radius:var(--r2);margin-bottom:8px}
+.thw-gen.show{display:flex}
+.gdots{display:flex;gap:4px}
+.gdot{width:7px;height:7px;border-radius:50%;background:var(--p);animation:gdot 1.2s ease-in-out infinite}
+.gdot:nth-child(2){animation-delay:.2s}.gdot:nth-child(3){animation-delay:.4s}
+@keyframes gdot{0%,80%,100%{transform:scale(.7);opacity:.35}40%{transform:scale(1.2);opacity:1}}
+.gtext{font-size:12px;color:#555}.gtext strong{color:#000}
+.thw-footer{background:#000;border-top:1px solid rgba(255,255,255,.08);padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.thw-biz-lbl{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;white-space:nowrap}
+.thw-chips{display:flex;gap:6px;flex-wrap:wrap}
+.thw-chip{font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all .18s;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.45)}
+.thw-chip.active{background:rgba(168,85,247,.25);border-color:#a855f7;color:#fff}
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);gap:1px;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden}
+.ss-cell{background:#fff;padding:26px 20px;text-align:center}
+.ss-n{font-family:'Inter Tight',sans-serif;font-size:clamp(26px,2.8vw,38px);font-weight:900;background:var(--pg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-2px;line-height:1;margin-bottom:5px}
+.ss-l{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ss-s{font-size:12px;color:var(--ink4)}
+.section{padding:88px 0}
+.section-alt{background:var(--surface)}
+.sec-ey{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
+.sec-h2{font-family:'Inter Tight',sans-serif;font-size:clamp(26px,3.3vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.sec-p{font-size:17px;color:var(--ink2);line-height:1.72;max-width:600px}
+.center{text-align:center}.center .sec-p{margin:0 auto}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pain-card{background:#fff;border:1px solid var(--border);border-radius:var(--r3);padding:22px;display:flex;gap:14px;transition:border-color .18s}
+.pain-card:hover{border-color:var(--border2)}
+.pain-ico{width:42px;height:42px;border-radius:11px;background:var(--p-wash);border:1px solid var(--p-border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pain-title{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.pain-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+.hiw-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.hiw-steps{display:flex;flex-direction:column;gap:0}
+.hiw-step{display:flex;gap:18px;position:relative;padding-bottom:28px}
+.hiw-step:last-child{padding-bottom:0}
+.hiw-step::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:2px;background:var(--border)}
+.hiw-step:last-child::before{display:none}
+.hiw-num{width:40px;height:40px;border-radius:50%;background:var(--pg);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 12px var(--glow);position:relative;z-index:1;font-family:'Inter Tight',sans-serif}
+.hiw-body{padding-top:8px}
+.hiw-title{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:5px;letter-spacing:-.2px}
+.hiw-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+.hiw-time{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--p);background:var(--p-wash);border-radius:100px;padding:2px 8px;margin-top:6px}
+.posttype-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.posttype-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;transition:all .2s}
+.posttype-card:hover{border-color:var(--border2);box-shadow:0 6px 24px rgba(108,59,245,.1);transform:translateY(-2px)}
+.ptc-preview{padding:18px;background:#fafafa;border-bottom:1px solid #eee;min-height:120px}
+.ptc-pname{font-size:13px;font-weight:700;color:#000;margin-bottom:2px}
+.ptc-handle{font-size:11.5px;color:#888;margin-bottom:8px}
+.ptc-hook{font-size:13px;font-weight:700;color:#000;line-height:1.45;margin-bottom:5px}
+.ptc-body{font-size:12px;color:#444;line-height:1.6;margin-bottom:6px}
+.ptc-badge{display:inline-flex;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-bottom:8px;width:fit-content;background:var(--p-wash);color:var(--p);border:1px solid var(--p-border)}
+.ptc-body-area{padding:14px 16px}
+.ptc-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.ptc-desc{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:8px}
+.ptc-spec{display:flex;gap:6px;flex-wrap:wrap}
+.ptc-spec-item{font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;background:var(--surface);border:1px solid var(--border);color:var(--ink2)}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.spec-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:24px}
+.sc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.sc-rows{display:flex;flex-direction:column;gap:10px}
+.sc-row{display:flex;gap:12px;align-items:flex-start}
+.sc-label{font-size:11.5px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;width:90px;padding-top:1px}
+.sc-val{font-size:13.5px;color:var(--ink2);line-height:1.55}
+.sc-val strong{color:var(--ink);font-weight:700}
+.sc-pill{display:inline-flex;font-size:11px;font-weight:700;background:var(--p-wash);color:var(--p);border:1px solid var(--p-border);border-radius:100px;padding:2px 8px;margin-top:2px}
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ex-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;transition:all .2s}
+.ex-card:hover{border-color:var(--border2);box-shadow:0 6px 24px rgba(108,59,245,.09);transform:translateY(-2px)}
+.exc-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.exc-biz{display:flex;align-items:center;gap:10px}
+.exc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.exc-name{font-size:13px;font-weight:700;color:var(--ink)}
+.exc-handle{font-size:11.5px;color:var(--ink4)}
+.exc-type{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--p-wash);border:1px solid var(--p-border);color:var(--p)}
+.exc-body{padding:16px}
+.exc-hook{font-size:14px;font-weight:700;color:#000;line-height:1.45;margin-bottom:8px;border-left:3px solid var(--p);padding-left:10px}
+.exc-text{font-size:13px;color:var(--ink2);line-height:1.72;margin-bottom:8px}
+.exc-cta{font-size:13px;color:var(--p);font-weight:600;margin-bottom:6px}
+.exc-foot{border-top:1px solid var(--border);padding:10px 16px;background:var(--surface);display:flex;align-items:center;justify-content:space-between}
+.exc-ai{font-size:11px;font-weight:600;color:var(--p)}
+.exc-time{font-size:11px;color:var(--ink4)}
+.vs-wrap{border:1px solid var(--border);border-radius:var(--r4);overflow:hidden}
+.vs-table{width:100%;border-collapse:collapse}
+.vs-table th{padding:15px 20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.th-feat{background:var(--surface);text-align:left;width:38%;color:var(--ink3)}
+.th-manual{background:#fef2f2;text-align:center;color:#dc2626}
+.th-shoutly{background:var(--pg);text-align:center;color:#fff}
+.vs-table td{padding:13px 20px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle}
+.vs-table tr:last-child td{border-bottom:none}
+.vs-table tr:hover td{background:var(--p-wash)}
+.vs-feat{font-weight:600;color:var(--ink)}
+.td-m{text-align:center;color:#dc2626;font-weight:600}
+.td-s{background:var(--p-wash);text-align:center;color:var(--green);font-weight:700}
+.yes{color:var(--green);font-size:18px}
+.no{color:#dc2626;font-size:18px}
+.meh{color:#d97706;font-size:13px;font-weight:600}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:26px;transition:all .18s}
+.feat-card:hover{border-color:var(--border2);box-shadow:0 4px 18px rgba(108,59,245,.08)}
+.fc-ico{width:44px;height:44px;border-radius:12px;background:var(--p-wash);display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px}
+.fc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.fc-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:28px;display:flex;flex-direction:column;transition:all .18s}
+.test-card:hover{border-color:var(--border2);box-shadow:0 6px 24px rgba(108,59,245,.09);transform:translateY(-2px)}
+.test-stars{color:#f59e0b;font-size:13px;letter-spacing:2px;margin-bottom:13px}
+.test-quote{font-size:14px;color:var(--ink2);line-height:1.76;font-style:italic;flex:1;margin-bottom:18px}
+.test-author{display:flex;align-items:center;gap:11px}
+.ta-av{width:40px;height:40px;border-radius:50%;background:var(--pg);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.ta-name{font-size:13.5px;font-weight:700;color:var(--ink);display:block}
+.ta-biz{font-size:12px;color:var(--ink4)}
+.faq-list{border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;max-width:740px;margin:40px auto 0}
+.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;padding:18px 22px;background:#fff;border:none;display:flex;align-items:center;justify-content:space-between;text-align:left;cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);gap:14px;transition:background .14s;font-family:inherit}
+.faq-q:hover{background:var(--surface)}
+.faq-arr{width:24px;height:24px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink4);flex-shrink:0;transition:all .22s}
+.faq-item.open .faq-arr{background:var(--pg);border-color:transparent;color:#fff;transform:rotate(45deg)}
+.faq-a{display:none;padding:0 22px 18px;font-size:14.5px;color:var(--ink2);line-height:1.75;background:#fff}
+.faq-item.open .faq-a{display:block}
+.links-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.link-card{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--r2);padding:12px 14px;font-size:13.5px;font-weight:500;color:var(--ink2);transition:all .15s}
+.link-card:hover{border-color:var(--border2);background:var(--p-wash);color:var(--p)}
+.link-arr{margin-left:auto;font-size:12px;color:var(--ink4)}
+.cta-section{background:var(--dark);padding:96px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 65% at 50% 110%,rgba(108,59,245,.25) 0%,transparent 70%);pointer-events:none}
+.cta-section h2{font-family:'Inter Tight',sans-serif;font-size:clamp(30px,5vw,54px);font-weight:900;letter-spacing:-2.5px;line-height:1.03;color:#fff;margin-bottom:16px;position:relative;z-index:1}
+.cta-section h2 .grad{background:linear-gradient(135deg,#fff,#d4bfff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-section p{font-size:17.5px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;margin:0 auto 38px;position:relative;z-index:1}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;position:relative;z-index:1}
+.cta-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.4);position:relative;z-index:1}
+.ct{display:flex;align-items:center;gap:5px}
+.ct-check{color:#a855f7;font-size:13px}
+.footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.07);padding:32px 0}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.ft-logo{display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:800;color:rgba(255,255,255,.6)}
+.ft-links{display:flex;gap:18px;flex-wrap:wrap}
+.ft-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .14s}.ft-links a:hover{color:rgba(255,255,255,.65)}
+.ft-copy{font-size:12px;color:rgba(255,255,255,.2);margin-top:14px}
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:44px}
+  .th-window{max-width:540px;margin:0 auto}
+  .hiw-grid{grid-template-columns:1fr;gap:44px}
+  .posttype-grid{grid-template-columns:1fr 1fr}
+  .spec-grid{grid-template-columns:1fr}
+  .ex-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .test-grid{grid-template-columns:1fr 1fr}
+  .links-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .nav-links,.nav-right .btn-ghost{display:none}
+  .pain-grid,.feat-grid,.test-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .posttype-grid{grid-template-columns:1fr}
+  .section{padding:60px 0}
+  .wrap{padding:0 18px}
+}
+@media(prefers-reduced-motion:reduce){.ey-dot,.gdot{animation:none}}
+[data-r]{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+[data-r].vis{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="nav-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      </span>
+      Shoutly AI
+    </a>
+    <span class="feat-badge">&#128172; Threads Generator</span>
+    <div class="nav-links">
+      <a href="https://shoutlyai.com/channels">Channels</a>
+      <a href="https://shoutlyai.com/pricing">Pricing</a>
+      <a href="https://shoutlyai.com/demo">Demo</a>
+    </div>
+    <div class="nav-right">
+      <a href="https://shoutlyai.com/sign-in" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="https://shoutlyai.com/sign-up" class="btn btn-primary btn-sm">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><span class="ey-dot"></span>Threads Post Generator &mdash; By Channel</div>
+        <h1 class="hero-h1" id="hero-h1">Threads content<br>that sparks<br><span class="grad">conversations.</span></h1>
+        <p class="hero-sub">Shoutly AI writes conversational, text-first Threads posts in your brand voice &mdash; opinions, thread chains, community questions, and image posts &mdash; published automatically via the official Threads API.</p>
+        <div class="hero-ctas">
+          <a href="https://shoutlyai.com/sign-up" class="btn btn-th btn-lg">Start free trial &#8594;</a>
+          <a href="https://shoutlyai.com/demo" class="btn btn-wh-ghost btn-lg">Book a demo</a>
+        </div>
+        <div class="hero-proof">
+          <span class="hp"><span class="hp-check">&#10003;</span>Conversational tone &mdash; never corporate</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>Zero hashtags &mdash; Threads is algorithm-distributed</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>Thread chains written as a full coordinated sequence</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>Published via the official Threads API</span>
+        </div>
+      </div>
+      <div>
+        <div class="th-window" role="region" aria-label="Threads post generator preview">
+          <div class="thw-bar">
+            <div class="thw-dots"><div class="thw-dot r"></div><div class="thw-dot y"></div><div class="thw-dot g"></div></div>
+            <span class="thw-title">Shoutly AI &mdash; Threads Generator</span>
+          </div>
+          <div class="thw-tabs" id="thw-tabs">
+            <span class="thw-tab active" onclick="setType('opinion')">&#128172; Opinion</span>
+            <span class="thw-tab" onclick="setType('question')">&#10067; Question</span>
+            <span class="thw-tab" onclick="setType('chain')">&#128279; Thread chain</span>
+            <span class="thw-tab" onclick="setType('image')">&#128247; With image</span>
+          </div>
+          <div class="thw-body">
+            <div class="thw-gen" id="thw-gen">
+              <div class="gdots"><div class="gdot"></div><div class="gdot"></div><div class="gdot"></div></div>
+              <div class="gtext">Writing Threads post for <strong id="gen-lbl">your business</strong>&hellip;</div>
+            </div>
+            <div class="th-post" id="th-post">
+              <div class="thp-head">
+                <div class="thp-av-col">
+                  <div class="thp-av" id="thp-av" style="background:#6c3bf5">AM</div>
+                  <div class="thp-thread-line" id="thp-thread-line" style="display:none"></div>
+                </div>
+                <div class="thp-meta">
+                  <div class="thp-name" id="thp-name">Anjali Mehta</div>
+                  <div class="thp-handle" id="thp-handle">@anjali.agency</div>
+                </div>
+                <div class="thp-time">2h</div>
+              </div>
+              <div class="thp-body">
+                <span class="thp-hook" id="thp-hook"></span>
+                <div class="thp-text" id="thp-text"></div>
+                <div class="thp-img" id="thp-img" style="display:none">
+                  <span id="thp-img-icon"></span>
+                  <span class="thp-img-badge" id="thp-img-badge">1:1 Branded</span>
+                </div>
+                <div class="thp-actions">
+                  <div class="thp-action">&#10084;&#65039; Like</div>
+                  <div class="thp-action">&#128172; Reply</div>
+                  <div class="thp-action">&#128257; Repost</div>
+                  <div class="thp-action">&#128228; Share</div>
+                </div>
+              </div>
+            </div>
+            <div class="th-reply" id="thp-reply" style="display:none">
+              <div style="width:48px;display:flex;justify-content:center;flex-shrink:0">
+                <div class="thr-av" id="thr-av2">AM</div>
+              </div>
+              <div class="thr-body" id="thr-body" style="padding-top:4px"></div>
+            </div>
+          </div>
+          <div class="thw-footer">
+            <span class="thw-biz-lbl">Business:</span>
+            <div class="thw-chips">
+              <span class="thw-chip active" onclick="switchBiz('agency')">&#128188; Agency</span>
+              <span class="thw-chip" onclick="switchBiz('restaurant')">&#127829; Restaurant</span>
+              <span class="thw-chip" onclick="switchBiz('salon')">&#9986; Salon</span>
+              <span class="thw-chip" onclick="switchBiz('founder')">&#128640; Founder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:52px 0 0" data-r>
+  <div class="wrap">
+    <div class="stat-strip">
+      <div class="ss-cell"><div class="ss-n">150M+</div><div class="ss-l">Monthly active users</div><div class="ss-s">Fastest growing Meta platform in 2024</div></div>
+      <div class="ss-cell"><div class="ss-n">500</div><div class="ss-l">Character limit</div><div class="ss-s">Short, sharp, conversational by design</div></div>
+      <div class="ss-cell"><div class="ss-n">0</div><div class="ss-l">Hashtags needed</div><div class="ss-s">Algorithm-distributed &mdash; tags add no value</div></div>
+      <div class="ss-cell"><div class="ss-n">5x</div><div class="ss-l">Faster follower growth</div><div class="ss-s">vs Instagram for businesses posting consistently</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="pain-h2" data-r>
+  <div class="wrap">
+    <div style="margin-bottom:48px">
+      <span class="sec-ey">The Threads problem</span>
+      <h2 class="sec-h2" id="pain-h2">Most businesses treat Threads like a shorter Instagram. That&rsquo;s the mistake.</h2>
+      <p class="sec-p">Threads is a text-first conversation platform. Polished branded graphics, promotional captions, and hashtag stacks that work on Instagram actively hurt you here. Threads rewards opinion, personality, and dialogue &mdash; things most business accounts don&rsquo;t know how to produce consistently.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-ico">&#128444;&#65039;</div><div><div class="pain-title">Posting branded graphics with promotional captions</div><div class="pain-desc">Threads users scroll past polished branded content instantly. The platform was built for conversational text &mdash; the graphic-heavy approach that works on Instagram gets zero engagement here. Text-first posts with personality outperform image posts 4:1 on Threads.</div></div></div>
+      <div class="pain-card"><div class="pain-ico">&#35;</div><div><div class="pain-title">Using hashtags like Instagram</div><div class="pain-desc">Threads hashtags have almost no algorithmic impact. The platform distributes content based on engagement signals &mdash; replies, reposts, likes &mdash; not tag matching. Adding 20 hashtags makes posts look spammy and reduces credibility without any reach benefit whatsoever.</div></div></div>
+      <div class="pain-card"><div class="pain-ico">&#128243;</div><div><div class="pain-title">No distinct brand voice for Threads</div><div class="pain-desc">LinkedIn voice (professional, story-driven) and Instagram voice (visual, hashtag-heavy) both fail on Threads. Threads requires a third voice &mdash; casual, direct, opinionated, conversational. Most businesses don&rsquo;t have this defined, so they sound like nobody.</div></div></div>
+      <div class="pain-card"><div class="pain-ico">&#128279;</div><div><div class="pain-title">Not using thread chains for longer content</div><div class="pain-desc">A single 500-character post can&rsquo;t tell a full story. Thread chains &mdash; a sequence of connected posts that each earn the scroll &mdash; are the format that builds the deepest audience on the platform. Most businesses don&rsquo;t know how to structure one.</div></div></div>
+      <div class="pain-card"><div class="pain-ico">&#128165;</div><div><div class="pain-title">Posting announcements instead of conversations</div><div class="pain-desc">Threads audiences respond to questions, takes, and opinions &mdash; not announcements. &ldquo;We just launched X&rdquo; gets ignored. &ldquo;Why does X still not exist in India?&rdquo; gets 200 replies. The platform rewards posts that invite a response, not ones that just inform.</div></div></div>
+      <div class="pain-card"><div class="pain-ico">&#128347;</div><div><div class="pain-title">Posting inconsistently because Threads feels low-priority</div><div class="pain-desc">Most businesses treat Threads as experimental. But the platform rewards early, consistent presence. Businesses posting 5+ times a week now are building an audience that compounds as the platform grows from 150M to 500M+ users over the next 2 years.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="how-it-works" aria-labelledby="hiw-h2" data-r>
+  <div class="wrap">
+    <div class="hiw-grid">
+      <div>
+        <span class="sec-ey">How it works</span>
+        <h2 class="sec-h2" id="hiw-h2">From your business brief to a month of Threads content &mdash; automatically.</h2>
+        <p class="sec-p" style="margin-bottom:40px">You describe your business once. Shoutly AI understands Threads&rsquo; conversational rules and generates a full calendar of platform-appropriate posts in your brand voice.</p>
+        <div class="hiw-steps">
+          <div class="hiw-step"><div class="hiw-num">1</div><div class="hiw-body"><div class="hiw-title">Connect your Threads account</div><div class="hiw-desc">Connect via the official Threads API (part of Meta&rsquo;s platform). Secure OAuth authentication. Shoutly AI can only post &mdash; it cannot read your DMs, followers, or profile data.</div><span class="hiw-time">&#8987; 2 minutes, one-time</span></div></div>
+          <div class="hiw-step"><div class="hiw-num">2</div><div class="hiw-body"><div class="hiw-title">Define your Threads voice</div><div class="hiw-desc">Set a distinct Threads voice in your Brand Kit &mdash; separate from Instagram and LinkedIn. Options: Casual &amp; Direct, Opinionated &amp; Honest, Warm &amp; Community-Led, or Founder Personality. Applied consistently to every post.</div><span class="hiw-time">&#8987; 3 minutes, once</span></div></div>
+          <div class="hiw-step"><div class="hiw-num">3</div><div class="hiw-body"><div class="hiw-title">AI generates your monthly Threads calendar</div><div class="hiw-desc">A full month of Threads content: the right mix of opinion posts, conversation starters, thread chains, behind-the-scenes, and image posts for your industry. No hashtags added. Short-form, punchy, platform-native writing.</div><span class="hiw-time">&#8987; Under 2 minutes</span></div></div>
+          <div class="hiw-step"><div class="hiw-num">4</div><div class="hiw-body"><div class="hiw-title">Review, edit, approve in bulk</div><div class="hiw-desc">Review the entire month in one screen. Edit any post, add a topical reference, or approve everything in one click. Thread chains are reviewed as a sequence &mdash; you see how each post connects to the next before approving.</div><span class="hiw-time">&#8987; ~8 minutes per month</span></div></div>
+          <div class="hiw-step"><div class="hiw-num">5</div><div class="hiw-body"><div class="hiw-title">Publishes at peak engagement times</div><div class="hiw-desc">Threads engagement peaks mid-morning and early evening. AI schedules posts accordingly. As your analytics build, the AI recalibrates to your specific audience&rsquo;s most active windows automatically.</div><span class="hiw-time">&#8987; Automatic, ongoing</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r5);padding:32px;margin-bottom:16px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--p);margin-bottom:18px">&#64; How Shoutly AI formats Threads posts</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:11px;font-weight:700;color:var(--ink4);width:80px;flex-shrink:0;padding-top:2px">HOOK</div><div style="flex:1;background:var(--p-wash);border:1px solid var(--p-border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">First line does all the work. Question, bold claim, or unexpected take. Under 100 characters &mdash; before anyone decides to read more.</div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:11px;font-weight:700;color:var(--ink4);width:80px;flex-shrink:0;padding-top:2px">LENGTH</div><div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">Under 500 characters. Punchy. No padding. If there&rsquo;s more to say, use a thread chain rather than cramming everything into one post.</div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:11px;font-weight:700;color:var(--ink4);width:80px;flex-shrink:0;padding-top:2px">HASHTAGS</div><div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">None. Zero. Threads is algorithm-distributed. Tags add visual clutter and signal low effort to readers.</div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:11px;font-weight:700;color:var(--ink4);width:80px;flex-shrink:0;padding-top:2px">TONE</div><div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">Conversational. Opinionated. Direct. Never corporate. Never a press release. Never a product announcement.</div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start"><div style="font-size:11px;font-weight:700;color:var(--ink4);width:80px;flex-shrink:0;padding-top:2px">IMAGES</div><div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">1:1 square. Use selectively &mdash; text-first posts outperform image posts on Threads by 3&ndash;4x. Images only when the visual adds meaning text can&rsquo;t convey.</div></div>
+          </div>
+        </div>
+        <div style="background:var(--dark);border-radius:var(--r4);padding:22px 24px;color:#fff">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:8px">&#64; Connected via the official Threads API</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.65">Meta&rsquo;s official API. Secure, compliant, and identical to posting manually from the Threads app. Posts published via the API appear identically to manually posted content &mdash; your account is never at risk.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="post-types" aria-labelledby="pt-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:52px">
+      <span class="sec-ey">Every type of Threads content</span>
+      <h2 class="sec-h2" id="pt-h2">6 post types &mdash; all written and scheduled by AI</h2>
+      <p class="sec-p">Threads rewards variety and personality. A calendar of only promotional posts gets zero reach. Shoutly AI plans the right mix of formats for your industry automatically.</p>
+    </div>
+    <div class="posttype-grid">
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#128172; Opinion post</span>
+          <div class="ptc-pname">Anjali Mehta</div><div class="ptc-handle">@anjali.agency</div>
+          <div class="ptc-hook">Agencies that still charge per post are slowly going out of business.</div>
+          <div class="ptc-body">Not because AI is taking over. Because clients will stop paying for content creation and start paying for content strategy.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Opinion &amp; Take Posts</div>
+          <div class="ptc-desc">A bold or contrarian statement about your industry, followed by the reasoning behind it. Drives the most replies and reposts on Threads. Builds authority and attracts followers who align with your perspective.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">Text only</span><span class="ptc-spec-item">Under 500 chars</span><span class="ptc-spec-item">No hashtags</span><span class="ptc-spec-item">High replies</span></div>
+        </div>
+      </div>
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#10067; Question post</span>
+          <div class="ptc-pname">Spice Garden</div><div class="ptc-handle">@spicegarden.blr</div>
+          <div class="ptc-hook">What&rsquo;s the one dish you order every time you visit a South Indian restaurant?</div>
+          <div class="ptc-body">Drop your answer below. We&rsquo;re planning next month&rsquo;s specials and want to know what you actually love.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Community Questions</div>
+          <div class="ptc-desc">Direct questions that invite your audience to reply. Highest comment rates of any post type on Threads. Also serves as informal market research &mdash; you learn what your customers want while building engagement.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">Text only</span><span class="ptc-spec-item">CTA to reply</span><span class="ptc-spec-item">High comments</span><span class="ptc-spec-item">Community</span></div>
+        </div>
+      </div>
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#128279; Thread chain</span>
+          <div class="ptc-pname">Ravi Fitness</div><div class="ptc-handle">@ravifitcoach</div>
+          <div class="ptc-hook">3 things nobody tells you about losing weight after 30. Thread below.</div>
+          <div class="ptc-body" style="color:#888;font-size:11px">[1/3] Your metabolism didn&rsquo;t slow down as much as you think&hellip;<br>[2/3] The real issue is muscle loss, not fat gain&hellip;<br>[3/3] Here&rsquo;s what actually works&hellip;</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Thread Chains</div>
+          <div class="ptc-desc">A sequence of 3&ndash;6 connected posts, each under 500 characters, written to earn the scroll to the next. Ideal for stories, step-by-step guides, before/after narratives, and opinion essays. Written as a fully coordinated set.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">3&ndash;6 posts</span><span class="ptc-spec-item">Numbered sequence</span><span class="ptc-spec-item">Story format</span><span class="ptc-spec-item">High saves</span></div>
+        </div>
+      </div>
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#128247; Image post</span>
+          <div class="ptc-pname">Glow Salon</div><div class="ptc-handle">@glowsalon.mumbai</div>
+          <div class="ptc-hook">Before and after. She came in nervous. She left with a whole new energy.</div>
+          <div class="ptc-body">[Branded transformation image &middot; 1:1 square]</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Image Posts</div>
+          <div class="ptc-desc">When a visual genuinely adds what text can&rsquo;t &mdash; transformations, food photos, behind-the-scenes. AI generates a branded 1:1 image and writes a conversational caption that frames the visual, not just describes it.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">1:1 image</span><span class="ptc-spec-item">Branded</span><span class="ptc-spec-item">Conversational</span><span class="ptc-spec-item">Selective use</span></div>
+        </div>
+      </div>
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#127881; Behind the scenes</span>
+          <div class="ptc-pname">Growth Media</div><div class="ptc-handle">@growthmedia.in</div>
+          <div class="ptc-hook">It&rsquo;s 7am. Three coffees in. 47 posts to review before a client call at 9.</div>
+          <div class="ptc-body">Nobody sees this part of running an agency. This is the part I actually love.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Behind-the-Scenes &amp; Day-in-the-life</div>
+          <div class="ptc-desc">Casual glimpses into the daily reality of running your business. The highest-performing format for building a personal connection with your audience. Raw, honest, and specific &mdash; the opposite of a curated brand post.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">Personal tone</span><span class="ptc-spec-item">No pitch</span><span class="ptc-spec-item">High relatability</span><span class="ptc-spec-item">Builds loyalty</span></div>
+        </div>
+      </div>
+      <div class="posttype-card">
+        <div class="ptc-preview">
+          <span class="ptc-badge">&#128172; Engagement prompt</span>
+          <div class="ptc-pname">Mehta &amp; Associates</div><div class="ptc-handle">@mehtaca</div>
+          <div class="ptc-hook">Drop your city below and I&rsquo;ll tell you the one local tax rule most businesses miss.</div>
+          <div class="ptc-body">Done this before. Always surprised by the response. Go.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Engagement Prompts</div>
+          <div class="ptc-desc">Posts specifically designed to generate comment replies. Threads&rsquo; algorithm heavily weights reply count, so these posts disproportionately expand reach. Fill-in-the-blank, city drops, hot takes with agree/disagree &mdash; all optimised for replies.</div>
+          <div class="ptc-spec"><span class="ptc-spec-item">Reply-focused</span><span class="ptc-spec-item">Algorithm boost</span><span class="ptc-spec-item">Community</span><span class="ptc-spec-item">High reach</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="spec-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">Threads-specific requirements</span>
+      <h2 class="sec-h2" id="spec-h2">Every Threads format, correctly handled by Shoutly AI</h2>
+      <p class="sec-p">Threads has its own rules &mdash; character limits, image specs, and content formats that differ from every other Meta platform. Shoutly AI knows them all and applies them automatically.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="sc-title">&#128203; Text post specs</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-label">Char limit</div><div class="sc-val"><strong>500 characters</strong> maximum per post in a chain</div></div>
+          <div class="sc-row"><div class="sc-label">Hashtags</div><div class="sc-val"><strong>None.</strong> Algorithm-distributed &mdash; tags add no reach benefit <span class="sc-pill">Different from Instagram</span></div></div>
+          <div class="sc-row"><div class="sc-label">Links</div><div class="sc-val">Links supported but reduce organic reach &mdash; AI avoids them in most post types</div></div>
+          <div class="sc-row"><div class="sc-label">Chain length</div><div class="sc-val">Up to <strong>10 posts</strong> in a single thread chain</div></div>
+          <div class="sc-row"><div class="sc-label">Best times</div><div class="sc-val"><strong>7&ndash;9am</strong> and <strong>6&ndash;9pm</strong> &mdash; peak Threads scroll windows</div></div>
+          <div class="sc-row"><div class="sc-label">Frequency</div><div class="sc-val">5&ndash;7 posts per week recommended &mdash; high-frequency personal accounts grow fastest</div></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="sc-title">&#128247; Image specs</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-label">Ratio</div><div class="sc-val"><strong>1:1 square</strong> (1080&times;1080px) &mdash; primary supported format <span class="sc-pill">Auto-sized</span></div></div>
+          <div class="sc-row"><div class="sc-label">Portrait</div><div class="sc-val">4:5 also supported (1080&times;1350px) &mdash; takes more feed space</div></div>
+          <div class="sc-row"><div class="sc-label">Usage</div><div class="sc-val">Used selectively &mdash; text-first posts outperform image posts 3&ndash;4x on Threads</div></div>
+          <div class="sc-row"><div class="sc-label">Branding</div><div class="sc-val">Your logo, colours, and fonts applied via Brand Kit automatically</div></div>
+          <div class="sc-row"><div class="sc-label">Multiple</div><div class="sc-val">Up to <strong>10 images</strong> in a single post (carousel format supported)</div></div>
+          <div class="sc-row"><div class="sc-label">Alt text</div><div class="sc-val">AI auto-generates descriptive alt text for every image</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="examples" aria-labelledby="ex-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:52px">
+      <span class="sec-ey">Real AI-generated Threads posts</span>
+      <h2 class="sec-h2" id="ex-h2">Exactly what Shoutly AI writes for Indian businesses on Threads</h2>
+      <p class="sec-p">Conversational, direct, zero-hashtag posts that sound like the business owner wrote them &mdash; not a brand manager or a template.</p>
+    </div>
+    <div class="ex-grid">
+      <div class="ex-card">
+        <div class="exc-head"><div class="exc-biz"><div class="exc-av" style="background:linear-gradient(135deg,#6c3bf5,#a855f7)">AM</div><div><div class="exc-name">Anjali Mehta</div><div class="exc-handle">@anjali.agency</div></div></div><span class="exc-type">Opinion post</span></div>
+        <div class="exc-body">
+          <div class="exc-hook">Most social media agencies are selling a service that will be unrecognisable in 18 months.</div>
+          <div class="exc-text">Not because AI is replacing agencies.<br><br>Because clients will stop paying for content creation and start paying for content strategy.<br><br>The agencies that survive this shift know why content works, not just how to make it.<br><br>We made this shift 8 months ago. Revenue went up. Hours went down.</div>
+          <div class="exc-cta">What do you think changes first in your industry?</div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 4 sec</span><span class="exc-time">Tue 8:00am</span></div>
+      </div>
+      <div class="ex-card">
+        <div class="exc-head"><div class="exc-biz"><div class="exc-av" style="background:linear-gradient(135deg,#c2410c,#b45309)">RK</div><div><div class="exc-name">Ravi Kumar</div><div class="exc-handle">@spicegarden.blr</div></div></div><span class="exc-type">Question + chain</span></div>
+        <div class="exc-body">
+          <div class="exc-hook">What&rsquo;s the one dish you order every time you visit a South Indian restaurant? I have a theory.</div>
+          <div class="exc-text">Drop your answer below.<br><br>&mdash;&mdash;&mdash;<br><br>[Thread 2/2]<br><br>Okay, my theory: it&rsquo;s either masala dosa or filter coffee.<br><br>Because those two things exist everywhere but taste completely different at every single place.<br><br>We&rsquo;ve been perfecting ours for 12 years. Still adjusting the batter every monsoon season.</div>
+          <div class="exc-cta">Come tell us if we got yours right. Koramangala, anytime.</div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 5 sec</span><span class="exc-time">Thu 7:30am</span></div>
+      </div>
+      <div class="ex-card">
+        <div class="exc-head"><div class="exc-biz"><div class="exc-av" style="background:linear-gradient(135deg,#be185d,#9333ea)">NP</div><div><div class="exc-name">Neha Patil</div><div class="exc-handle">@glowsalon.mumbai</div></div></div><span class="exc-type">Behind the scenes</span></div>
+        <div class="exc-body">
+          <div class="exc-hook">It&rsquo;s 8am. Three stylists in. First client at 8:15. One of us is still figuring out what we had for dinner.</div>
+          <div class="exc-text">This is what running a salon actually looks like before the first good photo of the day is taken.<br><br>We love this part. The chaos before the calm.<br><br>By 10am everything looks effortless. Right now it&rsquo;s anything but.<br><br>Powai, Mumbai. Come see us today.</div>
+          <div class="exc-cta">What does your 8am look like?</div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 4 sec</span><span class="exc-time">Wed 8:00am</span></div>
+      </div>
+      <div class="ex-card">
+        <div class="exc-head"><div class="exc-biz"><div class="exc-av" style="background:linear-gradient(135deg,#0077b5,#005fa3)">VP</div><div><div class="exc-name">Vikram Patel</div><div class="exc-handle">@mehtaca.in</div></div></div><span class="exc-type">Engagement prompt</span></div>
+        <div class="exc-body">
+          <div class="exc-hook">Drop your city below and I&rsquo;ll tell you the one local tax rule that trips up most businesses in your area.</div>
+          <div class="exc-text">I&rsquo;ve done filings across 14 states in India. Every state has at least one thing that&rsquo;s technically correct nationally but creates problems locally.<br><br>Some are obscure. Some are embarrassingly obvious. All of them cost people money when they miss them.<br><br>Drop your city. I&rsquo;ll reply to as many as I can today.</div>
+          <div class="exc-cta">Bengaluru, Mumbai, Delhi, Hyderabad &mdash; anywhere. Go.</div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 5 sec</span><span class="exc-time">Mon 9:00am</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="vs-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">Manual vs automated</span>
+      <h2 class="sec-h2" id="vs-h2">Writing Threads posts manually vs with Shoutly AI</h2>
+      <p class="sec-p">Threads requires a distinct voice and consistent volume. Both are hard to maintain manually for a business owner running an actual business.</p>
+    </div>
+    <div class="vs-wrap">
+      <table class="vs-table">
+        <thead><tr>
+          <th class="th-feat">Capability</th>
+          <th class="th-manual">&#9999;&#65039; Writing manually</th>
+          <th class="th-shoutly">&#64; Shoutly AI</th>
+        </tr></thead>
+        <tbody>
+          <tr><td class="vs-feat">Time per post</td><td class="td-m">15&ndash;25 minutes</td><td class="td-s">&#10003; Under 10 seconds</td></tr>
+          <tr><td class="vs-feat">Consistent Threads voice</td><td class="td-m"><span class="meh">Inconsistent</span> &mdash; slips into Instagram or LinkedIn tone</td><td class="td-s">&#10003; Platform-specific voice, every post</td></tr>
+          <tr><td class="vs-feat">Zero hashtags applied correctly</td><td class="td-m"><span class="meh">Often adds hashtags</span> out of Instagram habit</td><td class="td-s">&#10003; Never adds hashtags to Threads posts</td></tr>
+          <tr><td class="vs-feat">Thread chains as a complete set</td><td class="td-m"><span class="no">&#10007;</span> Hard to plan all parts cohesively</td><td class="td-s">&#10003; Full chain written as coordinated sequence</td></tr>
+          <tr><td class="vs-feat">Posting 5&ndash;7x per week</td><td class="td-m"><span class="no">&#10007;</span> Unsustainable alongside running a business</td><td class="td-s">&#10003; Always publishes, no matter what</td></tr>
+          <tr><td class="vs-feat">Opinion posts with real personality</td><td class="td-m"><span class="meh">Occasional</span> &mdash; hard to produce consistently</td><td class="td-s">&#10003; Industry-specific takes, every week</td></tr>
+          <tr><td class="vs-feat">Optimal posting times</td><td class="td-m"><span class="meh">Manual</span> &mdash; easy to miss 7&ndash;9am window</td><td class="td-s">&#10003; Auto-scheduled at peak times</td></tr>
+          <tr><td class="vs-feat">Content variety (6 formats)</td><td class="td-m"><span class="meh">Usually 1 format</span> &mdash; whatever is easiest</td><td class="td-s">&#10003; Full mix planned automatically</td></tr>
+          <tr><td class="vs-feat">Branded images when relevant</td><td class="td-m"><span class="no">&#10007;</span> Requires Canva, 20+ mins per image</td><td class="td-s">&#10003; AI-generated 1:1 branded image</td></tr>
+          <tr><td class="vs-feat">Improves based on engagement</td><td class="td-m"><span class="no">&#10007;</span> You track and adjust manually</td><td class="td-s">&#10003; Analytics drive next month automatically</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="feat-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">What&rsquo;s included</span>
+      <h2 class="sec-h2" id="feat-h2">Everything built into Shoutly AI&rsquo;s Threads generator</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="fc-ico">&#128172;</div><div class="fc-title">Conversational post writing</div><div class="fc-desc">Every post sounds like the business owner wrote it &mdash; not a brand manager. Opinions, direct questions, behind-the-scenes glimpses, and takes on industry topics. The voice that Threads actually rewards.</div></div>
+      <div class="feat-card"><div class="fc-ico">&#128279;</div><div class="fc-title">Thread chain generation</div><div class="fc-desc">Full 3&ndash;10 post thread chains written as a coordinated sequence. Each post earns the scroll to the next. Stories, how-tos, opinion essays, and before/after narratives &mdash; all structured for maximum retention through the chain.</div></div>
+      <div class="feat-card"><div class="fc-ico">&#128247;</div><div class="fc-title">Selective image posts</div><div class="fc-desc">Branded 1:1 images generated for post types where visuals genuinely add value &mdash; transformations, food, products. Text-first posts always take priority; images used strategically, not as a default for every post.</div></div>
+      <div class="feat-card"><div class="fc-ico">&#127775;</div><div class="fc-title">Platform-separate brand voice</div><div class="fc-desc">Your Threads voice is defined separately from Instagram and LinkedIn. Casual and opinionated here. Professional and story-driven on LinkedIn. Visual and hashtag-heavy on Instagram. Each platform gets its own version of you.</div></div>
+      <div class="feat-card"><div class="fc-ico">&#128200;</div><div class="fc-title">Analytics &amp; optimisation</div><div class="fc-desc">Impressions, replies, reposts, and follower growth tracked for every Threads post. AI identifies what post types and tones drive the most engagement and adjusts next month&rsquo;s calendar automatically based on what worked.</div></div>
+      <div class="feat-card"><div class="fc-ico">&#128197;</div><div class="fc-title">Peak-time scheduling</div><div class="fc-desc">Threads peaks early morning and early evening. Posts auto-schedule to 7&ndash;9am and 6&ndash;9pm by default. As your analytics mature, the AI recalibrates to your specific audience&rsquo;s most active windows.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" aria-labelledby="test-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">What businesses say</span>
+      <h2 class="sec-h2" id="test-h2">Indian businesses growing on Threads with Shoutly AI</h2>
+    </div>
+    <div class="test-grid">
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;I&rsquo;d tried Threads twice and quit both times because I didn&rsquo;t know what to post that wasn&rsquo;t just a shorter Instagram caption. Shoutly AI showed me that Threads needs a completely different tone &mdash; and then writes it for me in that tone automatically. I went from 0 to 2,800 Threads followers in 3 months without thinking about it.&rdquo;</blockquote>
+        <div class="test-author"><div class="ta-av" style="background:linear-gradient(135deg,#6c3bf5,#a855f7)">AM</div><div><span class="ta-name">Anjali Mehta</span><span class="ta-biz">Social Media Agency &middot; Delhi</span></div></div>
+      </article>
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;The thread chain feature is what sold me. I&rsquo;d tried to write multi-post threads myself but always lost the thread by post 3. Shoutly AI writes the full 5-post chain as a single coordinated piece of content. My best Threads post ever was one of these chains &mdash; 12,000 impressions from a restaurant account with 400 followers.&rdquo;</blockquote>
+        <div class="test-author"><div class="ta-av" style="background:linear-gradient(135deg,#c2410c,#b45309)">RK</div><div><span class="ta-name">Ravi Kumar</span><span class="ta-biz">Spice Garden Restaurant &middot; Bengaluru</span></div></div>
+      </article>
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;What surprised me most was that the AI stopped me from using hashtags on Threads. I&rsquo;d been adding 10&ndash;15 tags to every post out of Instagram habit. The AI uses zero &mdash; and my reach immediately went up because the posts stopped looking spammy. Such a small thing, but nobody had told me this.&rdquo;</blockquote>
+        <div class="test-author"><div class="ta-av" style="background:linear-gradient(135deg,#be185d,#9333ea)">PS</div><div><span class="ta-name">Priya Sharma</span><span class="ta-biz">Glow Salon &middot; Mumbai</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-h2" data-r>
+  <div class="wrap center">
+    <span class="sec-ey">Common questions</span>
+    <h2 class="sec-h2" id="faq-h2">Everything you need to know about Shoutly AI&rsquo;s Threads generator</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Why does Shoutly AI use zero hashtags on Threads?<span class="faq-arr">+</span></button><div class="faq-a"><p>Threads distributes content based on engagement signals &mdash; replies, reposts, likes &mdash; rather than hashtag matching. Unlike Instagram, Threads hashtags have minimal algorithmic effect. Adding hashtags makes posts look like copied Instagram content, which reduces credibility and engagement. Shoutly AI intentionally generates zero hashtags for all Threads content, which is the correct platform-specific approach.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">What is a thread chain and how does Shoutly AI write one?<span class="faq-arr">+</span></button><div class="faq-a"><p>A thread chain is a sequence of connected posts &mdash; each under 500 characters &mdash; that appear as a single threaded conversation. Each post must independently earn the scroll to the next. Shoutly AI writes the full chain as a coordinated piece: the opening post creates a hook or question, middle posts deliver the substance, and the closing post provides a resolution or CTA. Chains of 3&ndash;6 posts are ideal &mdash; long enough to tell a complete story, short enough to avoid dropout.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Will the posts sound like my business &mdash; not generic AI?<span class="faq-arr">+</span></button><div class="faq-a"><p>Yes. You define a Threads-specific voice in the Brand Kit &mdash; separate from Instagram and LinkedIn. Options include Casual &amp; Direct, Opinionated &amp; Honest, Warm &amp; Community-Led, and Founder Personality. The AI uses your industry context too &mdash; a restaurant&rsquo;s Threads posts sound like a local chef talking to regulars, while a CA firm&rsquo;s posts sound like a knowledgeable professional sharing practical tips.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">How does Shoutly AI connect to Threads?<span class="faq-arr">+</span></button><div class="faq-a"><p>Via the official Threads API, released by Meta in 2024. You authenticate once through Meta&rsquo;s standard OAuth flow. Shoutly AI is granted permission to publish posts on your behalf &mdash; it cannot read your DMs, follower list, or profile data. Posts published via the API appear identically to posts made manually from the Threads app. You can revoke access at any time from your Meta account settings.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">How often should I post on Threads?<span class="faq-arr">+</span></button><div class="faq-a"><p>5&ndash;7 times per week is the recommended frequency for building an audience on Threads. The platform rewards high-frequency personal-feeling accounts more than polished low-frequency brand accounts. Peak times are 7&ndash;9am and 6&ndash;9pm local time. Unlike Instagram, Threads does not penalise posting multiple times per day &mdash; some accounts post 3&ndash;5 times daily without any reach reduction.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Is Threads worth it for Indian businesses in 2026?<span class="faq-arr">+</span></button><div class="faq-a"><p>Yes &mdash; specifically because it&rsquo;s still early. Threads crossed 150M monthly active users and is growing rapidly in India, particularly in Tier 1 cities. Businesses building an audience now are doing so with relatively low competition and high organic reach. The same dynamic existed on Instagram in 2014. The cost of being present now is low; the cost of entering later (when organic reach compresses) will be significantly higher.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Is Threads included in the standard Shoutly AI plan?<span class="faq-arr">+</span></button><div class="faq-a"><p>Yes. Threads is one of 10 platforms in the standard &#8377;10,000/month plan &mdash; no extra charge. The same plan includes Instagram, Facebook, LinkedIn, X/Twitter, TikTok, YouTube, Google Business Profile, Pinterest, and Bluesky. All managed from one dashboard, all AI-generated content, all published via official APIs.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:36px">
+      <span class="sec-ey">More channels</span>
+      <h2 class="sec-h2" style="font-size:clamp(22px,2.8vw,34px)">Shoutly AI generates content for all 10 platforms</h2>
+    </div>
+    <div class="links-grid">
+      <a href="https://shoutlyai.com/channel/instagram" class="link-card"><span style="font-size:18px">&#128247;</span> Instagram <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/linkedin" class="link-card"><span style="font-size:18px">&#128188;</span> LinkedIn <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/twitter-x" class="link-card"><span style="font-size:18px">&#10006;</span> X / Twitter <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/facebook-post-generator" class="link-card"><span style="font-size:18px">&#128153;</span> Facebook <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/tiktok" class="link-card"><span style="font-size:18px">&#127925;</span> TikTok <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/youtube" class="link-card"><span style="font-size:18px">&#9654;&#65039;</span> YouTube <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/google-business" class="link-card"><span style="font-size:18px">&#128205;</span> Google Business <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/bluesky" class="link-card"><span style="font-size:18px">&#127784;&#65039;</span> Bluesky <span class="link-arr">&#8594;</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" aria-labelledby="cta-h2">
+  <div class="wrap">
+    <h2 id="cta-h2">Start building your<br><span class="grad">Threads presence today.</span></h2>
+    <p>Opinion posts, thread chains, community questions, and behind-the-scenes &mdash; written in your voice, published at the right time, every day. 14-day free trial. No credit card.</p>
+    <div class="cta-btns">
+      <a href="https://shoutlyai.com/sign-up" class="btn btn-th btn-xl">Start free trial &#8594;</a>
+      <a href="https://shoutlyai.com/demo" class="btn btn-wh-ghost btn-xl">Book a live demo</a>
+    </div>
+    <div class="cta-trust">
+      <span class="ct"><span class="ct-check">&#10003;</span>Official Threads API</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>14-day free trial &mdash; no credit card</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>All 10 platforms in one plan</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>&#8377;10,000/month &mdash; everything included</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>4.9&#9733; &mdash; 41,000+ businesses</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="ft-inner">
+      <a href="/" class="ft-logo">
+        <span style="width:28px;height:28px;border-radius:8px;background:var(--pg);display:inline-block"></span>
+        Shoutly AI
+      </a>
+      <div class="ft-links">
+        <a href="https://shoutlyai.com/privacy">Privacy</a>
+        <a href="https://shoutlyai.com/terms">Terms</a>
+        <a href="https://shoutlyai.com/contact">Contact</a>
+        <a href="https://shoutlyai.com/about">About</a>
+      </div>
+      <div class="ft-copy">&copy; 2026 Shoutly AI. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var posts = {
+  agency: {
+    opinion: { av:'AM', avC:'linear-gradient(135deg,#6c3bf5,#a855f7)', name:'Anjali Mehta', handle:'@anjali.agency', hook:'Agencies that still charge per post are slowly going out of business.', text:'Not because AI is taking over.<br><br>Because clients will stop paying for content creation and start paying for content strategy.<br><br>The agencies that survive this shift know why content works, not just how to make it.<br><br>We made this shift 8 months ago. Revenue went up. Hours went down.', showImg:false, showReply:false },
+    question: { av:'AM', avC:'linear-gradient(135deg,#6c3bf5,#a855f7)', name:'Anjali Mehta', handle:'@anjali.agency', hook:'What’s the one thing you wish clients understood before onboarding?', text:'Drop it below. I’m compiling these for a thread I’m writing next week.<br><br>After 3 years I’ve got mine but I want to know if yours is the same.', showImg:false, showReply:true, reply:'Scope creep and "can you also just" requests that are absolutely not "just" anything.' },
+    chain: { av:'AM', avC:'linear-gradient(135deg,#6c3bf5,#a855f7)', name:'Anjali Mehta', handle:'@anjali.agency', hook:'We scaled from 8 to 22 clients without hiring. Full breakdown. Thread below.', text:'[1/4] The obvious answer is AI tools. But that’s not the whole story.<br><br>The real answer is that we changed what we were actually selling.', showImg:false, showReply:true, reply:'[2/4] We stopped selling "social media management" and started selling "consistent brand presence." Same work. Different framing. Clients stopped questioning hours.' },
+    image: { av:'AM', avC:'linear-gradient(135deg,#6c3bf5,#a855f7)', name:'Anjali Mehta', handle:'@anjali.agency', hook:'This is what a month of content looks like when you stop creating it manually.', text:'One dashboard. One approval session. Everything publishes automatically.<br><br>If you’re still building content day by day, there’s a better way.', showImg:true, imgIco:'&#128202;', imgBadge:'1:1 Branded' }
+  },
+  restaurant: {
+    opinion: { av:'RK', avC:'linear-gradient(135deg,#c2410c,#b45309)', name:'Ravi Kumar', handle:'@spicegarden.blr', hook:'The best restaurants in India are not on Zomato’s top 10. They’re on your local’s WhatsApp group.', text:'Ratings tell you where people went. Word of mouth tells you where people go back.<br><br>We’ve never paid for a Zomato ad. Every new customer in 6 months came through a recommendation.<br><br>Cook well. Treat people right. The algorithm handles itself.', showImg:false, showReply:false },
+    question: { av:'RK', avC:'linear-gradient(135deg,#c2410c,#b45309)', name:'Ravi Kumar', handle:'@spicegarden.blr', hook:'What’s the one dish you order every single time at a South Indian restaurant?', text:'Drop it below. I have a theory about what most of you are going to say.<br><br>We’re planning next month’s specials and want to know what you actually love.', showImg:false, showReply:true, reply:'Masala dosa. Every time. Non-negotiable. The batter has to be slightly sour or I’m going home.' },
+    chain: { av:'RK', avC:'linear-gradient(135deg,#c2410c,#b45309)', name:'Ravi Kumar', handle:'@spicegarden.blr', hook:'Why our Biryani takes 4 hours and sells out by 1pm every day. Thread below.', text:'[1/3] It starts at 7am. The rice goes in first because it needs exactly 40 minutes to par-cook at the right temperature. Most restaurants skip this step.', showImg:false, showReply:true, reply:'[2/3] The spice base is slow-cooked for 90 minutes. You can’t rush it. We tried once. Never again. The whole pot went to staff lunch.' },
+    image: { av:'RK', avC:'linear-gradient(135deg,#c2410c,#b45309)', name:'Ravi Kumar', handle:'@spicegarden.blr', hook:'What 4 hours of cooking looks like before we opened. Koramangala, today.', text:'Most people see the plate. This is everything before the plate.<br><br>Still some Biryani left. Come before 1pm.', showImg:true, imgIco:'&#127829;', imgBadge:'Today 1:1' }
+  },
+  salon: {
+    opinion: { av:'NP', avC:'linear-gradient(135deg,#be185d,#9333ea)', name:'Neha Patil', handle:'@glowsalon.mumbai', hook:'The worst thing you can do before a big event is try a new hair treatment you’ve never had before.', text:'I say this every week to someone who didn’t listen.<br><br>Your hair has 3 good hours of looking perfect before it finds its natural texture again.<br><br>Come 3 days before. Not the morning of.', showImg:false, showReply:false },
+    question: { av:'NP', avC:'linear-gradient(135deg,#be185d,#9333ea)', name:'Neha Patil', handle:'@glowsalon.mumbai', hook:'What’s the one thing you wish your stylist would just do without asking 4 times?', text:'For us it’s always the fringe question. Or how much to take off the length.<br><br>Drop yours below. I genuinely want to know.', showImg:false, showReply:true, reply:'Stop asking if I want a blow dry. I always want a blow dry. That’s why I came.' },
+    chain: { av:'NP', avC:'linear-gradient(135deg,#be185d,#9333ea)', name:'Neha Patil', handle:'@glowsalon.mumbai', hook:'3 things most people don’t know about hair colouring. Thread below.', text:'[1/3] The colour on the box is photographed on pre-lightened hair. Your natural dark brown base will not turn that shade of copper.', showImg:false, showReply:true, reply:'[2/3] If your hair has been coloured before, the new colour behaves differently on those sections than on your roots. This is why consultations exist.' },
+    image: { av:'NP', avC:'linear-gradient(135deg,#be185d,#9333ea)', name:'Neha Patil', handle:'@glowsalon.mumbai', hook:'She came in wanting a subtle change. We talked her into going for it. She cried happy tears.', text:'This is the part of the job nobody tells you about.<br><br>Powai, Mumbai. Walk-ins welcome this Saturday.', showImg:true, imgIco:'&#10024;', imgBadge:'Transformation 1:1' }
+  },
+  founder: {
+    opinion: { av:'SK', avC:'linear-gradient(135deg,#f59e0b,#ef4444)', name:'Suresh Kumar', handle:'@sureshk.builds', hook:'The hardest part of building a startup in India isn’t the product. It’s deciding who not to hire.', text:'Every bad early hire costs you 6 months minimum. Not because of severance or notice period.<br><br>Because of the time you spend managing around them instead of building the thing.<br><br>Hire slowly. Especially the first 5.', showImg:false, showReply:false },
+    question: { av:'SK', avC:'linear-gradient(135deg,#f59e0b,#ef4444)', name:'Suresh Kumar', handle:'@sureshk.builds', hook:'What’s the one piece of startup advice you got early that turned out to be completely wrong?', text:'I’ll go first: "move fast and break things" works if you have 100 engineers. With 3 people it just means you ship broken things.<br><br>Drop yours below.', showImg:false, showReply:true, reply:'"Don’t tell anyone your idea, they’ll steal it." Kept it secret for 6 months. Lost 6 months of customer feedback.' },
+    chain: { av:'SK', avC:'linear-gradient(135deg,#f59e0b,#ef4444)', name:'Suresh Kumar', handle:'@sureshk.builds', hook:'How we got our first 10 enterprise clients with zero paid ads. Thread below.', text:'[1/4] We didn’t pitch anyone. We built in public for 4 months and let people come to us.<br><br>Every week I posted what we were building, what broke, and what we learned.', showImg:false, showReply:true, reply:'[2/4] By month 3 we had 400 followers combined. Two of them DMed asking if we took enterprise clients. Those became clients 1 and 2.' },
+    image: { av:'SK', avC:'linear-gradient(135deg,#f59e0b,#ef4444)', name:'Suresh Kumar', handle:'@sureshk.builds', hook:'Month 18 of building. This is what the dashboard looks like today vs month 1.', text:'The numbers got better. The problems got more interesting.<br><br>Still the best decision I’ve made.', showImg:true, imgIco:'&#128200;', imgBadge:'Dashboard Month 18' }
+  }
+};
+
+var currentBiz = 'agency';
+var currentType = 'opinion';
+var genTimer = null;
+
+function renderPost(d) {
+  document.getElementById('thp-av').style.background = d.avC;
+  document.getElementById('thp-av').textContent = d.av;
+  document.getElementById('thp-name').textContent = d.name;
+  document.getElementById('thp-handle').textContent = d.handle;
+  document.getElementById('thp-hook').innerHTML = d.hook;
+  document.getElementById('thp-text').innerHTML = d.text;
+  var imgEl = document.getElementById('thp-img');
+  if (d.showImg) {
+    imgEl.style.display = 'flex';
+    document.getElementById('thp-img-icon').innerHTML = d.imgIco;
+    document.getElementById('thp-img-badge').textContent = d.imgBadge;
+  } else {
+    imgEl.style.display = 'none';
+  }
+  var replyEl = document.getElementById('thp-reply');
+  var threadLine = document.getElementById('thp-thread-line');
+  if (d.showReply) {
+    replyEl.style.display = 'flex';
+    threadLine.style.display = 'block';
+    document.getElementById('thr-av2').textContent = d.av;
+    document.getElementById('thr-body').innerHTML = '<span class="thr-name">' + d.name + '</span>' + d.reply;
+  } else {
+    replyEl.style.display = 'none';
+    threadLine.style.display = 'none';
+  }
+}
+
+function triggerGen() {
+  if (genTimer) clearTimeout(genTimer);
+  var genEl = document.getElementById('thw-gen');
+  var post = document.getElementById('th-post');
+  var names = {agency:'Growth Media Agency',restaurant:'Spice Garden',salon:'Glow Salon',founder:'TechStart'};
+  document.getElementById('gen-lbl').textContent = names[currentBiz];
+  post.style.opacity = '0.3';
+  genEl.classList.add('show');
+  genTimer = setTimeout(function(){
+    genEl.classList.remove('show');
+    post.style.opacity = '1';
+    renderPost(posts[currentBiz][currentType]);
+  }, 1000);
+}
+
+function setType(type) {
+  currentType = type;
+  document.querySelectorAll('.thw-tab').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('onclick').includes("'" + type + "'"));
+  });
+  triggerGen();
+}
+
+function switchBiz(biz) {
+  if (biz === currentBiz) return;
+  currentBiz = biz;
+  document.querySelectorAll('.thw-chip').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('onclick').includes("'" + biz + "'"));
+  });
+  triggerGen();
+}
+
+window.addEventListener('load', function(){
+  renderPost(posts['agency']['opinion']);
+});
+
+function faq(btn) {
+  var item = btn.closest('.faq-item');
+  var open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+}
+
+if ('IntersectionObserver' in window) {
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
+  }, {threshold:.06,rootMargin:'0px 0px -28px 0px'});
+  document.querySelectorAll('[data-r]').forEach(function(el){obs.observe(el);});
+} else {
+  document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+}
+
+window.addEventListener('scroll', function(){
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 8);
+}, {passive:true});
+</script>
+</body>
+</html>

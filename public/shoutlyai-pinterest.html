@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pinterest Pin Generator & Scheduler — AI-Powered | Shoutly AI</title>
+<meta name="description" content="Generate keyword-optimized Pinterest pins, boards and descriptions with AI. Auto-schedule and publish daily with Shoutly AI.">
+<meta name="keywords" content="AI social media tool,social media automation,AI content generator,social media scheduler,AI caption generator">
+<link rel="canonical" href="https://shoutlyai.com/channel/pinterest">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shoutly AI">
+<meta property="og:locale" content="en_US">
+<meta property="og:url" content="https://shoutlyai.com/channel/pinterest">
+<meta property="og:title" content="Pinterest Pin Generator & Scheduler — AI-Powered | Shoutly AI">
+<meta property="og:description" content="AI-powered social media automation for modern businesses. Generate a full year of branded pins, boards, and descriptions from a single prompt.">
+<meta property="og:image" content="https://shoutlyai.com/opengraph-image?4a8d9538a613b7a7">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shoutly AI - One Prompt, 365 Days of Content">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@shoutlyai">
+<meta name="twitter:title" content="Pinterest Pin Generator & Scheduler — AI-Powered | Shoutly AI">
+<meta name="twitter:description" content="Generate and schedule a year of branded Pinterest content in minutes.">
+<meta name="twitter:image" content="https://shoutlyai.com/opengraph-image?4a8d9538a613b7a7">
+<style>
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-alt: #f7f7f8;
+    --color-text: #14141a;
+    --color-text-muted: #5b5b66;
+    --color-border: #e6e6ea;
+    --color-primary: #cc0000;
+    --color-primary-dark: #a30000;
+    --color-primary-tint: #fdeeee;
+    --color-footer-bg: #0f0f13;
+    --color-footer-text: #b9b9c2;
+    --color-footer-heading: #ffffff;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 22px;
+    --max-width: 1160px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header.site-header {
+    border-bottom: 1px solid var(--color-border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(8px);
+    z-index: 50;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .logo {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  nav.primary-nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  nav.primary-nav a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-muted);
+  }
+
+  nav.primary-nav a:hover { color: var(--color-text); }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover { background: var(--color-primary-dark); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .btn-secondary:hover { border-color: var(--color-text); }
+
+  .link-plain {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    nav.primary-nav { display: none; }
+  }
+
+  /* Hero */
+  .hero {
+    padding: 72px 24px 56px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    background: var(--color-primary-tint);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 44px;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    max-width: 780px;
+    margin: 0 auto 20px;
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    max-width: 640px;
+    margin: 0 auto 32px;
+  }
+
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 32px; }
+  }
+
+  /* Stats strip */
+  .stats-strip {
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-alt);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .stat-cell {
+    padding: 36px 24px;
+    text-align: center;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .stat-cell:last-child { border-right: none; }
+
+  .stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-top: 6px;
+  }
+
+  @media (max-width: 800px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat-cell:nth-child(2) { border-right: none; }
+    .stat-cell { border-bottom: 1px solid var(--color-border); }
+  }
+
+  /* Publishing outputs pill row */
+  .outputs-row {
+    padding: 40px 24px;
+    text-align: center;
+  }
+
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .pill {
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    background: var(--color-bg);
+  }
+
+  /* Section shell */
+  section.block {
+    padding: 72px 24px;
+  }
+
+  .block-alt { background: var(--color-bg-alt); }
+
+  .section-kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.015em;
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  /* Feature grid */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 26px;
+  }
+
+  .feature-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Capabilities checklist */
+  .checklist {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 14px;
+  }
+
+  .check-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 16px;
+    padding: 16px 20px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .check-icon {
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Three-part workflow */
+  .workflow-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .workflow-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    background: var(--color-bg);
+  }
+
+  .workflow-number {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .workflow-card p { color: var(--color-text-muted); font-size: 15px; }
+
+  @media (max-width: 800px) {
+    .workflow-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Output library */
+  .tag-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: var(--max-width);
+    margin: 0 auto 36px;
+  }
+
+  .tag-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 18px 14px;
+    text-align: center;
+    font-size: 13.5px;
+    font-weight: 600;
+    background: var(--color-bg);
+  }
+
+  @media (max-width: 900px) {
+    .tag-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .tag-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .consistency-copy {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 16px;
+  }
+
+  /* FAQ */
+  .faq-list {
+    max-width: 760px;
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+  }
+
+  details.faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    background: var(--color-bg);
+  }
+
+  details.faq-item summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 15.5px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  details.faq-item summary::-webkit-details-marker { display: none; }
+
+  details.faq-item summary::after {
+    content: "+";
+    font-size: 20px;
+    color: var(--color-primary);
+    margin-left: 12px;
+  }
+
+  details.faq-item[open] summary::after { content: "\2212"; }
+
+  details.faq-item p {
+    margin-top: 12px;
+    color: var(--color-text-muted);
+    font-size: 14.5px;
+  }
+
+  /* Closing CTA */
+  .closing-cta {
+    text-align: center;
+    padding: 80px 24px;
+    background: var(--color-bg-alt);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .closing-cta h2 {
+    font-size: 30px;
+    font-weight: 800;
+    max-width: 640px;
+    margin: 0 auto 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .closing-cta p {
+    color: var(--color-text-muted);
+    max-width: 560px;
+    margin: 0 auto 28px;
+    font-size: 16px;
+  }
+
+  /* Footer */
+  footer.site-footer {
+    background: var(--color-footer-bg);
+    color: var(--color-footer-text);
+    padding: 64px 24px 32px;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    max-width: var(--max-width);
+    margin: 0 auto 48px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 48px;
+  }
+
+  .footer-brand { max-width: 320px; }
+
+  .footer-brand .logo { color: var(--color-footer-heading); margin-bottom: 14px; }
+
+  .footer-brand p { font-size: 14px; color: var(--color-footer-text); margin-bottom: 16px; }
+
+  .footer-newsletter { max-width: 300px; }
+
+  .footer-newsletter h4 {
+    color: var(--color-footer-heading);
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 10px 12px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-size: 13px;
+  }
+
+  .newsletter-form button {
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    max-width: var(--max-width);
+    margin: 0 auto 40px;
+  }
+
+  .footer-col h5 {
+    color: var(--color-footer-heading);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul { list-style: none; display: grid; gap: 10px; }
+
+  .footer-col ul li a, .footer-col ul li span {
+    font-size: 13.5px;
+    color: var(--color-footer-text);
+  }
+
+  .footer-col ul li a:hover { color: #fff; }
+
+  @media (max-width: 900px) {
+    .footer-cols { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .trust-row {
+    max-width: var(--max-width);
+    margin: 0 auto 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--color-footer-text);
+  }
+
+  .trust-row span {
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+
+  .legal-row {
+    max-width: var(--max-width);
+    margin: 0 auto 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12.5px;
+    color: var(--color-footer-text);
+  }
+
+  .legal-row a:hover { color: #fff; }
+
+  .footer-bottom {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 12.5px;
+    color: var(--color-footer-text);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>
+<link rel="stylesheet" href="/css/site-nav.css">
+<link rel="stylesheet" href="/css/site-footer.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="/" class="sh-logo"><img src="/images/logo-master.png" alt="Shoutly AI logo"></a>
+    <nav class="sh-links">
+      <div class="sh-item" data-menu="home"><a href="/" class="sh-link" aria-haspopup="true" aria-expanded="false">Home<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+      <div class="sh-item" data-menu="solutions"><a href="#" class="sh-link" aria-haspopup="true" aria-expanded="false" data-toggle-only="true">Solutions<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+      <div class="sh-item" data-menu="features"><a href="#" class="sh-link" aria-haspopup="true" aria-expanded="false" data-toggle-only="true">Features<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+      <div class="sh-item" data-menu="compare"><a href="#" class="sh-link" aria-haspopup="true" aria-expanded="false" data-toggle-only="true">Compare<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+      <div class="sh-item" data-menu="pricing"><a href="/pricing" class="sh-link" aria-haspopup="true" aria-expanded="false">Pricing<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+      <div class="sh-item" data-menu="company"><a href="#" class="sh-link" aria-haspopup="true" aria-expanded="false" data-toggle-only="true">Company<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></a></div>
+    </nav>
+    <div class="sh-right">
+      <div class="sh-auth-guest" id="sh-auth-guest">
+        <a href="/sign-in" class="sh-login">Log in</a>
+        <a href="/sign-up" class="sh-start">Start Free Trial</a>
+      </div>
+      <div class="sh-profile" id="sh-profile" style="display:none">
+        <button type="button" class="sh-profile-btn" id="sh-profile-btn" aria-haspopup="true" aria-expanded="false">
+          <span class="sh-avatar" id="sh-avatar">U</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#6b7280;flex-shrink:0"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <div class="sh-profile-menu" id="sh-profile-menu">
+          <div class="sh-profile-info" id="sh-profile-info">
+            <p class="sh-profile-name" id="sh-profile-name"></p>
+            <p class="sh-profile-email" id="sh-profile-email"></p>
+          </div>
+          <a href="/dashboards/settings" class="sh-profile-item">Profile</a>
+          <a href="/dashboards" class="sh-profile-item">Dashboard</a>
+          <button type="button" class="sh-profile-item sh-signout" id="sh-signout">Sign Out</button>
+        </div>
+      </div>
+    </div>
+    <button class="sh-burger" id="sh-burger-btn" aria-label="Open menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+  <div class="sh-mega-wrap">
+    <!-- Home Panel -->
+    <div class="sh-panel" data-menu="home">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">Get Oriented</div>
+            <div class="mp-col-items">
+              <a href="/shoutlyai-overview.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg></span>
+                <span class="mp-text"><span class="mp-label">Overview</span><span class="mp-desc">See how the whole platform fits together.</span></span>
+              </a>
+              <a href="/shoutlyai-why-shoutly-ai.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></span>
+                <span class="mp-text"><span class="mp-label">Why Shoutly AI</span><span class="mp-desc">What makes it different from a scheduler.</span></span>
+              </a>
+            </div>
+          </div>
+          <div class="mp-col">
+            <div class="mp-col-title">Create</div>
+            <div class="mp-col-items">
+              <a href="/shoutlyai-how-it-works.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+                <span class="mp-text"><span class="mp-label">Live Preview</span><span class="mp-desc">Watch your brand come to life in real time.</span></span>
+              </a>
+              <a href="/templates" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line></svg></span>
+                <span class="mp-text"><span class="mp-label">Branded Templates</span><span class="mp-desc">Choose, brand &amp; download ready-to-post designs.</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">FEATURED</div>
+          <div class="mp-featured-title">A month of posts in one sitting</div>
+          <p class="mp-featured-desc">Describe your business once. Shoutly drafts, designs, and schedules a full content calendar you can edit.</p>
+          <a href="/shoutlyai-how-it-works.html" class="mp-cta">Try the generator <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solutions Panel -->
+    <div class="sh-panel" data-menu="solutions">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">By industry</div>
+            <div class="mp-col-items mp-col-grid">
+              <a href="/solutions/local-businesses" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-store"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"></path><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"></path><path d="M2 7h20"></path></svg></span><span class="mp-text"><span class="mp-label">Local Businesses</span></span></a>
+              <a href="/social-media-marketing-for-restaurants.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg></span><span class="mp-text"><span class="mp-label">Restaurants</span></span></a>
+              <a href="/social-media-marketing-for-gyms.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-dumbbell"><path d="m6.5 6.5 11 11"></path><path d="m21 21-1-1"></path><path d="m3 3 1 1"></path><path d="m18 22 4-4"></path><path d="m2 6 4-4"></path><path d="m3 10 7-7"></path><path d="m14 21 7-7"></path></svg></span><span class="mp-text"><span class="mp-label">Fitness</span></span></a>
+              <a href="/social-media-marketing-for-interior-designers.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-bag"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 0 1-8 0"></path></svg></span><span class="mp-text"><span class="mp-label">Interior Design</span></span></a>
+              <a href="/digital-marketing-for-footwear-brands.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart-pulse"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"></path></svg></span><span class="mp-text"><span class="mp-label">Footwear</span></span></a>
+              <a href="/digital-marketing-for-real-estate-agents.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building-2"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path><path d="M10 6h4"></path><path d="M10 10h4"></path><path d="M10 14h4"></path><path d="M10 18h4"></path></svg></span><span class="mp-text"><span class="mp-label">Real Estate</span></span></a>
+              <a href="/marketing-for-business-consultants.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg></span><span class="mp-text"><span class="mp-label">Startups</span></span></a>
+              <a href="/digital-marketing-for-hotels-and-resorts.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span><span class="mp-text"><span class="mp-label">Hotels</span></span></a>
+              <a href="/digital-marketing-for-event-planners.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></span><span class="mp-text"><span class="mp-label">Event Planners</span></span></a>
+              <a href="/digital-marketing-for-makeup-artists.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg></span><span class="mp-text"><span class="mp-label">Makeup Services</span></span></a>
+            </div>
+          </div>
+          <div class="mp-col">
+            <div class="mp-col-title">By channel</div>
+            <div class="mp-col-items mp-col-grid">
+              <a href="/channel/twitter-x" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-x-twitter"></i></span><span class="mp-text"><span class="mp-label">X</span></span></a>
+              <a href="/channel/instagram" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-instagram"></i></span><span class="mp-text"><span class="mp-label">Instagram</span></span></a>
+              <a href="/channel/facebook" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-facebook"></i></span><span class="mp-text"><span class="mp-label">Facebook</span></span></a>
+              <a href="/channel/bluesky" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-bluesky"></i></span><span class="mp-text"><span class="mp-label">Bluesky</span></span></a>
+              <a href="/channel/linkedin" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-linkedin"></i></span><span class="mp-text"><span class="mp-label">LinkedIn</span></span></a>
+              <a href="/channel/tiktok" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-tiktok"></i></span><span class="mp-text"><span class="mp-label">TikTok</span></span></a>
+              <a href="/channel/threads" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-threads"></i></span><span class="mp-text"><span class="mp-label">Threads</span></span></a>
+              <a href="/channel/youtube" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-youtube"></i></span><span class="mp-text"><span class="mp-label">YouTube</span></span></a>
+              <a href="/channel/pinterest" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-pinterest"></i></span><span class="mp-text"><span class="mp-label">Pinterest</span></span></a>
+              <a href="/channel/google-business" class="mp-row"><span class="mp-ico"><i class="fa-brands fa-google"></i></span><span class="mp-text"><span class="mp-label">Google Biz</span></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">POPULAR</div>
+          <div class="mp-featured-title">Built for one-person marketing teams</div>
+          <p class="mp-featured-desc">Local businesses publish to six channels a week on Shoutly — without hiring an agency.</p>
+          <a href="/#who-we-help" class="mp-cta">See how it works <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Panel -->
+    <div class="sh-panel" data-menu="features">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">AI creation</div>
+            <div class="mp-col-items">
+              <a href="/shoutlyai-ai-content-generator.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path><path d="M20 2v4"></path><path d="M22 4h-4"></path><circle cx="4" cy="20" r="2"></circle></svg></span>
+                <span class="mp-text"><span class="mp-label">AI Content Generator<span class="mp-badge">POPULAR</span></span><span class="mp-desc">Turn one prompt into a week of posts.</span></span>
+              </a>
+              <a href="/shoutlyai-ai-image-generator.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">AI Image Generator</span><span class="mp-desc">On-brand visuals in your colors and fonts.</span></span>
+              </a>
+              <a href="/shoutlyai-how-it-works.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"></path><path d="m6.2 5.3 3.1 3.9"></path><path d="m12.4 3.4 3.1 4"></path><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">AI Reel Generator<span class="mp-badge">NEW</span></span><span class="mp-desc">Short-form video from a script or a URL.</span></span>
+              </a>
+              <a href="/shoutlyai-ai-caption-generator.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">AI Caption Generator</span><span class="mp-desc">Captions tuned per platform, not copy-pasted.</span></span>
+              </a>
+              <a href="/shoutlyai-ai-hashtag-generator.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hash"><line x1="4" x2="20" y1="9" y2="9"></line><line x1="4" x2="20" y1="15" y2="15"></line><line x1="10" x2="8" y1="3" y2="21"></line><line x1="16" x2="14" y1="3" y2="21"></line></svg></span>
+                <span class="mp-text"><span class="mp-label">AI Hashtag Generator</span><span class="mp-desc">Tags ranked by reach, not by volume.</span></span>
+              </a>
+            </div>
+          </div>
+          <div class="mp-col">
+            <div class="mp-col-title">Publishing</div>
+            <div class="mp-col-items">
+              <a href="/shoutlyai-social-media-scheduler.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
+                <span class="mp-text"><span class="mp-label">Social Media Scheduler</span><span class="mp-desc">Queue posts for the times your audience shows up.</span></span>
+              </a>
+              <a href="/shoutlyai-multi-platform-publishing.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share-2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line></svg></span>
+                <span class="mp-text"><span class="mp-label">Multi-Platform Publishing</span><span class="mp-desc">Write once, reformat for each network.</span></span>
+              </a>
+              <a href="/shoutlyai-bulk-scheduling.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-checks"><path d="m3 17 2 2 4-4"></path><path d="m3 7 2 2 4-4"></path><path d="M13 6h8"></path><path d="M13 12h8"></path><path d="M13 18h8"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">Bulk Scheduling</span><span class="mp-desc">Upload a CSV, fill the whole quarter.</span></span>
+              </a>
+            </div>
+          </div>
+          <div class="mp-col">
+            <div class="mp-col-title">Management</div>
+            <div class="mp-col-items">
+              <a href="/shoutlyai-analytics-dashboard.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bar-chart-3"><path d="M3 3v18h18"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">Analytics Dashboard</span><span class="mp-desc">See what earned reach, and what didn't.</span></span>
+              </a>
+              <a href="/shoutlyai-brand-kit.html" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">Brand Kit</span><span class="mp-desc">Lock your colors, fonts, and voice.</span></span>
+              </a>
+              <a href="/#library" class="mp-row">
+                <span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2"></path></svg></span>
+                <span class="mp-text"><span class="mp-label">Media Library</span><span class="mp-desc">Every asset, searchable and reusable.</span></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">NEW THIS MONTH</div>
+          <div class="mp-featured-title">AI Reel Generator</div>
+          <p class="mp-featured-desc">Paste a product URL. Shoutly writes the script, cuts the clips, adds captions, and queues it to Reels, TikTok, and Shorts.</p>
+          <a href="/shoutlyai-how-it-works.html" class="mp-cta">Generate a reel <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compare Panel -->
+    <div class="sh-panel" data-menu="compare">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">Popular comparisons</div>
+            <div class="mp-col-items mp-col-grid">
+              <a href="/compare/buffer-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Buffer vs Shoutly AI</span></span></a>
+              <a href="/compare/hootsuite-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Hootsuite vs Shoutly AI</span></span></a>
+              <a href="/compare/later-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Later vs Shoutly AI</span></span></a>
+              <a href="/compare/socialpilot-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">SocialPilot vs Shoutly AI</span></span></a>
+              <a href="/compare/metricool-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Metricool vs Shoutly AI</span></span></a>
+              <a href="/compare/publer-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Publer vs Shoutly AI</span></span></a>
+              <a href="/compare/canva-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Canva vs Shoutly AI</span></span></a>
+              <a href="/compare/sprout-social-vs-shoutly-ai" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-right"><path d="M8 3 4 7l4 4"></path><path d="M4 7h16"></path><path d="m16 21 4-4-4-4"></path><path d="M20 17H4"></path></svg></span><span class="mp-text"><span class="mp-label">Sprout Social vs Shoutly AI</span></span></a>
+            </div>
+          </div>
+          <div class="mp-col">
+            <div class="mp-col-title">Alternatives</div>
+            <div class="mp-col-items mp-col-grid">
+              <a href="/buffer-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Buffer Alternative</span></span></a>
+              <a href="/hootsuite-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Hootsuite Alternative</span></span></a>
+              <a href="/later-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Later Alternative</span></span></a>
+              <a href="/socialpilot-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">SocialPilot Alternative</span></span></a>
+              <a href="/metricool-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Metricool Alternative</span></span></a>
+              <a href="/canva-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Canva Alternative</span></span></a>
+              <a href="/sprout-social-alternative.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg></span><span class="mp-text"><span class="mp-label">Sprout Social Alternative</span></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">SIDE BY SIDE</div>
+          <div class="mp-featured-title">Every tool, one table</div>
+          <p class="mp-featured-desc">Features, limits, and real pricing across eight platforms — no marketing math.</p>
+          <a href="/compare/buffer-vs-shoutly-ai" class="mp-cta">View all comparisons <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Panel -->
+    <div class="sh-panel" data-menu="pricing">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(1,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">Plans &amp; billing</div>
+            <div class="mp-col-items">
+              <a href="/pricing" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg></span><span class="mp-text"><span class="mp-label">Pricing Plans</span><span class="mp-desc">Start free. Upgrade when you outgrow it.</span></span></a>
+              <a href="/pricing" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-columns-3"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path><path d="M15 3v18"></path></svg></span><span class="mp-text"><span class="mp-label">Compare Plans</span><span class="mp-desc">Every limit and feature, line by line.</span></span></a>
+              <a href="/shoutlyai-enterprise.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-landmark"><line x1="3" x2="21" y1="22" y2="22"></line><line x1="6" x2="6" y1="18" y2="11"></line><line x1="10" x2="10" y1="18" y2="11"></line><line x1="14" x2="14" y1="18" y2="11"></line><line x1="18" x2="18" y1="18" y2="11"></line><polygon points="12 2 20 7 4 7"></polygon></svg></span><span class="mp-text"><span class="mp-label">Enterprise</span><span class="mp-desc">SSO, SLAs, and a named contact.</span></span></a>
+              <a href="/help-center" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg></span><span class="mp-text"><span class="mp-label">FAQs</span><span class="mp-desc">Billing, seats, limits, and cancellation.</span></span></a>
+              <a href="/shoutlyai-demo.html" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path><path d="m9 16 2 2 4-4"></path></svg></span><span class="mp-text"><span class="mp-label">Book a Demo</span><span class="mp-desc">30 minutes with a product specialist.</span></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">FREE FOREVER</div>
+          <div class="mp-featured-title">Three channels, no card</div>
+          <p class="mp-featured-desc">Generate, schedule, and publish on the free plan for as long as you like.</p>
+          <a href="/sign-up" class="mp-cta">Start Free Trial <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company Panel -->
+    <div class="sh-panel" data-menu="company">
+      <div class="mp-inner">
+        <div class="mp-cols" style="grid-template-columns:repeat(1,minmax(0,1fr))">
+          <div class="mp-col">
+            <div class="mp-col-title">Company &amp; resources</div>
+            <div class="mp-col-items mp-col-grid">
+              <a href="/about-us" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-circle"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="10" r="3"></circle><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path></svg></span><span class="mp-text"><span class="mp-label">About Us</span><span class="mp-desc">Who we are and why we built this.</span></span></a>
+              <a href="/partners" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-handshake"><path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0L13 12"></path><path d="m18 10 3.3-3.3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0L14 6"></path><path d="m2 14 6 6"></path><path d="M7 8 2 13"></path><path d="M21 21 16 16"></path></svg></span><span class="mp-text"><span class="mp-label">Partners</span><span class="mp-desc">Agencies and resellers building on Shoutly.</span></span></a>
+              <a href="/help-center" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-help-circle"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg></span><span class="mp-text"><span class="mp-label">Help Center</span><span class="mp-desc">Guides, troubleshooting, and API docs.</span></span></a>
+              <a href="/security" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="mp-text"><span class="mp-label">Security</span><span class="mp-desc">How we protect your accounts and data.</span></span></a>
+              <a href="/careers" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></span><span class="mp-text"><span class="mp-label">Careers<span class="mp-badge">HIRING</span></span><span class="mp-desc">Open roles across product and growth.</span></span></a>
+              <a href="https://blog.shoutlyai.com/" target="_blank" rel="noopener noreferrer" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" x2="8" y1="13" y2="13"></line><line x1="16" x2="8" y1="17" y2="17"></line><line x1="10" x2="8" y1="9" y2="9"></line></svg></span><span class="mp-text"><span class="mp-label">Blog</span><span class="mp-desc">Playbooks, teardowns, and benchmarks.</span></span></a>
+              <a href="/contact-us" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span><span class="mp-text"><span class="mp-label">Contact</span><span class="mp-desc">Talk to sales or support.</span></span></a>
+              <a href="/legal-hub" class="mp-row"><span class="mp-ico"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"></path></svg></span><span class="mp-text"><span class="mp-label">Legal Hub</span><span class="mp-desc">Privacy, terms, GDPR, DPDP, and more.</span></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="mp-featured">
+          <div class="mp-featured-eyebrow">TRUST</div>
+          <div class="mp-featured-title">Enterprise-ready by default</div>
+          <p class="mp-featured-desc">SSL, GDPR, CCPA, and DPDP compliant. 99.9% uptime, hosted on AWS.</p>
+          <a href="/security" class="mp-cta">Read the security brief <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile Menu -->
+  <div class="sh-mobile" id="sh-mobile-menu">
+    <a href="/">Home</a>
+    <a href="/shoutlyai-overview.html">Overview</a>
+    <a href="/shoutlyai-why-shoutly-ai.html">Why Shoutly AI</a>
+    <a href="/shoutlyai-how-it-works.html">How It Works</a>
+    <a href="/templates">Templates</a>
+    <a href="/solutions/local-businesses">Solutions</a>
+    <a href="/shoutlyai-ai-content-generator.html">AI Content Generator</a>
+    <a href="/shoutlyai-ai-image-generator.html">AI Image Generator</a>
+    <a href="/shoutlyai-social-media-scheduler.html">Social Scheduler</a>
+    <a href="/shoutlyai-analytics-dashboard.html">Analytics</a>
+    <a href="/shoutlyai-brand-kit.html">Brand Kit</a>
+    <a href="/compare/buffer-vs-shoutly-ai">Compare Tools</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about-us">About Us</a>
+    <a href="/help-center">Help Center</a>
+    <a href="/contact-us">Contact</a>
+    <div class="sh-mobile-cta" id="sh-mobile-auth-guest">
+      <a href="/sign-in" class="sh-login">Log in</a>
+      <a href="/sign-up" class="sh-start">Start Free Trial</a>
+    </div>
+    <div class="sh-mobile-profile" id="sh-mobile-profile" style="display:none">
+      <div class="sh-profile-info">
+        <p class="sh-profile-name" id="sh-mobile-profile-name"></p>
+        <p class="sh-profile-email" id="sh-mobile-profile-email"></p>
+      </div>
+      <a href="/dashboards/settings" class="sh-profile-item">Profile</a>
+      <a href="/dashboards" class="sh-profile-item">Dashboard</a>
+      <button type="button" class="sh-profile-item sh-signout" id="sh-mobile-signout">Sign Out</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">By Channel</span>
+      <h1>Pinterest Pin Generator &amp; Scheduler</h1>
+      <p class="hero-sub">Generate keyword-optimized pins, idea pins, and board-ready content queues with AI. Shoutly AI helps businesses and creators stay consistent on Pinterest without spending hours writing every pin manually.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://shoutlyai.com/sign-up">Start free trial</a>
+        <a class="btn btn-secondary" href="https://shoutlyai.com/pricing">See plans</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-number">4 mo+</div>
+        <div class="stat-label">Average pin lifespan vs. hours on a feed post</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Networks supported in one workflow</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">365</div>
+        <div class="stat-label">Days of Pinterest content from one brief</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">15+ hrs</div>
+        <div class="stat-label">Saved each week on writing and planning</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outputs-row">
+    <div class="wrap">
+      <div class="pill-list">
+        <span class="pill">Keyword-rich pin titles</span>
+        <span class="pill">Idea Pins</span>
+        <span class="pill">Seasonal pin sets</span>
+        <span class="pill">Product &amp; shopping pins</span>
+        <span class="pill">Blog traffic pins</span>
+        <span class="pill">Board-ready batches</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-kicker">Why Pinterest needs a different workflow</div>
+      <h2 class="section-title">Visual search rewards keywords, evergreen value, and consistency.</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Write less, ship more</h3>
+          <p>Shoutly AI compresses ideation, keyword research, and pin description writing into a single workflow so you can stay active on Pinterest without writing every pin from scratch.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Built for visual search</h3>
+          <p>Titles, descriptions, and alt text are tuned for a platform where searchable keywords determine whether people discover your pin months after it's published.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Board-ready workflows</h3>
+          <p>Turn one topic into a full pin set with a keyword-optimized title, a description that ranks, and a save-worthy CTA that still sounds like your brand.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Queue a season at once</h3>
+          <p>Plan recurring themes, stagger seasonal and evergreen content, and keep your boards active without manually assembling a content plan every day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block block-alt">
+    <div class="wrap">
+      <div class="section-kicker">Core capabilities</div>
+      <h2 class="section-title">One workflow for pin writing, keyword research, board planning, and scheduling Pinterest content.</h2>
+      <div class="checklist">
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Keyword-rich pin titles and descriptions built for search</span></div>
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Idea Pin scripts with on-pin text and step structure</span></div>
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Seasonal and evergreen content calendars planned months ahead</span></div>
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Rich Pin copy tuned for shopping, recipe, and blog traffic</span></div>
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Weekly board scheduling queues for consistent publishing</span></div>
+        <div class="check-item"><span class="check-icon">&#10003;</span><span>Performance-informed iteration across boards and themes</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-kicker">Turn one topic into a full pin set</div>
+      <h2 class="section-title">Draft a topic once and expand it into a keyword-optimized title, a ranking description, and a board-ready queue that keeps your brand discoverable.</h2>
+      <div class="workflow-grid">
+        <div class="workflow-card">
+          <div class="workflow-number">Part 1</div>
+          <p>Start with a keyword-optimized pin title that surfaces in Pinterest search for months.</p>
+        </div>
+        <div class="workflow-card">
+          <div class="workflow-number">Part 2</div>
+          <p>Expand into a description that stays natural, searchable, and true to your brand voice.</p>
+        </div>
+        <div class="workflow-card">
+          <div class="workflow-number">Part 3</div>
+          <p>Close with a clear save, click, or shop prompt suited to the board and audience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block block-alt">
+    <div class="wrap">
+      <div class="section-kicker">Output library</div>
+      <h2 class="section-title">What you can publish on Pinterest</h2>
+      <div class="tag-grid">
+        <div class="tag-card">Idea Pins</div>
+        <div class="tag-card">Seasonal pin sets</div>
+        <div class="tag-card">Product &amp; shopping pins</div>
+        <div class="tag-card">Blog traffic pins</div>
+        <div class="tag-card">Recipe &amp; how-to pins</div>
+        <div class="tag-card">Board-ready batches</div>
+        <div class="tag-card">Repurposed blog snippets</div>
+        <div class="tag-card">Infographic-style pins</div>
+        <div class="tag-card">Evergreen inspiration pins</div>
+        <div class="tag-card">Offer-led CTAs</div>
+      </div>
+      <p class="consistency-copy">Shoutly AI turns a single content brief into weeks of ready-to-post Pinterest titles, descriptions, and board plans, so you can stay consistent without starting from a blank pin before every upload.</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-kicker">FAQ</div>
+      <h2 class="section-title">Frequently asked questions about Pinterest publishing with AI</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Can Shoutly AI write Pinterest pin titles and descriptions?</summary>
+          <p>Yes. It can generate keyword-optimized titles, searchable descriptions, and board-ready pin sets aligned to Pinterest's discovery format.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can it auto-publish to Pinterest?</summary>
+          <p>Yes. You can prepare pins and push them into a scheduling workflow for consistent daily publishing across your boards.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it work for brands as well as creators?</summary>
+          <p>Yes. It supports product catalogs, blog traffic campaigns, seasonal promotions, and creator-led inspiration boards.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Can I generate a year of Pinterest content with one prompt?</summary>
+          <p>Yes. Shoutly AI is built to take a niche, voice, and offer brief and expand it into long-range publishing direction, including seasonal planning.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-cta">
+    <h2>Build your next season of Pinterest content in one sitting</h2>
+    <p>Generate keyword-optimized pins, descriptions, and board plans in minutes, then queue them for consistent publishing — all from Shoutly AI.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://shoutlyai.com/sign-up">Try Shoutly AI</a>
+      <a class="btn btn-secondary" href="https://shoutlyai.com/contact-us">Talk to our team</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="sf-inner">
+
+    <!-- Brand blurb + newsletter -->
+    <div class="sf-newsletter">
+      <div class="sf-brand">
+        <a href="/" class="sf-brand-logo-wrap"><img class="sf-brand-logo" src="/images/logo-master-white.png" alt="Shoutly AI logo"></a>
+        <p>Shoutly AI transforms one idea into 365 days of ready-to-publish social media content. Create, schedule, and grow your brand across every major platform.</p>
+        <div class="sf-plats">
+          <div class="sf-plats-label">Post across 10 platforms</div>
+          <div class="sf-plats-row">
+            <div class="sf-plat-ico" style="background:#000000"><i class="fa-brands fa-x-twitter" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#0A66C2"><i class="fa-brands fa-linkedin-in" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)"><i class="fa-brands fa-instagram" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#010101"><i class="fa-brands fa-tiktok" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#1877F2"><i class="fa-brands fa-facebook-f" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#000000"><i class="fa-brands fa-threads" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#0085ff"><i class="fa-brands fa-bluesky" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#FF0000"><i class="fa-brands fa-youtube" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#E60023"><i class="fa-brands fa-pinterest-p" style="color:#fff;font-size:16px"></i></div>
+            <div class="sf-plat-ico" style="background:#FFFC00"><i class="fa-brands fa-snapchat" style="color:#000;font-size:16px"></i></div>
+          </div>
+        </div>
+        <span class="sf-status" style="margin-top:14px;display:inline-flex">
+          <span class="sf-status-dot"></span>
+          All systems operational &mdash; <span style="text-decoration:underline">status</span>
+        </span>
+      </div>
+      <div class="sf-newsletter-box">
+        <div class="sf-nl-title">The weekly signal</div>
+        <p class="sf-nl-sub">AI marketing tactics, product updates, and new feature releases. Sent Thursdays.</p>
+        <div class="sf-nl-form">
+          <input type="email" id="sf-nl-email" placeholder="you@company.com">
+          <button type="button" id="sf-nl-btn">Subscribe</button>
+        </div>
+        <p id="sf-nl-msg" style="font-size:12px;font-weight:500;color:#6b7280;margin-top:12px">No spam. Unsubscribe anytime.</p>
+      </div>
+    </div>
+
+    <!-- Link columns -->
+    <div class="sf-cols">
+      <div class="sf-col">
+        <div class="sf-col-title">Product</div>
+        <a href="/shoutlyai-overview.html">Overview</a>
+        <a href="/shoutlyai-why-shoutly-ai.html">Why Shoutly AI</a>
+        <a href="/shoutlyai-ai-content-generator.html">AI Content Generator</a>
+        <a href="/shoutlyai-ai-image-generator.html">AI Image Generator</a>
+        <a href="/shoutlyai-how-it-works.html">AI Reel Generator</a>
+        <a href="/shoutlyai-ai-caption-generator.html">AI Caption Generator</a>
+        <a href="/shoutlyai-ai-hashtag-generator.html">AI Hashtag Generator</a>
+        <a href="/shoutlyai-social-media-scheduler.html">AI Social Scheduler</a>
+        <a href="/shoutlyai-bulk-scheduling.html">Bulk Scheduling</a>
+        <a href="/shoutlyai-multi-platform-publishing.html">Multi-Platform Publishing</a>
+        <a href="/shoutlyai-analytics-dashboard.html">Analytics</a>
+        <a href="/shoutlyai-brand-kit.html">Brand Kit</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/shoutlyai-enterprise.html">Enterprise</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-title">Solutions</div>
+        <a href="/solutions/local-businesses">Local Businesses</a>
+        <a href="/social-media-marketing-for-restaurants.html">Restaurants</a>
+        <a href="/social-media-marketing-for-gyms.html">Fitness</a>
+        <a href="/social-media-marketing-for-interior-designers.html">Interior Design</a>
+        <a href="/digital-marketing-for-footwear-brands.html">Footwear</a>
+        <a href="/digital-marketing-for-real-estate-agents.html">Real Estate</a>
+        <a href="/marketing-for-business-consultants.html">Startups</a>
+        <a href="/digital-marketing-for-hotels-and-resorts.html">Hotels</a>
+        <a href="/digital-marketing-for-event-planners.html">Event Planners</a>
+        <a href="/digital-marketing-for-makeup-artists.html">Makeup Services</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-title">Channels</div>
+        <a href="/channel/twitter-x">X</a>
+        <a href="/channel/instagram">Instagram</a>
+        <a href="/channel/facebook">Facebook</a>
+        <a href="/channel/bluesky">Bluesky</a>
+        <a href="/channel/linkedin">LinkedIn</a>
+        <a href="/channel/tiktok">TikTok</a>
+        <a href="/channel/threads">Threads</a>
+        <a href="/channel/youtube">YouTube</a>
+        <a href="/channel/pinterest">Pinterest</a>
+        <a href="/channel/google-business">Google Biz</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-title">Compare</div>
+        <a href="/compare/buffer-vs-shoutly-ai">Buffer vs Shoutly AI</a>
+        <a href="/compare/hootsuite-vs-shoutly-ai">Hootsuite vs Shoutly AI</a>
+        <a href="/compare/later-vs-shoutly-ai">Later vs Shoutly AI</a>
+        <a href="/compare/socialpilot-vs-shoutly-ai">SocialPilot vs Shoutly AI</a>
+        <a href="/compare/metricool-vs-shoutly-ai">Metricool vs Shoutly AI</a>
+        <a href="/compare/publer-vs-shoutly-ai">Publer vs Shoutly AI</a>
+        <a href="/compare/canva-vs-shoutly-ai">Canva vs Shoutly AI</a>
+        <a href="/compare/sprout-social-vs-shoutly-ai">Sprout Social vs Shoutly AI</a>
+        <a href="/compare/buffer-vs-shoutly-ai" style="color:#ea580c;margin-top:6px;">View all comparisons &rarr;</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-title">Alternatives</div>
+        <a href="/buffer-alternative.html">Buffer Alternative</a>
+        <a href="/hootsuite-alternative.html">Hootsuite Alternative</a>
+        <a href="/later-alternative.html">Later Alternative</a>
+        <a href="/socialpilot-alternative.html">SocialPilot Alternative</a>
+        <a href="/metricool-alternative.html">Metricool Alternative</a>
+        <a href="/canva-alternative.html">Canva Alternative</a>
+        <a href="/sprout-social-alternative.html">Sprout Social Alternative</a>
+        <a href="/buffer-alternative.html" style="color:#ea580c;margin-top:6px;">View all alternatives &rarr;</a>
+      </div>
+      <div class="sf-col">
+        <div class="sf-col-title">Resources</div>
+        <a href="https://blog.shoutlyai.com/" target="_blank" rel="noopener noreferrer">Blog</a>
+        <a href="/help-center">Help Center</a>
+        <a href="/templates">Branded Templates</a>
+      </div>
+    </div>
+
+    <!-- Company Row -->
+    <div class="sf-company">
+      <div class="sf-col-title">Company</div>
+      <div class="sf-company-links">
+        <a href="/about-us">About Us</a>
+        <a href="/partners">Partners</a>
+        <a href="/help-center">Help Center</a>
+        <a href="/security">Security</a>
+        <a href="/careers">Careers</a>
+        <a href="https://blog.shoutlyai.com/" target="_blank" rel="noopener noreferrer">Blog</a>
+        <a href="/contact-us">Contact</a>
+        <a href="/legal-hub">Legal Hub</a>
+        <a href="/shoutlyai-brand-assets.html">Brand Assets</a>
+      </div>
+    </div>
+
+    <!-- Trust & compliance -->
+    <div class="sf-trust">
+      <div class="sf-trust-title">Trust &amp; compliance</div>
+      <div class="sf-badges">
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2l8 3v6c0 5-3.4 8.4-8 11-4.6-2.6-8-6-8-11V5z"/></svg>Enterprise Security</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>SSL Secured</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>GDPR Ready</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>CCPA Compliant</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>DPDP Act Compliant</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>99.9% Uptime</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M8 6L3 12l5 6M16 6l5 6-5 6"/></svg>API Available</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 10h-1.26A8 8 0 108 20h10a5 5 0 000-10z"/></svg>AWS Cloud Hosted</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg>AI Powered</span>
+        <span class="sf-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M3 11a9 9 0 0118 0M3 11v7a2 2 0 002 2h1v-9H5a2 2 0 00-2 2zm18 0v7a2 2 0 01-2 2h-1v-9h1a2 2 0 012 2z"/></svg>24/7 Support</span>
+      </div>
+    </div>
+
+    <!-- Legal hub -->
+    <div class="sf-legal">
+      <div class="sf-legal-head">
+        <div class="t">Legal hub</div>
+        <p>Every policy governing how we handle your data, content, and account.</p>
+      </div>
+      <div class="sf-legal-links">
+        <a href="/privacy-policy">Privacy Policy</a><span class="sep">|</span>
+        <a href="/terms-and-conditions">Terms of Service</a><span class="sep">|</span>
+        <a href="/cookie">Cookie Policy</a><span class="sep">|</span>
+        <a href="/gdpr">GDPR</a><span class="sep">|</span>
+        <a href="/ccpa">CCPA</a><span class="sep">|</span>
+        <a href="/dpdp">DPDP Act</a><span class="sep">|</span>
+        <a href="/refunds">Refunds</a><span class="sep">|</span>
+        <a href="/security">Security</a><span class="sep">|</span>
+        <a href="/dmca">DMCA</a><span class="sep">|</span>
+        <a href="/eula">EULA</a><span class="sep">|</span>
+        <a href="/data-deletion">Data Deletion</a>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="sf-bottom">
+      <p class="sf-copy">&copy; 2026 shoutlyai &mdash; Qubixel Technologies Private Limited. All rights reserved.<span class="sub">smart ai powering your social media for the next 365 days.</span></p>
+      <div class="sf-bottom-right">
+        <span class="muted">English &#9662;</span>
+        <span class="muted">Global &#9662;</span>
+        <a href="/sitemap.xml">Sitemap</a>
+        <div class="sf-social">
+          <a href="https://www.facebook.com/people/Shoutly-AI/61583485633639/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/ai.shoutly/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/shoutlyai/?viewAsMember=true" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://x.com/shoutlyai" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="https://youtube.com/@shoutlyai" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<script src="/js/site-nav.js" defer></script>
+<script src="/js/site-footer.js" defer></script>
+</body>
+</html>

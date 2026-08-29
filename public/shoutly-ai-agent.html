@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoutlyAI - Find Buyers on Social Media</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* ============= HEADER SECTION ============= */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(135deg, rgba(255, 87, 34, 0.05) 0%, rgba(255, 87, 34, 0.02) 100%);
+            border-radius: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 24px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero .sub-text {
+            color: #888;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        /* ============= SEARCH SECTION ============= */
+        .search-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 60px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: #FF5722;
+            background: #fffbf8;
+        }
+        
+        .search-box button {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #FF5722, #F97316);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+            box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
+            min-width: 140px;
+        }
+        
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
+        }
+        
+        .search-box button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .demo-info {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .demo-info strong {
+            color: #FF5722;
+        }
+        
+        /* ============= LOADING STATE ============= */
+        .loading-state {
+            text-align: center;
+            padding: 100px 20px;
+            display: none;
+        }
+        
+        .loading-state.active {
+            display: block;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #FF5722;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 24px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        .loading-subtext {
+            color: #999;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+        
+        /* ============= RESULTS SECTION ============= */
+        .results-section {
+            display: none;
+        }
+        
+        .results-section.active {
+            display: block;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        
+        .analysis-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .analysis-card:hover {
+            border-color: #FF5722;
+            box-shadow: 0 12px 40px rgba(255, 87, 34, 0.15);
+            transform: translateY(-4px);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            color: #FF5722;
+        }
+        
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .card-content {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .card-content p {
+            margin-bottom: 12px;
+        }
+        
+        .card-content strong {
+            color: #FF5722;
+        }
+        
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+        
+        .tag {
+            background: rgba(255, 87, 34, 0.12);
+            border: 1px solid rgba(255, 87, 34, 0.3);
+            color: #FF5722;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* ============= HOW IT WORKS SECTION ============= */
+        .how-it-works {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        
+        .example-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 22px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .example-card:hover {
+            border-color: #FF5722;
+            transform: translateY(-6px);
+            box-shadow: 0 16px 36px rgba(255, 87, 34, 0.14);
+        }
+        
+        .example-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            border-radius: 16px 16px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .example-card:hover:before {
+            opacity: 1;
+        }
+        
+        .example-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .example-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-emoji {
+            font-size: 2rem;
+            line-height: 1;
+        }
+        
+        .example-category {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+        }
+        
+        .example-platform-badge {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .example-platform-badge.facebook {
+            background: rgba(24, 119, 242, 0.1);
+            color: #1877F2;
+            border: 1px solid rgba(24, 119, 242, 0.25);
+        }
+
+        .example-platform-badge.linkedin {
+            background: rgba(10, 102, 194, 0.1);
+            color: #0A66C2;
+            border: 1px solid rgba(10, 102, 194, 0.25);
+        }
+
+        .example-image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border: 1.5px solid #e2e8f0;
+            background: #ffffff;
+            cursor: zoom-in;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.02), 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .example-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            transition: transform 0.3s ease;
+            background: #ffffff;
+        }
+
+        .example-image-container:hover .example-image {
+            transform: scale(1.03);
+        }
+        
+        .example-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .example-content {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+        
+        .example-quote {
+            background: #f8fafc;
+            border-left: 3px solid #FF5722;
+            padding: 12px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: #334155;
+            font-style: italic;
+            line-height: 1.5;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+        
+        .example-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            font-size: 0.8rem;
+            color: #10B981;
+            font-weight: 600;
+        }
+
+        /* Modal Lightbox */
+        .img-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .img-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .img-modal-content {
+            position: relative;
+            max-width: 860px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .img-modal-content img {
+            width: 100%;
+            max-height: 80vh;
+            display: block;
+            object-fit: contain;
+            background: #0f172a;
+        }
+
+        .img-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.6);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: background-color 0.2s;
+        }
+
+        .img-modal-close:hover {
+            background: #FF5722;
+        }
+        
+        /* ============= ADVANCED LANDING SECTIONS ============= */
+        .precision-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 70px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .precision-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .precision-content h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FF5722;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .precision-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        
+        .precision-content p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .precision-highlight {
+            background: #FFF7ED;
+            padding: 16px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #FF5722;
+            margin-bottom: 24px;
+            font-weight: 600;
+            color: #C2410C;
+            font-size: 0.95rem;
+        }
+        
+        .precision-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        
+        .precision-btn {
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .precision-btn-primary {
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            color: white;
+            box-shadow: 0 4px 14px rgba(255, 87, 34, 0.3);
+        }
+        
+        .precision-btn-primary:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.4);
+        }
+        
+        .precision-btn-secondary {
+            background: white;
+            color: #1e293b;
+            border: 1.5px solid #cbd5e1;
+        }
+        
+        .precision-btn-secondary:hover {
+            border-color: #FF5722;
+            color: #FF5722;
+            background: #fff7ed;
+            transform: translateY(-2px);
+        }
+        
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .use-case-card {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-4px);
+            border-color: #FF5722;
+            box-shadow: 0 10px 25px rgba(255, 87, 34, 0.1);
+            background: #ffffff;
+        }
+        
+        .use-case-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .use-case-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .use-case-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.55;
+        }
+        
+        /* Strategy Section */
+        .saas-strategy-section {
+            margin-bottom: 70px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .social-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .social-post {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s;
+        }
+        
+        .social-post:hover {
+            border-color: #FF5722;
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(255, 87, 34, 0.12);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .post-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5722, #F97316);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .post-info h5 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .post-info p {
+            margin: 2px 0 0;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        .post-platform {
+            margin-left: auto;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .post-badge {
+            display: inline-block;
+            background: #FEF3C7;
+            color: #B45309;
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .post-text {
+            font-size: 0.92rem;
+            color: #334155;
+            line-height: 1.55;
+            margin-bottom: 12px;
+        }
+        
+        .post-engagement {
+            display: flex;
+            gap: 16px;
+            padding-top: 10px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        
+        .strategy-content h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FF5722;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .strategy-content h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        
+        .strategy-content p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .strategy-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 28px;
+        }
+        
+        .strategy-features li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: #334155;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .strategy-features li:before {
+            content: "✓";
+            color: #10B981;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+        
+        .strategy-cta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        /* Channels Section */
+        .channels-section {
+            text-align: center;
+            margin-bottom: 70px;
+            padding: 50px 30px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .channels-title h2 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .channels-title p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .channels-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .channel-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .channel-card:hover {
+            transform: translateY(-6px);
+        }
+        
+        .channel-icon {
+            width: 84px;
+            height: 84px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s;
+        }
+        
+        .channel-card:hover .channel-icon {
+            border-color: #FF5722;
+            box-shadow: 0 10px 25px rgba(255, 87, 34, 0.18);
+        }
+        
+        .channel-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        /* Scale Section */
+        .scale-section {
+            margin-bottom: 70px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 50px 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .scale-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .scale-visuals {
+            position: relative;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            position: absolute;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s;
+        }
+        
+        .profile-avatar:nth-child(1) {
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%);
+        }
+        
+        .profile-avatar:nth-child(2) {
+            top: 40px;
+            right: 20px;
+            background: linear-gradient(135deg, #EC4899 0%, #DB2777 100%);
+        }
+        
+        .profile-avatar:nth-child(3) {
+            bottom: 30px;
+            left: 40px;
+            background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+        }
+        
+        .profile-avatar:nth-child(4) {
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+        
+        .center-badge {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            box-shadow: 0 14px 35px rgba(255, 87, 34, 0.25);
+            border: 3px solid #FF5722;
+            z-index: 10;
+        }
+        
+        .scale-content h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FF5722;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .scale-content h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.25;
+            margin-bottom: 16px;
+        }
+        
+        .scale-content p {
+            font-size: 1.05rem;
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+        
+        .scale-points {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        
+        .scale-point {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        
+        .scale-point-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #FFF7ED;
+            color: #EA580C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            border: 1px solid #FFEDD5;
+        }
+        
+        .scale-point-text h4 {
+            margin: 0 0 3px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .scale-point-text p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        /* Use Cases Section */
+        .use-cases-section {
+            margin-bottom: 70px;
+        }
+        
+        .use-cases-header {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+        
+        .use-cases-header h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .use-cases-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin: 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .use-cases-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .use-case-box {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        
+        .use-case-box:hover {
+            border-color: #FF5722;
+            box-shadow: 0 14px 35px rgba(255, 87, 34, 0.12);
+            transform: translateY(-5px);
+        }
+        
+        .use-case-box:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .use-case-box:hover:before {
+            opacity: 1;
+        }
+        
+        .use-case-icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: #FFF7ED;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            border: 1px solid #FFEDD5;
+        }
+        
+        .use-case-box h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .use-case-box p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+        
+        .use-case-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 10px 14px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-top: auto;
+            border: 1px solid #edf2f7;
+        }
+        
+        .use-case-metric-value {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #FF5722;
+        }
+        
+        .use-case-metric-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 600;
+        }
+        
+        /* ============= GLOBAL COVERAGE SECTION ============= */
+        .global-section {
+            text-align: center;
+            margin-bottom: 70px;
+            padding: 50px 40px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .global-header {
+            margin-bottom: 40px;
+        }
+        
+        .global-header .label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FF5722;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        
+        .global-header h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .global-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin: 0 auto;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+        
+        .globe-visual {
+            width: 100%;
+            max-width: 800px;
+            height: 440px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+        
+        .map-svg {
+            width: 95%;
+            height: 95%;
+            filter: drop-shadow(0 0 15px rgba(255, 87, 34, 0.3));
+        }
+
+        /* ============= ONBOARDING / 3 MINUTES SECTION ============= */
+        .onboarding-section {
+            text-align: center;
+            margin-bottom: 70px;
+            padding: 60px 40px;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        
+        .onboarding-header {
+            margin-bottom: 50px;
+        }
+        
+        .onboarding-header h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .onboarding-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin: 0 auto;
+            max-width: 650px;
+            line-height: 1.7;
+        }
+        
+        .steps-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+        
+        .flow-section-left, .flow-section-right {
+            flex: 1;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .flow-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.25s;
+        }
+
+        .flow-item:hover {
+            border-color: #FF5722;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.08);
+        }
+        
+        .flow-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5722, #F97316);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.25);
+        }
+        
+        .flow-number.green {
+            background: linear-gradient(135deg, #10B981, #059669);
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+        }
+        
+        .flow-content h4 {
+            margin: 0 0 4px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .flow-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .flow-center-icon {
+            flex: 0 0 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 3px solid #FF5722;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 12px 30px rgba(255, 87, 34, 0.2);
+            animation: pulseGlow 3s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 12px 30px rgba(255, 87, 34, 0.2); }
+            100% { transform: scale(1.06); box-shadow: 0 16px 40px rgba(255, 87, 34, 0.35); }
+        }
+
+        /* ============= PRICING SECTION ============= */
+        .pricing-section {
+            margin-bottom: 70px;
+            text-align: center;
+        }
+
+        .pricing-header {
+            margin-bottom: 45px;
+        }
+
+        .pricing-header h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .pricing-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px;
+            max-width: 950px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .tier-card {
+            background: white;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 36px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tier-card:hover {
+            border-color: #FF5722;
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(255, 87, 34, 0.12);
+        }
+        
+        .tier-card.featured {
+            border: 2px solid #FF5722;
+            background: linear-gradient(180deg, #ffffff 0%, #fffbf8 100%);
+            box-shadow: 0 10px 30px rgba(255, 87, 34, 0.08);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.25);
+        }
+        
+        .tier-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 0 10px;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tier-description {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            min-height: 48px;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+        
+        .features-list li {
+            padding: 6px 0;
+            color: #334155;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features-list li i {
+            color: #10B981;
+            font-size: 0.9rem;
+        }
+        
+        .tier-cta {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #FF5722, #F97316);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.25);
+            text-align: center;
+        }
+        
+        .tier-cta:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.35);
+        }
+
+        /* ============= CTA SECTION ============= */
+        .cta-section {
+            background: linear-gradient(135deg, #FF5722 0%, #F97316 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        
+        .cta-text {
+            font-size: 1.05rem;
+            margin-bottom: 28px;
+            opacity: 0.95;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #FF5722;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* ============= RESPONSIVE ============= */
+        @media (max-width: 992px) {
+            .precision-header, .saas-strategy-section, .scale-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .scale-visuals {
+                height: 280px;
+            }
+            .steps-flow {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .flow-center-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .grid-container { grid-template-columns: 1fr; }
+            .search-box { flex-direction: column; }
+            .search-box button { width: 100%; }
+            .analysis-card { padding: 20px; }
+            .cta-section { padding: 40px 20px; }
+            .use-cases-grid { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .precision-content h2, .strategy-content h2, .channels-title h2, .scale-content h2, .use-cases-header h2, .global-header h2, .onboarding-header h2, .pricing-header h2 {
+                font-size: 1.8rem;
+            }
+            .globe-visual {
+                height: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- ============= HERO SECTION ============= -->
+        <div class="hero">
+            <h1><i class="fas fa-rocket"></i> ShoutlyAI</h1>
+            <p>Enter any website. Discover who's actively hunting for your services on LinkedIn & Facebook.</p>
+            <p class="sub-text">Real buyers. Real demand. Right now.</p>
+        </div>
+        
+        <!-- ============= SEARCH SECTION ============= -->
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="url" 
+                    id="websiteUrl" 
+                    placeholder="Enter website URL (e.g., https://example.com)"
+                    autocomplete="off"
+                >
+                <button id="analyzeBtn" onclick="analyzeWebsite()">
+                    <i class="fas fa-search"></i> Analyze
+                </button>
+                <button id="demoBtn" onclick="runDemo()" style="background: linear-gradient(135deg, #10B981, #059669); box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);">
+                    <i class="fas fa-play"></i> Demo
+                </button>
+            </div>
+            <div class="demo-info">
+                👉 <strong>Click "Demo"</strong> to see instant results without entering a URL
+            </div>
+        </div>
+        
+        <!-- ============= LOADING STATE ============= -->
+        <div class="loading-state" id="loadingState">
+            <div class="spinner"></div>
+            <p class="loading-text">Analyzing website...</p>
+            <p class="loading-subtext">Finding your ideal customers on social platforms</p>
+        </div>
+        
+        <!-- ============= RESULTS SECTION ============= -->
+        <div class="results-section" id="resultsSection">
+            
+            <!-- Analysis Cards -->
+            <div class="grid-container">
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                        <div class="card-title">About The Business</div>
+                    </div>
+                    <div class="card-content" id="businessAnalysis">
+                        <p>Loading analysis...</p>
+                    </div>
+                    <div class="tags" id="businessKeywords"></div>
+                </div>
+                
+                <div class="analysis-card">
+                    <div class="card-header">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <div class="card-title">Target Audience</div>
+                    </div>
+                    <div class="card-content" id="audienceAnalysis">
+                        <p>Loading analysis...</p>
+                    </div>
+                    <div class="tags" id="audienceKeywords"></div>
+                </div>
+            </div>
+            
+            <!-- How It Works Section -->
+            <div class="how-it-works">
+                <h2 class="section-title">🎯 How This Works</h2>
+                <p class="section-subtitle">Real people hunting for solutions like yours RIGHT NOW on LinkedIn & Facebook</p>
+                
+                <div class="examples-grid" id="examplesGrid">
+                    <!-- Examples will be populated here -->
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- ============= VALUE PROPOSITION / PRECISION SECTION ============= -->
+        <div class="precision-section">
+            <div class="precision-header">
+                <div class="precision-content">
+                    <h3>✨ Real-time prospect discovery</h3>
+                    <h2>Stop chasing. Start converting.</h2>
+                    <p>Watch your ideal buyers raise their hands on social media. IntentFlow AI finds them the moment they show intent, so you respond first while they're still deciding.</p>
+                    <div class="precision-highlight">
+                        ⚡ 47 high-intent prospects found today • Average response time: 2 minutes
+                    </div>
+                    <div class="precision-buttons">
+                        <button class="precision-btn precision-btn-primary" onclick="document.getElementById('websiteUrl').focus()">Learn how →</button>
+                        <button class="precision-btn precision-btn-secondary" onclick="runDemo()">Try Growth Engine</button>
+                    </div>
+                </div>
+                
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">💰</div>
+                        <h4>Close bigger deals</h4>
+                        <p>Find decision-makers with budgets already approved. No more cold outreach that goes nowhere.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon">⚡</div>
+                        <h4>Beat your competitors</h4>
+                        <p>Respond to prospects in 2 minutes, not 2 days. Be the first vendor they talk to.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon">📈</div>
+                        <h4>Scale your team</h4>
+                        <p>Our AI handles 50+ conversations simultaneously. Your team focuses on closing deals.</p>
+                    </div>
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🎯</div>
+                        <h4>Never miss an opportunity</h4>
+                        <p>AI watches Twitter, LinkedIn, Reddit 24/7. You sleep. Prospects still show up in your inbox.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= SAAS STRATEGY & SOCIAL FEED SECTION ============= -->
+        <div class="saas-strategy-section">
+            <div class="social-feed">
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar">EM</div>
+                        <div class="post-info">
+                            <h5>Emma Martinez</h5>
+                            <p>@emmamtz • CTO at Venture Labs</p>
+                        </div>
+                        <div class="post-platform"><i class="fab fa-linkedin" style="color: #0A66C2;"></i> LinkedIn</div>
+                    </div>
+                    <div class="post-badge">🔥 HIGH INTENT</div>
+                    <div class="post-text">"We're in the market for a new lead gen solution. Budget is $50k/quarter. Looking for something that integrates with our CRM and has solid AI capabilities."</div>
+                    <div class="post-engagement">
+                        <span>💬 23 comments</span>
+                        <span>❤️ 156 likes</span>
+                        <span>📤 8 shares</span>
+                    </div>
+                </div>
+
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar" style="background: linear-gradient(135deg, #0284c7, #0ea5e9);">JR</div>
+                        <div class="post-info">
+                            <h5>James Rodriguez</h5>
+                            <p>@jrodriguez_dev • Marketing Lead at TechStart</p>
+                        </div>
+                        <div class="post-platform"><i class="fab fa-twitter" style="color: #1DA1F2;"></i> Twitter</div>
+                    </div>
+                    <div class="post-badge" style="background: #E0F2FE; color: #0369A1;">⚡ MEDIUM INTENT</div>
+                    <div class="post-text">"Our team just got approved for marketing tech upgrades. Anyone using a platform that automates outreach + handles lead qualification? Would love recommendations 👇"</div>
+                    <div class="post-engagement">
+                        <span>💬 45 comments</span>
+                        <span>❤️ 234 likes</span>
+                        <span>📤 67 retweets</span>
+                    </div>
+                </div>
+
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="post-avatar" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">SN</div>
+                        <div class="post-info">
+                            <h5>Sarah Nelson</h5>
+                            <p>@sarahnelson_io • Founder of GrowthCo</p>
+                        </div>
+                        <div class="post-platform"><i class="fab fa-linkedin" style="color: #0A66C2;"></i> LinkedIn</div>
+                    </div>
+                    <div class="post-badge">🔥 HIGH INTENT</div>
+                    <div class="post-text">"Scaling from 3 to 30 SDRs. Current tools are manual nightmare. Need something that can qualify leads in real-time while we sleep. Already talked to 5 vendors."</div>
+                    <div class="post-engagement">
+                        <span>💬 89 comments</span>
+                        <span>❤️ 512 likes</span>
+                        <span>📤 124 shares</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="strategy-content">
+                <h3>🎯 Real-Time Intent</h3>
+                <h2>Capture demand, not just interest</h2>
+                <p>Most SaaS teams waste days chasing cold leads who might have interacted yesterday. IntentFlow finds prospects at the exact moment they need help <strong>right now</strong>—when budget is pre-approved, need is urgent, and they're ready to buy.</p>
+                
+                <ul class="strategy-features">
+                    <li>Real-time intent detection across social platforms</li>
+                    <li>Automated lead scoring based on buying urgency</li>
+                    <li>Response templates tailored to the context</li>
+                    <li>Instant forwarding to your sales team</li>
+                    <li>40% faster sales cycles, guaranteed outreach</li>
+                </ul>
+
+                <div class="strategy-cta">
+                    <button class="precision-btn precision-btn-primary" onclick="document.getElementById('websiteUrl').focus()">Start Free Trial</button>
+                    <button class="precision-btn precision-btn-secondary" onclick="runDemo()">Schedule Demo</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= CHANNELS SECTION ============= -->
+        <div class="channels-section">
+            <div class="channels-title">
+                <h2>Monitor every channel where buyers gather</h2>
+                <p>IntentFlow monitors all major platforms simultaneously. You focus on closing deals while our AI does the searching.</p>
+            </div>
+            <div class="channels-grid">
+                <div class="channel-card">
+                    <div class="channel-icon" style="color: #0A66C2;"><i class="fab fa-linkedin"></i></div>
+                    <div class="channel-name">LinkedIn</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-icon" style="color: #0f172a;"><i class="fab fa-x-twitter"></i></div>
+                    <div class="channel-name">Twitter / X</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-icon" style="color: #FF4500;"><i class="fab fa-reddit"></i></div>
+                    <div class="channel-name">Reddit</div>
+                </div>
+                <div class="channel-card">
+                    <div class="channel-icon" style="color: #4A154B;"><i class="fab fa-slack"></i></div>
+                    <div class="channel-name">Slack & Communities</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= SCALE WITH AI SECTION ============= -->
+        <div class="scale-section">
+            <div class="scale-container">
+                <div class="scale-visuals">
+                    <div class="profile-avatar">👤</div>
+                    <div class="profile-avatar">👥</div>
+                    <div class="profile-avatar">📊</div>
+                    <div class="profile-avatar">⚙️</div>
+                    <div class="center-badge">🚀</div>
+                </div>
+
+                <div class="scale-content">
+                    <h3>⚡ Automation at Scale</h3>
+                    <h2>Your team, multiplied by AI</h2>
+                    <p>Handle 100+ conversations simultaneously. One sales rep becomes ten. Your team scales without hiring.</p>
+                    
+                    <div class="scale-points">
+                        <div class="scale-point">
+                            <div class="scale-point-icon"><i class="fas fa-bolt"></i></div>
+                            <div class="scale-point-text">
+                                <h4>Instant response</h4>
+                                <p>Respond to buyers within 2 minutes, not 2 days. First to respond wins.</p>
+                            </div>
+                        </div>
+                        <div class="scale-point">
+                            <div class="scale-point-icon"><i class="fas fa-filter"></i></div>
+                            <div class="scale-point-text">
+                                <h4>Context-aware qualification</h4>
+                                <p>AI scans context, profile & budget to qualify leads automatically.</p>
+                            </div>
+                        </div>
+                        <div class="scale-point">
+                            <div class="scale-point-icon"><i class="fas fa-comments"></i></div>
+                            <div class="scale-point-text">
+                                <h4>Custom tailored pitches</h4>
+                                <p>Generates contextual replies based on your product and buyer problem.</p>
+                            </div>
+                        </div>
+                        <div class="scale-point">
+                            <div class="scale-point-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="scale-point-text">
+                                <h4>Predictable pipeline</h4>
+                                <p>Turn unpredictable social activity into predictable qualified sales pipeline.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="strategy-cta">
+                        <button class="precision-btn precision-btn-primary" onclick="document.getElementById('websiteUrl').focus()">See it in Action</button>
+                        <button class="precision-btn precision-btn-secondary" onclick="runDemo()">Talk to Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= HOW SAAS TEAMS USE SECTION ============= -->
+        <div class="use-cases-section">
+            <div class="use-cases-header">
+                <h2>How SaaS teams use IntentFlow</h2>
+                <p>Whether you're a 3-person startup or 300-person scale-up, IntentFlow fits your workflow</p>
+            </div>
+
+            <div class="use-cases-cards">
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">⚡</div>
+                    <h4>Accelerate your sales cycle</h4>
+                    <p>Stop waiting for inbound. Find buyers actively shopping and respond before they reach your competitors.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">72%</span>
+                        <span class="use-case-metric-label">faster sales cycles</span>
+                    </div>
+                </div>
+
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">🎯</div>
+                    <h4>Automate lead qualification</h4>
+                    <p>AI scores intent and routes only qualified prospects to your reps. Your team focuses on closing, not filtering.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">94%</span>
+                        <span class="use-case-metric-label">qualification accuracy</span>
+                    </div>
+                </div>
+
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">📈</div>
+                    <h4>Scale your GTM without hiring</h4>
+                    <p>Handle 50+ conversations simultaneously. One sales rep becomes ten with AI assistance. Same payroll, 10x results.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">50+</span>
+                        <span class="use-case-metric-label">conversations at once</span>
+                    </div>
+                </div>
+
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">🏆</div>
+                    <h4>Win deals from competitors</h4>
+                    <p>Monitor when prospects mention your competitors on social. Win them while they're still evaluating.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">32%</span>
+                        <span class="use-case-metric-label">from competitive wins</span>
+                    </div>
+                </div>
+
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">💬</div>
+                    <h4>Land enterprise accounts</h4>
+                    <p>Find decision-makers before RFPs go out. Engage CTOs, CFOs, and VPs directly when budget is approved.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">$45K</span>
+                        <span class="use-case-metric-label">avg deal size</span>
+                    </div>
+                </div>
+
+                <div class="use-case-box">
+                    <div class="use-case-icon-box">🔄</div>
+                    <h4>Expand existing customers</h4>
+                    <p>Catch expansion signals from your own customers. Upsell and cross-sell before they look elsewhere.</p>
+                    <div class="use-case-metric">
+                        <span class="use-case-metric-value">28%</span>
+                        <span class="use-case-metric-label">upsell success rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= GLOBAL COVERAGE SECTION ============= -->
+        <div class="global-section">
+            <div class="global-header">
+                <span class="label">🌍 Global Coverage</span>
+                <h2>Find buyers anywhere in the world</h2>
+                <p>Monitor conversations across every continent, every timezone, every market. Your ideal customers are talking right now—on Twitter, LinkedIn, Reddit, Slack. We find them.</p>
+            </div>
+            <div class="globe-visual">
+                <svg class="map-svg" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style>
+                            .map-land { fill: #1e3a5f; stroke: #0f2744; stroke-width: 0.8; }
+                            .map-grid { stroke: rgba(255, 87, 34, 0.15); stroke-width: 0.5; }
+                            .map-point { fill: #FF5722; opacity: 0.85; }
+                            .map-line { stroke: rgba(255, 87, 34, 0.35); stroke-width: 1.2; stroke-dasharray: 4,4; }
+                        </style>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background -->
+                    <rect width="960" height="600" fill="#0b1329"/>
+                    
+                    <!-- Grid Lines -->
+                    <line x1="0" y1="150" x2="960" y2="150" class="map-grid"/>
+                    <line x1="0" y1="300" x2="960" y2="300" class="map-grid"/>
+                    <line x1="0" y1="450" x2="960" y2="450" class="map-grid"/>
+                    <line x1="240" y1="0" x2="240" y2="600" class="map-grid"/>
+                    <line x1="480" y1="0" x2="480" y2="600" class="map-grid"/>
+                    <line x1="720" y1="0" x2="720" y2="600" class="map-grid"/>
+                    
+                    <!-- Simplified World Continents -->
+                    <!-- North America -->
+                    <path class="map-land" d="M 120,130 L 250,110 L 290,190 L 220,260 L 160,250 L 110,180 Z"/>
+                    <!-- South America -->
+                    <path class="map-land" d="M 230,300 L 300,320 L 320,430 L 260,500 L 210,410 Z"/>
+                    <!-- Europe -->
+                    <path class="map-land" d="M 440,110 L 530,100 L 550,180 L 470,210 L 420,160 Z"/>
+                    <!-- Africa -->
+                    <path class="map-land" d="M 440,240 L 560,240 L 580,380 L 510,490 L 450,400 L 420,290 Z"/>
+                    <!-- Asia -->
+                    <path class="map-land" d="M 570,90 L 790,110 L 830,240 L 730,340 L 610,270 L 560,180 Z"/>
+                    <!-- Australia -->
+                    <path class="map-land" d="M 720,390 L 830,380 L 850,470 L 750,480 Z"/>
+                    
+                    <!-- Active Pulsing Intent Nodes -->
+                    <circle cx="190" cy="180" class="map-point" r="5" filter="url(#glow)">
+                        <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="260" cy="380" class="map-point" r="5" filter="url(#glow)">
+                        <animate attributeName="r" values="4;7;4" dur="2.4s" repeatCount="indefinite" begin="0.4s"/>
+                    </circle>
+                    <circle cx="480" cy="150" class="map-point" r="5.5" filter="url(#glow)">
+                        <animate attributeName="r" values="4.5;7.5;4.5" dur="1.8s" repeatCount="indefinite" begin="0.2s"/>
+                    </circle>
+                    <circle cx="510" cy="340" class="map-point" r="5" filter="url(#glow)">
+                        <animate attributeName="r" values="4;6.5;4" dur="2.2s" repeatCount="indefinite" begin="0.7s"/>
+                    </circle>
+                    <circle cx="700" cy="180" class="map-point" r="5.5" filter="url(#glow)">
+                        <animate attributeName="r" values="4.5;7.5;4.5" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                    </circle>
+                    <circle cx="780" cy="430" class="map-point" r="5" filter="url(#glow)">
+                        <animate attributeName="r" values="4;7;4" dur="2.6s" repeatCount="indefinite" begin="0.9s"/>
+                    </circle>
+                    
+                    <!-- Connecting Social Discovery Lines -->
+                    <line x1="190" y1="180" x2="480" y2="150" class="map-line"/>
+                    <line x1="480" y1="150" x2="700" y2="180" class="map-line"/>
+                    <line x1="190" y1="180" x2="260" y2="380" class="map-line"/>
+                    <line x1="480" y1="150" x2="510" y2="340" class="map-line"/>
+                    <line x1="700" y1="180" x2="780" y2="430" class="map-line"/>
+                    <line x1="510" y1="340" x2="780" y2="430" class="map-line"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- ============= ONBOARDING / 3 MINUTES SECTION ============= -->
+        <div class="onboarding-section">
+            <div class="onboarding-header">
+                <h2>Get started in 3 minutes</h2>
+                <p>No credit card, no complex onboarding. Here's how it works:</p>
+            </div>
+
+            <div class="steps-flow">
+                <div class="flow-section-left">
+                    <div class="flow-item">
+                        <div class="flow-number">1</div>
+                        <div class="flow-content">
+                            <h4>Connect your business</h4>
+                            <p>Tell us what you sell and who you're targeting. We'll learn your ideal customer profile.</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-number">2</div>
+                        <div class="flow-content">
+                            <h4>Set your targeting</h4>
+                            <p>Choose keywords, locations, company sizes, and platforms. Select AI automation level for you.</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-number">3</div>
+                        <div class="flow-content">
+                            <h4>Start capturing leads</h4>
+                            <p>Prospects show up in your dashboard. AI suggests responses. You approve and send.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flow-center-icon">
+                    ⚡
+                </div>
+
+                <div class="flow-section-right">
+                    <div class="flow-item">
+                        <div class="flow-number green">✓</div>
+                        <div class="flow-content">
+                            <h4>Real prospects daily</h4>
+                            <p>30-50 qualified leads delivered to your inbox every morning.</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-number green">✓</div>
+                        <div class="flow-content">
+                            <h4>Ready to engage</h4>
+                            <p>AI crafts response drafts so you respond in 2 minutes, not 2 days.</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-number green">✓</div>
+                        <div class="flow-content">
+                            <h4>Track everything</h4>
+                            <p>See which buyers converted. Repeat what works. Double your revenue this month.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= PRICING SECTION ============= -->
+        <div class="pricing-section">
+            <div class="pricing-header">
+                <h2>Choose the plan that fits your team</h2>
+                <p>Simple, transparent pricing to scale your social lead generation</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="tier-card">
+                    <h3 class="tier-title">🚀 Social First</h3>
+                    <p class="tier-description">Schedule posts, track engagement, build your brand presence</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Post scheduling & publishing</li>
+                        <li><i class="fas fa-check"></i> Multi-platform support</li>
+                        <li><i class="fas fa-check"></i> Engagement analytics</li>
+                        <li><i class="fas fa-check"></i> Audience insights</li>
+                        <li><i class="fas fa-check"></i> 5 active campaigns</li>
+                        <li><i class="fas fa-check"></i> Email support</li>
+                    </ul>
+                    <button class="tier-cta" onclick="document.getElementById('websiteUrl').focus()">See demo →</button>
+                </div>
+
+                <div class="tier-card featured">
+                    <div class="tier-badge">MOST POPULAR</div>
+                    <h3 class="tier-title">⚡ Growth Engine</h3>
+                    <p class="tier-description">Everything above + AI finds your ideal buyers and gets them to say yes</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Everything in Social First</li>
+                        <li><i class="fas fa-check"></i> 🎯 AI prospect detection</li>
+                        <li><i class="fas fa-check"></i> Buying intent scoring</li>
+                        <li><i class="fas fa-check"></i> Auto-qualified lead flow</li>
+                        <li><i class="fas fa-check"></i> Smart response suggestions</li>
+                        <li><i class="fas fa-check"></i> Unlimited campaigns</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                    </ul>
+                    <button class="tier-cta" onclick="runDemo()">See demo →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= CTA SECTION ============= -->
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Find Your Customers?</h2>
+            <p class="cta-text">Stop guessing who needs your services. Start seeing real demand on social.</p>
+            <button class="cta-button" onclick="document.getElementById('websiteUrl').focus()">
+                Get Started Now →
+            </button>
+        </div>
+        
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="imageModal" class="img-modal" onclick="closeImageModal(event)">
+        <div class="img-modal-content" onclick="event.stopPropagation()">
+            <button class="img-modal-close" onclick="closeImageModal()" aria-label="Close image">&times;</button>
+            <img id="modalImg" src="" alt="Full Post Screenshot" />
+        </div>
+    </div>
+
+    <script>
+        const examples = [
+            {
+                emoji: '💪',
+                category: 'Gym Owners',
+                platform: 'Facebook',
+                platformClass: 'facebook',
+                platformIcon: 'fab fa-facebook',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_gym_owners.png',
+                title: 'Looking for Website Development',
+                content: 'Building their online presence to attract members and increase bookings.',
+                quote: '"Any gym owners looking to have a website built I\'m a purple belt and a software dev so if anyone wants to grow there business please just reach out"',
+                badge: 'Active demand right now'
+            },
+            {
+                emoji: '💼',
+                category: 'App Developers',
+                platform: 'LinkedIn',
+                platformClass: 'linkedin',
+                platformIcon: 'fab fa-linkedin',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_app_developers.png',
+                title: 'Freelance Developer Needed',
+                content: 'Seeking experienced developers for mobile and marketplace app projects.',
+                quote: '"Looking for experienced Freelance App Developer for Wedding Industry Marketplace App. Backend & API integration preferred."',
+                badge: 'Active demand right now'
+            },
+            {
+                emoji: '💒',
+                category: 'Wedding Planners',
+                platform: 'Facebook',
+                platformClass: 'facebook',
+                platformIcon: 'fab fa-facebook',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_wedding_planners.png',
+                title: 'Lead Generation Help Needed',
+                content: 'Need guidance on generating quality bookings for photography and planning.',
+                quote: '"Looking for assistance with lead generation via Facebook! Upgraded to professional gear but need guidance on getting booked."',
+                badge: 'Active demand right now'
+            },
+            {
+                emoji: '🏗️',
+                category: 'Architects',
+                platform: 'Facebook',
+                platformClass: 'facebook',
+                platformIcon: 'fab fa-facebook',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_architects.png',
+                title: 'Project Design Work',
+                content: 'Seeking architectural expertise for upcoming residential and commercial projects.',
+                quote: '"ARCHITECT WANTED: Looking for experienced architect to help with upcoming project. Need someone creative and reliable."',
+                badge: 'Active demand right now'
+            },
+            {
+                emoji: '🏠',
+                category: 'Real Estate Pros',
+                platform: 'Facebook',
+                platformClass: 'facebook',
+                platformIcon: 'fab fa-facebook',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_creative_pros.png',
+                title: 'Referrals & Recommendations',
+                content: 'Looking for architect and contractor recommendations for renovation projects.',
+                quote: '"RECOMMENDATIONS NEEDED - Looking for architect & contractor. Want experienced, dependable professionals familiar with area."',
+                badge: 'Active demand right now'
+            },
+            {
+                emoji: '📸',
+                category: 'Creative Professionals',
+                platform: 'Facebook',
+                platformClass: 'facebook',
+                platformIcon: 'fab fa-facebook',
+                image: 'https://blog.shoutlyai.com/wp-content/uploads/2026/08/post_real_estate.png',
+                title: 'Portfolio Building',
+                content: 'Established gear, now need consistent client flow and booking strategy.',
+                quote: '"Looking for recommendations! Want to be booked for 10-15 projects this year. Need guidance on lead generation."',
+                badge: 'Active demand right now'
+            }
+        ];
+        
+        async function analyzeWebsite() {
+            const url = document.getElementById('websiteUrl').value.trim();
+            
+            if (!url) {
+                alert('Please enter a website URL');
+                return;
+            }
+            
+            if (!isValidUrl(url)) {
+                alert('Please enter a valid URL (e.g., https://example.com)');
+                return;
+            }
+            
+            showLoading(true);
+            
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const analysis = generateAnalysis(url);
+            displayResults(analysis);
+            displayExamples();
+            
+            showLoading(false);
+        }
+        
+        async function runDemo() {
+            showLoading(true);
+            
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const demoAnalysis = {
+                businessName: 'Digital Marketing Agency',
+                businessDescription: 'Provides comprehensive digital marketing solutions including SEO, social media management, and paid advertising. Helps businesses grow their online presence and generate qualified leads through data-driven strategies.',
+                businessKeywords: ['digital marketing', 'social media', 'SEO', 'lead generation', 'paid advertising'],
+                targetAudience: 'Small to medium-sized businesses and e-commerce companies looking to increase online visibility and sales. Business owners seeking expert guidance on reaching target customers through social platforms.',
+                audienceKeywords: ['business owners', 'e-commerce sellers', 'startups', 'service providers', 'entrepreneurs']
+            };
+            
+            displayResults(demoAnalysis);
+            displayExamples();
+            
+            showLoading(false);
+            document.getElementById('websiteUrl').value = 'https://demo-marketing-agency.com';
+        }
+        
+        function generateAnalysis(url) {
+            const domain = new URL(url).hostname.replace('www.', '');
+            
+            const templates = {
+                gym: {
+                    businessName: 'Fitness Studio / Gym',
+                    businessDescription: 'Provides fitness training and gym membership services. Helps people achieve their health goals through personalized workout programs and state-of-the-art equipment.',
+                    businessKeywords: ['fitness training', 'gym membership', 'workout programs', 'personal training'],
+                    targetAudience: 'Health-conscious individuals aged 18-55 seeking to improve fitness, lose weight, or build muscle. Usually looking for convenient local gyms with good facilities and expert guidance.',
+                    audienceKeywords: ['fitness enthusiasts', 'weight loss seekers', 'athletes', 'health conscious professionals']
+                },
+                web: {
+                    businessName: 'Web Development Agency',
+                    businessDescription: 'Creates custom websites and web applications for businesses. Helps companies establish online presence, increase sales, and engage customers through modern web solutions.',
+                    businessKeywords: ['web development', 'website design', 'custom applications', 'digital presence'],
+                    targetAudience: 'Small to medium businesses needing online visibility. Companies looking to upgrade outdated websites or launch e-commerce platforms to reach more customers.',
+                    audienceKeywords: ['business owners', 'startups', 'e-commerce companies', 'local businesses']
+                },
+                design: {
+                    businessName: 'Design & Creative Agency',
+                    businessDescription: 'Offers graphic design, branding, and creative services. Transforms business visions into compelling visual identities that attract customers and build brand loyalty.',
+                    businessKeywords: ['graphic design', 'branding', 'visual identity', 'creative services'],
+                    targetAudience: 'Businesses of all sizes needing professional branding, marketing materials, and visual design. Companies seeking to differentiate themselves in competitive markets.',
+                    audienceKeywords: ['entrepreneurs', 'marketing teams', 'brands', 'startups']
+                },
+                default: {
+                    businessName: 'Professional Service Provider',
+                    businessDescription: 'Provides expert services to help businesses solve problems and achieve their goals. Combines industry knowledge with innovative solutions to drive growth and customer satisfaction.',
+                    businessKeywords: ['professional services', 'business solutions', 'expertise', 'growth'],
+                    targetAudience: 'Businesses seeking professional guidance and specialized services. Companies looking to improve operations, reduce costs, or scale their business effectively.',
+                    audienceKeywords: ['business decision makers', 'managers', 'entrepreneurs', 'teams']
+                }
+            };
+            
+            let template = templates.default;
+            for (const [key, value] of Object.entries(templates)) {
+                if (domain.includes(key)) {
+                    template = value;
+                    break;
+                }
+            }
+            
+            return template;
+        }
+        
+        function displayResults(analysis) {
+            document.getElementById('businessAnalysis').innerHTML = `
+                <p><strong>${analysis.businessName}</strong></p>
+                <p>${analysis.businessDescription}</p>
+            `;
+            
+            document.getElementById('businessKeywords').innerHTML = analysis.businessKeywords
+                .map(kw => `<span class="tag">${kw}</span>`)
+                .join('');
+            
+            document.getElementById('audienceAnalysis').innerHTML = `
+                <p>${analysis.targetAudience}</p>
+            `;
+            
+            document.getElementById('audienceKeywords').innerHTML = analysis.audienceKeywords
+                .map(kw => `<span class="tag">${kw}</span>`)
+                .join('');
+        }
+        
+        function displayExamples() {
+            const grid = document.getElementById('examplesGrid');
+            grid.innerHTML = examples.map(ex => `
+                <div class="example-card">
+                    <div class="example-header">
+                        <div class="example-header-left">
+                            <span class="example-emoji">${ex.emoji}</span>
+                            <span class="example-category">${ex.category}</span>
+                        </div>
+                        <span class="example-platform-badge ${ex.platformClass}">
+                            <i class="${ex.platformIcon}"></i> ${ex.platform}
+                        </span>
+                    </div>
+
+                    <div class="example-image-container" onclick="openImageModal('${encodeURI(ex.image)}')">
+                        <img src="${encodeURI(ex.image)}" alt="${ex.category} Post Screenshot" class="example-image" loading="lazy">
+                    </div>
+
+                    <div class="example-title">${ex.title}</div>
+                    <div class="example-content">${ex.content}</div>
+                    <div class="example-quote">${ex.quote}</div>
+                    <div class="example-badge"><i class="fas fa-circle-check"></i> ${ex.badge}</div>
+                </div>
+            `).join('');
+        }
+
+        function openImageModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imgSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal(e) {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeImageModal();
+        });
+        
+        function showLoading(show) {
+            const loading = document.getElementById('loadingState');
+            const results = document.getElementById('resultsSection');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const demoBtn = document.getElementById('demoBtn');
+            
+            if (show) {
+                loading.classList.add('active');
+                results.classList.remove('active');
+                analyzeBtn.disabled = true;
+                demoBtn.disabled = true;
+            } else {
+                loading.classList.remove('active');
+                results.classList.add('active');
+                analyzeBtn.disabled = false;
+                demoBtn.disabled = false;
+            }
+        }
+        
+        function isValidUrl(string) {
+            try {
+                new URL(string);
+                return true;
+            } catch (_) {
+                return false;
+            }
+        }
+        
+        document.getElementById('websiteUrl').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') analyzeWebsite();
+        });
+
+        // Initialize examples immediately
+        displayExamples();
+    </script>
+</body>
+</html>
+
+
+
+

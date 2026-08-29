@@ -1,0 +1,487 @@
+'use client';
+
+import React, { useState } from 'react';
+import { API_BASE_URL } from '@/api/configApi';
+import Image from 'next/image';
+import Link from 'next/link';
+import Script from 'next/script';
+import { usePathname } from 'next/navigation';
+import {
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+  FaYoutube,
+  FaMoon,
+  FaShieldAlt,
+  FaLock,
+  FaCheckCircle,
+  FaClock,
+  FaCode,
+  FaCloud,
+  FaBolt,
+  FaHeadset,
+} from 'react-icons/fa';
+import {
+  FaXTwitter,
+  FaLinkedinIn,
+  FaTiktok,
+  FaThreads,
+  FaBluesky,
+  FaPinterestP,
+  FaSnapchat,
+} from 'react-icons/fa6';
+
+type FooterLink = { label: string; href?: string; external?: boolean };
+
+// Auth pages use a minimal, chrome-free shell — no marketing nav or footer,
+// matching how Stripe/Linear/Vercel-style SaaS auth flows are laid out.
+const AUTH_ROUTES = [
+  "/sign-in", "/sign-up", "/signin", "/signup",
+  "/forgot-password", "/new-password", "/create-password",
+  "/password-success", "/verify-email", "/verification",
+];
+
+// A link with no `href` has no real destination yet in this app — render as
+// an inactive/muted label instead of pointing it at a 404.
+function FooterNavLink({ link }: { link: FooterLink }) {
+  if (!link.href) {
+    return (
+      <span
+        className="text-[14px] font-semibold text-gray-400 cursor-not-allowed select-none"
+        title="Coming soon"
+      >
+        {link.label}
+      </span>
+    );
+  }
+  if (link.external) {
+    return (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[14px] font-semibold text-white hover:text-orange-600 transition-colors"
+      >
+        {link.label}
+      </a>
+    );
+  }
+  return (
+    <Link
+      href={link.href}
+      className="text-[14px] font-semibold text-white hover:text-orange-600 transition-colors"
+    >
+      {link.label}
+    </Link>
+  );
+}
+
+function FooterColumn({ title, links }: { title: string; links: FooterLink[] }) {
+  return (
+    <div className="col-span-1">
+      <div className="text-[13px] font-extrabold uppercase tracking-tight text-orange-500 mb-5">
+        {title}
+      </div>
+      <ul className="space-y-2.5">
+        {links.map((link) => (
+          <li key={link.label}>
+            <FooterNavLink link={link} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const Footer = () => {
+  const pathname = usePathname();
+
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterState, setNewsletterState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [newsletterMessage, setNewsletterMessage] = useState('');
+
+  const handleNewsletterSubscribe = async () => {
+    const email = newsletterEmail.trim();
+    if (!email) {
+      setNewsletterState('error');
+      setNewsletterMessage('Please enter your email.');
+      return;
+    }
+    setNewsletterState('loading');
+    setNewsletterMessage('');
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (res.status === 409) {
+        setNewsletterState('success');
+        setNewsletterMessage("You're already subscribed!");
+        return;
+      }
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        setNewsletterState('error');
+        setNewsletterMessage(err?.message || 'Something went wrong — please try again.');
+        return;
+      }
+      setNewsletterState('success');
+      setNewsletterMessage("Subscribed! Check your inbox Thursday.");
+      setNewsletterEmail('');
+    } catch {
+      setNewsletterState('error');
+      setNewsletterMessage('Network error — please try again.');
+    }
+  };
+
+  if (pathname === "/dashboards" || pathname?.startsWith("/dashboards/")) return null;
+  if (AUTH_ROUTES.some((p) => pathname === p || pathname?.startsWith(`${p}/`))) return null;
+
+  const currentYear = new Date().getFullYear();
+
+  const productLinks: FooterLink[] = [
+    { label: "Overview", href: "/shoutlyai-overview.html" },
+    { label: "Why Shoutly AI", href: "/shoutlyai-why-shoutly-ai.html" },
+    { label: "AI Content Generator", href: "/shoutlyai-ai-content-generator.html" },
+    { label: "AI Image Generator", href: "/shoutlyai-ai-image-generator.html" },
+    { label: "AI Reel Generator", href: "/shoutlyai-how-it-works.html" },
+    { label: "AI Caption Generator", href: "/shoutlyai-ai-caption-generator.html" },
+    { label: "AI Hashtag Generator", href: "/shoutlyai-ai-hashtag-generator.html" },
+    { label: "AI Social Scheduler", href: "/shoutlyai-social-media-scheduler.html" },
+    { label: "Bulk Scheduling", href: "/shoutlyai-bulk-scheduling.html" },
+    { label: "Multi-Platform Publishing", href: "/shoutlyai-multi-platform-publishing.html" },
+    { label: "Analytics", href: "/shoutlyai-analytics-dashboard.html" },
+    { label: "Brand Kit", href: "/shoutlyai-brand-kit.html" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Enterprise", href: "/shoutlyai-enterprise.html" },
+  ];
+
+  const solutionsLinks: FooterLink[] = [
+    { label: "Local Businesses", href: "/solutions/local-businesses" },
+    { label: "Restaurants", href: "/social-media-marketing-for-restaurants.html" },
+    { label: "Fitness", href: "/social-media-marketing-for-gyms.html" },
+    { label: "Interior Design", href: "/social-media-marketing-for-interior-designers.html" },
+    { label: "Footwear", href: "/digital-marketing-for-footwear-brands.html" },
+    { label: "Real Estate", href: "/digital-marketing-for-real-estate-agents.html" },
+    { label: "Startups", href: "/marketing-for-business-consultants.html" },
+    { label: "Hotels", href: "/digital-marketing-for-hotels-and-resorts.html" },
+    { label: "Event Planners", href: "/digital-marketing-for-event-planners.html" },
+    { label: "Makeup Services", href: "/digital-marketing-for-makeup-artists.html" },
+  ];
+
+  const channelsLinks: FooterLink[] = [
+    { label: "X", href: "/channel/twitter-x" },
+    { label: "Instagram", href: "/channel/instagram" },
+    { label: "Facebook", href: "/channel/facebook" },
+    { label: "Bluesky", href: "/channel/bluesky" },
+    { label: "LinkedIn", href: "/channel/linkedin" },
+    { label: "TikTok", href: "/channel/tiktok" },
+    { label: "Threads", href: "/channel/threads" },
+    { label: "YouTube", href: "/channel/youtube" },
+    { label: "Pinterest", href: "/channel/pinterest" },
+    { label: "Google Biz", href: "/channel/google-business" },
+  ];
+
+  const compareLinks: FooterLink[] = [
+    { label: "Buffer vs Shoutly AI", href: "/compare/buffer-vs-shoutly-ai" },
+    { label: "Hootsuite vs Shoutly AI", href: "/compare/hootsuite-vs-shoutly-ai" },
+    { label: "Later vs Shoutly AI", href: "/compare/later-vs-shoutly-ai" },
+    { label: "SocialPilot vs Shoutly AI", href: "/compare/socialpilot-vs-shoutly-ai" },
+    { label: "Metricool vs Shoutly AI", href: "/compare/metricool-vs-shoutly-ai" },
+    { label: "Publer vs Shoutly AI", href: "/compare/publer-vs-shoutly-ai" },
+    { label: "Canva vs Shoutly AI", href: "/compare/canva-vs-shoutly-ai" },
+    { label: "Sprout Social vs Shoutly AI", href: "/compare/sprout-social-vs-shoutly-ai" },
+  ];
+
+  const alternativesLinks: FooterLink[] = [
+    { label: "Buffer Alternative", href: "/buffer-alternative.html" },
+    { label: "Hootsuite Alternative", href: "/hootsuite-alternative.html" },
+    { label: "Later Alternative", href: "/later-alternative.html" },
+    { label: "SocialPilot Alternative", href: "/socialpilot-alternative.html" },
+    { label: "Metricool Alternative", href: "/metricool-alternative.html" },
+    { label: "Canva Alternative", href: "/canva-alternative.html" },
+    { label: "Sprout Social Alternative", href: "/sprout-social-alternative.html" },
+  ];
+
+  const resourcesLinks: FooterLink[] = [
+    { label: "Blog", href: "https://blog.shoutlyai.com/", external: true },
+    { label: "Help Center", href: "/help-center" },
+    { label: "Branded Templates", href: "/templates" },
+  ];
+
+  const companyLinks: FooterLink[] = [
+    { label: "About Us", href: "/about-us" },
+    { label: "Partners", href: "/partners" },
+    { label: "Help Center", href: "/help-center" },
+    { label: "Security", href: "/security" },
+    { label: "Careers", href: "/careers" },
+    { label: "Blog", href: "https://blog.shoutlyai.com/", external: true },
+    { label: "Contact", href: "/contact-us" },
+    { label: "Legal Hub", href: "/legal-hub" },
+    { label: "Brand Assets", href: "/shoutlyai-brand-assets.html" },
+  ];
+
+  const trustBadges: { icon: React.ReactNode; label: string }[] = [
+    { icon: <FaShieldAlt size={11} />, label: "Enterprise Security" },
+    { icon: <FaLock size={11} />, label: "SSL Secured" },
+    { icon: <FaCheckCircle size={11} />, label: "GDPR Ready" },
+    { icon: <FaCheckCircle size={11} />, label: "CCPA Compliant" },
+    { icon: <FaCheckCircle size={11} />, label: "DPDP Act Compliant" },
+    { icon: <FaClock size={11} />, label: "99.9% Uptime" },
+    { icon: <FaCode size={11} />, label: "API Available" },
+    { icon: <FaCloud size={11} />, label: "AWS Cloud Hosted" },
+    { icon: <FaBolt size={11} />, label: "AI Powered" },
+    { icon: <FaHeadset size={11} />, label: "24/7 Support" },
+  ];
+
+  const legalLinks = [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-and-conditions" },
+    { label: "Cookie Policy", href: "/cookie" },
+    { label: "GDPR", href: "/gdpr" },
+    { label: "CCPA", href: "/ccpa" },
+    { label: "DPDP Act", href: "/dpdp" },
+    { label: "Refunds", href: "/refunds" },
+    { label: "Security", href: "/security" },
+    { label: "DMCA", href: "/dmca" },
+    { label: "EULA", href: "/eula" },
+    { label: "Data Deletion", href: "/data-deletion" }
+  ];
+
+  const socialLinks = [
+    { icon: <FaFacebook size={17} />, href: "https://www.facebook.com/people/Shoutly-AI/61583485633639/", label: "Facebook" },
+    { icon: <FaInstagram size={17} />, href: "https://www.instagram.com/ai.shoutly/", label: "Instagram" },
+    { icon: <FaLinkedin size={17} />, href: "https://www.linkedin.com/company/shoutlyai/?viewAsMember=true", label: "LinkedIn" },
+    { icon: <FaTwitter size={17} />, href: "https://x.com/shoutlyai", label: "X" },
+    { icon: <FaYoutube size={17} />, href: "https://youtube.com/@shoutlyai", label: "YouTube" }
+  ];
+
+  return (
+    <footer
+      className="bg-gradient-to-b from-slate-950  to-slate-900"
+      style={{ fontFamily: "'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif", background: "#020618" }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+
+        {/* Top band — brand blurb + newsletter */}
+        <div className="border-b border-gray-200 pb-12 mb-12 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <Link href="/" className="inline-block relative w-40 sm:w-48 h-10 sm:h-12 overflow-hidden mb-1">
+              <Image
+                src="/images/logo-master-white.png"
+                alt="Shoutly AI logo"
+                fill
+                priority
+                /* Keeps the logo sized at scale-80 and pinned flush to the left */
+                className="object-cover object-left scale-80 origin-left transform-gpu"
+              />
+            </Link>
+            <p className="text-[15px] text-white max-w-sm leading-[1.65] mb-4">
+              Shoutly AI™ transforms one idea into 365 days of ready-to-publish social media content. Create, schedule, and grow your brand across every major platform.
+            </p>
+
+            {/* Platform Icons */}
+                        <div className="pt-2 pb-1">
+                            <p className="text-xs text-white/50 uppercase tracking-widest font-semibold mb-3">Post across 10 platforms</p>
+                            <div className="flex flex-wrap gap-2">
+                                {[
+                                { icon: <FaXTwitter size={16} />, bg: "#000000" },
+                                { icon: <FaLinkedinIn size={16} />, bg: "#0A66C2" },
+                                { icon: <FaInstagram size={16} />, bg: "linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)" },
+                                { icon: <FaTiktok size={16} />, bg: "#010101" },
+                                { icon: <FaFacebook size={16} />, bg: "#1877F2" },
+                                { icon: <FaThreads size={16} />, bg: "#000000" },
+                                { icon: <FaBluesky size={16} />, bg: "#0085ff" },
+                                { icon: <FaYoutube size={16} />, bg: "#FF0000" },
+                                { icon: <FaPinterestP size={16} />, bg: "#E60023" },
+                                { icon: <FaSnapchat size={16} />, bg: "#FFFC00", color: "#000" },
+                              ].map(({ icon, bg, color }, i) => (
+                                    <div key={i} style={{
+                                        width: 36, height: 36, borderRadius: 10,
+                                        background: bg, display: "flex", alignItems: "center", justifyContent: "center",
+                                  flexShrink: 0,
+                                  color: color || "#fff"
+                                    }}>
+                                  {icon}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+            <span
+              className="inline-flex items-center gap-2 text-[12.5px] font-semibold text-green-800 cursor-not-allowed select-none"
+              title="Coming soon"
+            >
+              <span className="w-2 h-2 rounded-full bg-green-500 flex-shrink-0" />
+              All systems operational — <span className="underline">status</span>
+            </span>
+          </div>
+
+          <div className="rounded-2xl p-6 bg-orange-50 border border-orange-100">
+            <div className="text-[17px] font-extrabold text-gray-900 mb-1.5">The weekly signal</div>
+            <p className="text-[13.5px] text-gray-600 mb-4 leading-[1.55]">
+              AI marketing tactics, product updates, and new feature releases. Sent Thursdays.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                placeholder="you@company.com"
+                value={newsletterEmail}
+                onChange={(e) => setNewsletterEmail(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') handleNewsletterSubscribe(); }}
+                disabled={newsletterState === 'loading'}
+                className="flex-1 text-[14.5px] font-semibold px-3.5 py-2.5 rounded-lg border border-orange-200 bg-white text-gray-900 placeholder-gray-500 outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 disabled:opacity-60"
+              />
+              <button
+                type="button"
+                onClick={handleNewsletterSubscribe}
+                disabled={newsletterState === 'loading'}
+                className="px-5 py-2.5 rounded-lg text-[14.5px] font-extrabold text-white flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ background: "linear-gradient(115deg,#F97316,#EA580C)" }}
+              >
+                {newsletterState === 'loading' ? 'Subscribing…' : 'Subscribe'}
+              </button>
+            </div>
+            {newsletterMessage ? (
+              <p className={`text-xs mt-3 ${newsletterState === 'error' ? 'text-red-500' : 'text-green-600'}`}>
+                {newsletterMessage}
+              </p>
+            ) : (
+              <p className="text-[12px] font-medium text-gray-500 mt-3">No spam. Unsubscribe anytime.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Row 1 — 6 link columns */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 sm:gap-8 mb-12">
+          <FooterColumn title="Product" links={productLinks} />
+          <FooterColumn title="Solutions" links={solutionsLinks} />
+          <FooterColumn title="Channels" links={channelsLinks} />
+          <div className="col-span-1">
+            <FooterColumn title="Compare" links={compareLinks} />
+            <div className="mt-2.5">
+              <FooterNavLink link={{ label: "View all comparisons →" }} />
+            </div>
+          </div>
+          <div className="col-span-1">
+            <FooterColumn title="Alternatives" links={alternativesLinks} />
+            <div className="mt-2.5">
+              <FooterNavLink link={{ label: "View all alternatives →" }} />
+            </div>
+          </div>
+          <FooterColumn title="Resources" links={resourcesLinks} />
+        </div>
+
+        {/* Row 2 — Company */}
+        <div className="mb-12">
+          <div className="text-[13px] font-extrabold uppercase tracking-tight text-orange-500 mb-5">
+            Company
+          </div>
+          <ul className="flex flex-wrap gap-x-8 gap-y-2.5">
+            {companyLinks.map((link) => (
+              <li key={link.label}>
+                <FooterNavLink link={link} />
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Trust & compliance badges */}
+        <div className="border-t border-white pt-8 mb-8">
+          <div className="text-[13px] font-extrabold text-orange-500 mb-4">
+            Trust &amp; compliance
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {trustBadges.map((badge) => (
+              <span
+                key={badge.label}
+                className="inline-flex items-center gap-1.5 text-[12.5px] font-bold px-3 py-1.5 bg-white border border-gray-300 rounded-[10px] text-gray-600"
+              >
+                <span className="text-orange-500">{badge.icon}</span>
+                {badge.label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Legal hub */}
+        <div className="border-t border-white pt-8 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-10">
+            <div className="sm:w-48 flex-shrink-0">
+              <div className="text-[13px] font-extrabold text-orange-500 mb-2">
+                Legal hub
+              </div>
+              <p className="text-[13px] font-medium text-white/80 leading-[1.55]">
+                Every policy governing how we handle your data, content, and account.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {legalLinks.map((link, i) => (
+                <React.Fragment key={link.label}>
+                  {i > 0 && <span className="text-white hidden sm:inline">|</span>}
+                  <Link
+                    href={link.href}
+                    className="text-[13px] font-bold text-white hover:text-orange-600 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-white pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-[13px] font-semibold text-white text-center sm:text-left">
+            © {currentYear} shoutlyai — <span className="font-semibold text-white">Qubixel Technologies Private Limited</span>. All rights reserved.
+            <span className="block sm:inline sm:ml-1 text-[12px] font-medium text-white/80">smart ai powering your social media for the next 365 days.</span>
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {/* Language / region — no i18n implemented yet, shown inactive */}
+            <span className="text-[13px] font-bold text-white cursor-not-allowed select-none" title="Coming soon">
+              English ▾
+            </span>
+            <span className="text-[13px] font-bold text-white cursor-not-allowed select-none" title="Coming soon">
+              Global ▾
+            </span>
+            <a
+              href="/sitemap.xml"
+              className="text-[13px] font-bold text-white hover:text-orange-600 transition-colors"
+            >
+              Sitemap
+            </a>
+
+            <div className="flex items-center gap-3.5">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-orange-600 transition-colors"
+                  aria-label={social.label}
+                >
+                  {social.icon}
+                </a>
+              ))}
+              {/* Theme toggle — no site-wide dark mode wired up yet, shown inactive */}
+              <span
+                className="text-white cursor-not-allowed"
+                title="Coming soon"
+                aria-label="Toggle theme (coming soon)"
+              >
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+

@@ -1,0 +1,162 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  compress: true,
+  poweredByHeader: false,
+  experimental: {
+    proxyTimeout: 60_000,
+    // Client-side Router Cache: previously visited pages are kept in browser
+    // memory for fast back/forward and repeat navigation. This cache lives
+    // only in memory, so a hard refresh (F5) always discards it and fetches
+    // fresh data.
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
+  },
+  images: {
+    unoptimized: process.env.NODE_ENV === "development",
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.shoutlyai.com' }],
+        destination: 'https://shoutlyai.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/agencies.html',
+        destination: '/solutions/agencies',
+        permanent: true,
+      },
+      {
+        source: '/enterprise.html',
+        destination: '/solutions/enterprise',
+        permanent: true,
+      },
+      {
+        source: '/healthcare.html',
+        destination: '/solutions/healthcare',
+        permanent: true,
+      },
+      {
+        source: '/local-businesses.html',
+        destination: '/solutions/local-businesses',
+        permanent: true,
+      },
+      {
+        source: '/professional-services.html',
+        destination: '/solutions/professional-services',
+        permanent: true,
+      },
+      {
+        source: '/restaurants.html',
+        destination: '/solutions/restaurants',
+        permanent: true,
+      },
+      {
+        source: '/retail.html',
+        destination: '/solutions/retail',
+        permanent: true,
+      },
+      {
+        source: '/startups.html',
+        destination: '/solutions/startups',
+        permanent: true,
+      },
+      {
+        source: '/solutions/agencies.html',
+        destination: '/solutions/agencies',
+        permanent: true,
+      },
+      {
+        source: '/solutions/enterprise.html',
+        destination: '/solutions/enterprise',
+        permanent: true,
+      },
+      {
+        source: '/solutions/healthcare.html',
+        destination: '/solutions/healthcare',
+        permanent: true,
+      },
+      {
+        source: '/solutions/local-businesses.html',
+        destination: '/solutions/local-businesses',
+        permanent: true,
+      },
+      {
+        source: '/solutions/professional-services.html',
+        destination: '/solutions/professional-services',
+        permanent: true,
+      },
+      {
+        source: '/solutions/restaurants.html',
+        destination: '/solutions/restaurants',
+        permanent: true,
+      },
+      {
+        source: '/solutions/retail.html',
+        destination: '/solutions/retail',
+        permanent: true,
+      },
+      {
+        source: '/solutions/startups.html',
+        destination: '/solutions/startups',
+        permanent: true,
+      },
+      {
+        source: '/social-media-marketing-for-restaurants.html',
+        destination: '/solutions/restaurants',
+        permanent: true,
+      },
+      {
+        source: '/tech-startups-social-media-automation.html',
+        destination: '/solutions/startups',
+        permanent: true,
+      },
+      {
+        source: '/consultants.html',
+        destination: '/solutions/professional-services',
+        permanent: true,
+      },
+      {
+        source: '/shoutlyai-content-calendar.html',
+        destination: '/shoutlyai-how-it-works.html',
+        permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: '/images/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/videos/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400' },
+        ],
+      },
+      {
+        source: '/vendor/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ];
+  },
+};
+
+export default nextConfig;

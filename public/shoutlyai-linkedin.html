@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LinkedIn Post Generator — AI-Powered LinkedIn Content | Shoutly AI</title>
+<meta name="description" content="Shoutly AI generates professional LinkedIn posts, articles, carousels, and company page content for your business automatically. Hook-driven, story-led, B2B-optimised. No writing skills needed.">
+<link rel="canonical" href="https://shoutlyai.com/channel/linkedin">
+<meta property="og:title" content="LinkedIn Post Generator — Shoutly AI">
+<meta property="og:description" content="AI writes LinkedIn posts, carousels, and company updates in your brand voice. Professional, story-driven, B2B-optimised. Published automatically via LinkedIn Marketing API.">
+<meta property="og:url" content="https://shoutlyai.com/channel/linkedin">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shoutly AI">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Inter+Tight:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#0f0f0f;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ── Shoutly AI brand theme ── */
+:root{
+  --p:#F97316;               /* primary orange */
+  --pg:linear-gradient(135deg,#F97316,#EF4444);
+  --li:#F97316;              /* used for accents */
+  --li2:#EA580C;             /* darker orange */
+  --li-light:#fff7ed;        /* orange-50 */
+  --li-border:#fed7aa;       /* orange-200 */
+  --dark:#0f172a;            /* slate-900 */
+  --glow:rgba(249,115,22,.32);
+  --ink:#0f0f0f;
+  --ink2:#1e293b;
+  --ink3:#475569;
+  --ink4:#94a3b8;
+  --surface:#f8fafc;
+  --border:#e2e8f0;
+  --border2:#cbd5e1;
+  --green:#16a34a;
+  --max:1200px;
+  --r:8px;
+  --r2:12px;
+  --r3:16px;
+  --r4:22px;
+  --r5:30px;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+/* BC */
+.bc{background:var(--surface);border-bottom:1px solid var(--border);padding:11px 0}
+.bc-inner{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink4)}
+.bc-inner a{color:var(--ink4)}.bc-inner a:hover{color:var(--p)}
+
+/* HERO */
+.hero{background:var(--dark);padding:80px 0 76px;position:relative;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none}
+.hero-orb-1{width:700px;height:700px;background:radial-gradient(circle,rgba(249,115,22,.35),transparent 68%);top:-250px;left:-180px}
+.hero-orb-2{width:450px;height:450px;background:radial-gradient(circle,rgba(239,68,68,.35),transparent 65%);bottom:-120px;right:-80px}
+.hero-inner{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(249,115,22,.18);border:1px solid rgba(249,115,22,.4);border-radius:100px;padding:5px 14px 5px 9px;font-size:12.5px;font-weight:600;color:#fbd38d;margin-bottom:22px}
+.ey-dot{width:7px;height:7px;border-radius:50%;background:var(--p);animation:pulse 2.2s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-h1{font-family:'Inter Tight',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;letter-spacing:-2.8px;line-height:.96;color:#fff;margin-bottom:22px}
+.hero-h1 .grad{background:var(--pg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,1.6vw,18px);color:rgba(255,255,255,.6);line-height:1.72;max-width:480px;margin-bottom:34px}
+.hero-ctas{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:30px}
+.hero-proof{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hp{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.45)}
+.hp-check{color:#fbd38d;font-size:14px;flex-shrink:0}
+
+/* LINKEDIN FEED WINDOW */
+.li-window{background:#f3f2ef;border:1px solid rgba(255,255,255,.1);border-radius:var(--r5);overflow:hidden;box-shadow:0 32px 70px rgba(0,0,0,.5),0 0 0 1px rgba(249,115,22,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+.liw-bar{background:#1e293b;border-bottom:1px solid rgba(255,255,255,.1);padding:11px 16px;display:flex;align-items:center;gap:10px}
+.liw-dots{display:flex;gap:6px}
+.liw-dot{width:10px;height:10px;border-radius:50%}
+.liw-dot.r{background:#ff5f57}.liw-dot.y{background:#febc2e}.liw-dot.g{background:#28c840}
+.liw-title{font-size:11px;color:rgba(255,255,255,.4);margin-left:8px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.liw-body{padding:14px}
+/* Post card */
+.li-post{background:#fff;border-radius:var(--r2);border:1px solid #e0dfdc;margin-bottom:8px;overflow:hidden;transition:opacity .3s}
+.li-post.fading{opacity:.3}
+.lp-head{padding:12px 14px 8px;display:flex;align-items:flex-start;gap:10px}
+.lp-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0}
+.lp-name{font-size:13.5px;font-weight:700;color:#000;line-height:1.2}
+.lp-title{font-size:11.5px;color:#666;line-height:1.4;margin-top:1px}
+.lp-time{font-size:11px;color:#999;margin-top:1px;display:flex;align-items:center;gap:4px}
+.lp-globe{font-size:10px;color:#999}
+.lp-body{padding:0 14px 10px;font-size:13px;color:#1a1a1a;line-height:1.65}
+.lp-hook{font-weight:700;color:#000;font-size:13.5px;display:block;margin-bottom:6px}
+.lp-text{color:#333;line-height:1.7;margin-bottom:8px}
+.lp-more{color:#0077b5;font-size:12.5px;font-weight:600;cursor:pointer}
+.lp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.lp-tag{font-size:12px;color:#0077b5;font-weight:500}
+.lp-img{width:100%;aspect-ratio:1.91/1;display:flex;align-items:center;justify-content:center;font-size:36px;background:#f3f2ef;border-top:1px solid #e0dfdc;border-bottom:1px solid #e0dfdc;position:relative}
+.lp-img-label{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.55);border-radius:100px;padding:3px 9px;font-size:10px;font-weight:700;color:#fff}
+.lp-actions{padding:6px 14px;display:flex;gap:0;border-top:1px solid #e0dfdc}
+.lp-action{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;font-size:12px;font-weight:600;color:#666;padding:7px 0;border-radius:var(--r);transition:background .14s;cursor:pointer}
+.lp-action:hover{background:#f3f2ef;color:#333}
+.lp-action-ico{font-size:14px}
+/* Generating state */
+.liw-gen{display:none;align-items:center;gap:10px;padding:12px 14px;background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.25);border-radius:var(--r2);margin-bottom:8px}
+.liw-gen.show{display:flex}
+.gdots{display:flex;gap:4px}
+.gdot{width:7px;height:7px;border-radius:50%;background:var(--p);animation:gdot 1.2s ease-in-out infinite}
+.gdot:nth-child(2){animation-delay:.2s}.gdot:nth-child(3){animation-delay:.4s}
+@keyframes gdot{0%,80%,100%{transform:scale(.7);opacity:.35}40%{transform:scale(1.2);opacity:1}}
+.gtext{font-size:12px;color:#555}
+.gtext strong{color:var(--p)}
+/* Footer chips */
+.liw-footer{background:#1e293b;border-top:1px solid rgba(255,255,255,.08);padding:10px 16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.liw-biz-lbl{font-size:11px;color:rgba(255,255,255,.35);font-weight:600;white-space:nowrap}
+.liw-chips{display:flex;gap:6px;flex-wrap:wrap}
+.liw-chip{font-size:11px;font-weight:600;padding:4px 10px;border-radius:100px;cursor:pointer;transition:all .18s;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.45)}
+.liw-chip.active{background:rgba(249,115,22,.4);border-color:rgba(249,115,22,.7);color:#fbd38d}
+/* Post type tabs */
+.liw-tabs{display:flex;gap:6px;padding:10px 14px 0;flex-wrap:wrap}
+.liw-tab{font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;border:1px solid #ddd;color:#666;cursor:pointer;transition:all .18s;background:#fff}
+.liw-tab.active{background:var(--p);color:#fff;border-color:var(--p)}
+
+/* STAT STRIP */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);gap:1px;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden}
+.ss-cell{background:#fff;padding:26px 20px;text-align:center}
+.ss-n{font-family:'Inter Tight',sans-serif;font-size:clamp(26px,2.8vw,38px);font-weight:900;background:var(--pg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-2px;line-height:1;margin-bottom:5px}
+.ss-l{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.ss-s{font-size:12px;color:var(--ink4)}
+
+/* SECTIONS */
+.section{padding:88px 0}
+.section-alt{background:var(--surface)}
+.sec-ey{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--p);margin-bottom:10px;display:block}
+.sec-h2{font-family:'Inter Tight',sans-serif;font-size:clamp(26px,3.3vw,42px);font-weight:900;letter-spacing:-1.5px;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.sec-p{font-size:17px;color:var(--ink2);line-height:1.72;max-width:600px}
+.center{text-align:center}.center .sec-p{margin:0 auto}
+
+/* PAIN GRID */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pain-card{background:#fff;border:1px solid var(--border);border-radius:var(--r3);padding:22px;display:flex;gap:14px;transition:border-color .18s}
+.pain-card:hover{border-color:var(--border2)}
+.pain-ico{width:42px;height:42px;border-radius:11px;background:#fef2f2;border:1px solid #fecaca;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pain-title{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.pain-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+
+/* HOW IT WORKS */
+.hiw-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.hiw-steps{display:flex;flex-direction:column;gap:0}
+.hiw-step{display:flex;gap:18px;position:relative;padding-bottom:28px}
+.hiw-step:last-child{padding-bottom:0}
+.hiw-step::before{content:'';position:absolute;left:19px;top:44px;bottom:0;width:2px;background:var(--border)}
+.hiw-step:last-child::before{display:none}
+.hiw-num{width:40px;height:40px;border-radius:50%;background:var(--pg);color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 12px var(--glow);position:relative;z-index:1;font-family:'Inter Tight',sans-serif}
+.hiw-body{padding-top:8px}
+.hiw-title{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:5px;letter-spacing:-.2px}
+.hiw-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+.hiw-time{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--p);background:var(--li-light);border-radius:100px;padding:2px 8px;margin-top:6px}
+
+/* POST TYPES */
+.posttype-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.posttype-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;transition:all .2s}
+.posttype-card:hover{border-color:var(--li-border);box-shadow:0 6px 24px rgba(249,115,22,.09);transform:translateY(-2px)}
+.ptc-preview{width:100%;padding:20px;display:flex;flex-direction:column;gap:6px;min-height:130px;justify-content:center}
+.ptc-hook{font-size:13px;font-weight:800;color:#000;line-height:1.35;margin-bottom:4px}
+.ptc-body{font-size:11.5px;color:#555;line-height:1.6}
+.ptc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.ptc-tag{font-size:11px;color:var(--p);font-weight:500}
+.ptc-badge{display:inline-flex;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-bottom:6px;width:fit-content}
+.ptc-body-area{padding:14px 16px}
+.ptc-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.ptc-desc{font-size:13px;color:var(--ink3);line-height:1.6;margin-bottom:8px}
+.ptc-spec{display:flex;gap:6px;flex-wrap:wrap}
+.ptc-spec-item{font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;background:var(--li-light);border:1px solid var(--li-border);color:var(--p)}
+
+/* LINKEDIN SPEC TABLE */
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.spec-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:24px}
+.spec-card:hover{border-color:var(--li-border)}
+.sc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sc-rows{display:flex;flex-direction:column;gap:10px}
+.sc-row{display:flex;gap:12px;align-items:flex-start}
+.sc-label{font-size:11.5px;font-weight:700;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;flex-shrink:0;width:90px;padding-top:1px}
+.sc-val{font-size:13.5px;color:var(--ink2);line-height:1.55}
+.sc-val strong{color:var(--ink);font-weight:700}
+.sc-pill{display:inline-flex;font-size:11px;font-weight:700;background:var(--li-light);color:var(--p);border:1px solid var(--li-border);border-radius:100px;padding:2px 8px;margin-top:2px}
+
+/* REAL EXAMPLES */
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ex-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;transition:all .2s}
+.ex-card:hover{border-color:var(--li-border);box-shadow:0 6px 24px rgba(249,115,22,.08);transform:translateY(-2px)}
+.exc-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.exc-biz{display:flex;align-items:center;gap:10px}
+.exc-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.exc-name{font-size:13px;font-weight:700;color:var(--ink)}
+.exc-role{font-size:11.5px;color:var(--ink4)}
+.exc-type{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:100px;background:var(--li-light);border:1px solid var(--li-border);color:var(--p)}
+.exc-body{padding:16px}
+.exc-hook{font-size:14px;font-weight:700;color:var(--ink);line-height:1.45;margin-bottom:8px;border-left:3px solid var(--p);padding-left:10px}
+.exc-text{font-size:13px;color:var(--ink2);line-height:1.72;margin-bottom:8px}
+.exc-cta{font-size:13px;color:var(--p);font-weight:600;margin-bottom:8px}
+.exc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.exc-tag{font-size:12px;color:var(--p);font-weight:500}
+.exc-foot{border-top:1px solid var(--border);padding:10px 16px;background:var(--surface);display:flex;align-items:center;justify-content:space-between}
+.exc-ai{font-size:11px;font-weight:600;color:var(--p)}
+.exc-time{font-size:11px;color:var(--ink4)}
+
+/* VS MANUAL */
+.vs-wrap{border:1px solid var(--border);border-radius:var(--r4);overflow:hidden}
+.vs-table{width:100%;border-collapse:collapse}
+.vs-table th{padding:15px 20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)}
+.th-feat{background:var(--surface);text-align:left;width:38%;color:var(--ink3)}
+.th-manual{background:#fef2f2;text-align:center;color:#dc2626}
+.th-shoutly{background:var(--pg);text-align:center;color:#fff}
+.vs-table td{padding:13px 20px;border-bottom:1px solid var(--border);font-size:14px;vertical-align:middle}
+.vs-table tr:last-child td{border-bottom:none}
+.vs-table tr:hover td{background:#fff7ed}
+.vs-feat{font-weight:600;color:var(--ink)}
+.td-m{text-align:center;color:#dc2626;font-weight:600}
+.td-s{background:#fff7ed;text-align:center;color:var(--green);font-weight:700}
+.yes{color:var(--green);font-size:18px}
+.no{color:#dc2626;font-size:18px}
+.meh{color:#d97706;font-size:13px;font-weight:600}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.feat-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:26px;transition:all .18s}
+.feat-card:hover{border-color:var(--li-border);box-shadow:0 4px 18px rgba(249,115,22,.07)}
+.fc-ico{width:44px;height:44px;border-radius:12px;background:var(--li-light);display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px}
+.fc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:7px}
+.fc-desc{font-size:13.5px;color:var(--ink3);line-height:1.65}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test-card{background:#fff;border:1px solid var(--border);border-radius:var(--r4);padding:28px;display:flex;flex-direction:column;transition:all .18s}
+.test-card:hover{border-color:var(--li-border);box-shadow:0 6px 24px rgba(249,115,22,.08);transform:translateY(-2px)}
+.test-stars{color:#f59e0b;font-size:13px;letter-spacing:2px;margin-bottom:13px}
+.test-quote{font-size:14px;color:var(--ink2);line-height:1.76;font-style:italic;flex:1;margin-bottom:18px}
+.test-author{display:flex;align-items:center;gap:11px}
+.ta-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.ta-name{font-size:13.5px;font-weight:700;color:var(--ink);display:block}
+.ta-biz{font-size:12px;color:var(--ink4)}
+
+/* FAQ */
+.faq-list{border:1px solid var(--border);border-radius:var(--r4);overflow:hidden;max-width:740px;margin:40px auto 0}
+.faq-item{border-bottom:1px solid var(--border)}.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;padding:18px 22px;background:#fff;border:none;display:flex;align-items:center;justify-content:space-between;text-align:left;cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);gap:14px;transition:background .14s;font-family:inherit}
+.faq-q:hover{background:var(--surface)}
+.faq-arr{width:24px;height:24px;border-radius:50%;background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--ink4);flex-shrink:0;transition:all .22s}
+.faq-item.open .faq-arr{background:var(--pg);border-color:transparent;color:#fff;transform:rotate(45deg)}
+.faq-a{display:none;padding:0 22px 18px;font-size:14.5px;color:var(--ink2);line-height:1.75;background:#fff}
+.faq-item.open .faq-a{display:block}
+
+/* CHANNEL LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.link-card{display:flex;align-items:center;gap:10px;border:1px solid var(--border);border-radius:var(--r2);padding:12px 14px;font-size:13.5px;font-weight:500;color:var(--ink2);transition:all .15s}
+.link-card:hover{border-color:var(--li-border);background:var(--li-light);color:var(--p)}
+.link-arr{margin-left:auto;font-size:12px;color:var(--ink4)}
+.link-card:hover .link-arr{color:var(--p)}
+
+/* CTA */
+.cta-section{background:var(--dark);padding:96px 0;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 65% at 50% 110%,rgba(249,115,22,.28) 0%,transparent 70%);pointer-events:none}
+.cta-section h2{font-family:'Inter Tight',sans-serif;font-size:clamp(30px,5vw,54px);font-weight:900;letter-spacing:-2.5px;line-height:1.03;color:#fff;margin-bottom:16px;position:relative;z-index:1}
+.cta-section h2 .grad{background:var(--pg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-section p{font-size:17.5px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;margin:0 auto 38px;position:relative;z-index:1}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;position:relative;z-index:1}
+.cta-trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:13px;color:rgba(255,255,255,.4);position:relative;z-index:1}
+.ct{display:flex;align-items:center;gap:5px}
+.ct-check{color:#fbd38d;font-size:13px}
+
+/* Buttons (global) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:14px;font-weight:600;border-radius:var(--r2);padding:9px 20px;transition:all .15s;cursor:pointer;border:1.5px solid transparent;white-space:nowrap}
+.btn-ghost{color:var(--ink2);border-color:var(--border2)}.btn-ghost:hover{background:var(--surface)}
+.btn-primary{background:var(--pg);color:#fff;border:none;box-shadow:0 2px 10px var(--glow)}.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
+.btn-li{background:var(--pg);color:#fff;border:none;box-shadow:0 2px 10px var(--glow)}.btn-li:hover{background:var(--li2);transform:translateY(-1px)}
+.btn-white{background:#fff;color:var(--p);font-weight:700;border:none}.btn-white:hover{background:var(--li-light);transform:translateY(-1px)}
+.btn-wh-ghost{background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.3)}.btn-wh-ghost:hover{border-color:rgba(255,255,255,.65);color:#fff}
+.btn-lg{padding:13px 28px;font-size:15.5px;font-weight:700;border-radius:var(--r3)}
+.btn-xl{padding:15px 34px;font-size:16px;font-weight:700;border-radius:var(--r3)}
+.btn-sm{padding:7px 16px;font-size:13px}
+
+/* Utility */
+@media(max-width:1024px){
+  .hero-inner{grid-template-columns:1fr;gap:44px}
+  .li-window{max-width:540px;margin:0 auto}
+  .hiw-grid{grid-template-columns:1fr;gap:44px}
+  .posttype-grid{grid-template-columns:1fr 1fr}
+  .spec-grid{grid-template-columns:1fr}
+  .ex-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .test-grid{grid-template-columns:1fr 1fr}
+  .links-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .pain-grid,.feat-grid,.test-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .posttype-grid{grid-template-columns:1fr}
+  .section{padding:60px 0}
+  .wrap{padding:0 18px}
+}
+@media(prefers-reduced-motion:reduce){.ey-dot,.gdot{animation:none}}
+[data-r]{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+[data-r].vis{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow"><span class="ey-dot"></span>LinkedIn Post Generator &mdash; By Channel</div>
+        <h1 class="hero-h1" id="hero-h1">LinkedIn content<br>that builds authority.<br><span class="grad">Written by AI.</span></h1>
+        <p class="hero-sub">Shoutly AI writes story-driven LinkedIn posts, carousels, company updates, and thought leadership content for your business automatically &mdash; in your brand voice, published via LinkedIn Marketing API.</p>
+        <div class="hero-ctas">
+          <a href="https://shoutlyai.com/sign-up" class="btn btn-li btn-lg">Start free trial <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+          <a href="https://shoutlyai.com/shoutlyai-demo.html" class="btn btn-wh-ghost btn-lg">Book a demo</a>
+        </div>
+        <div class="hero-proof">
+          <span class="hp"><span class="hp-check">&#10003;</span>Story-driven hooks that earn the &ldquo;see more&rdquo; tap</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>Short-paragraph mobile format, always</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>3&ndash;5 hashtags &mdash; not 30 like Instagram</span>
+          <span class="hp"><span class="hp-check">&#10003;</span>Published directly via LinkedIn Marketing API</span>
+        </div>
+      </div>
+
+      <!-- LINKEDIN FEED WINDOW -->
+      <div>
+        <div class="li-window" role="region" aria-label="LinkedIn post generator preview">
+          <div class="liw-bar">
+            <div class="liw-dots"><div class="liw-dot r"></div><div class="liw-dot y"></div><div class="liw-dot g"></div></div>
+            <span class="liw-title">Shoutly AI &mdash; LinkedIn Generator</span>
+          </div>
+          <div class="liw-tabs" id="liw-tabs">
+            <span class="liw-tab active" onclick="setType('story')">&#128218; Story post</span>
+            <span class="liw-tab" onclick="setType('insight')">&#128161; Insight</span>
+            <span class="liw-tab" onclick="setType('company')">&#127970; Company update</span>
+            <span class="liw-tab" onclick="setType('carousel')">&#128196; Carousel</span>
+          </div>
+          <div class="liw-body">
+            <div class="liw-gen" id="liw-gen">
+              <div class="gdots"><div class="gdot"></div><div class="gdot"></div><div class="gdot"></div></div>
+              <div class="gtext">Writing LinkedIn post for <strong id="gen-lbl">your business</strong>&hellip;</div>
+            </div>
+            <div class="li-post" id="li-post">
+              <div class="lp-head">
+                <div class="lp-av" id="lp-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">AM</div>
+                <div>
+                  <div class="lp-name" id="lp-name">Anjali Mehta</div>
+                  <div class="lp-title" id="lp-role">Founder, Growth Media Agency</div>
+                  <div class="lp-time">2h &middot; <span class="lp-globe">&#127760;</span></div>
+                </div>
+              </div>
+              <div class="lp-body">
+                <span class="lp-hook" id="lp-hook"></span>
+                <div class="lp-text" id="lp-text"></div>
+                <span class="lp-more">...see more</span>
+                <div class="lp-tags" id="lp-tags"></div>
+              </div>
+              <div class="lp-img" id="lp-img" style="display:none">
+                <span id="lp-img-icon" style="font-size:42px"></span>
+                <div class="lp-img-label" id="lp-img-label">1.91:1 &middot; Branded</div>
+              </div>
+              <div class="lp-actions">
+                <div class="lp-action"><span class="lp-action-ico">&#128077;</span>Like</div>
+                <div class="lp-action"><span class="lp-action-ico">&#128172;</span>Comment</div>
+                <div class="lp-action"><span class="lp-action-ico">&#128257;</span>Repost</div>
+                <div class="lp-action"><span class="lp-action-ico">&#128228;</span>Send</div>
+              </div>
+            </div>
+          </div>
+          <div class="liw-footer">
+            <span class="liw-biz-lbl">Business:</span>
+            <div class="liw-chips">
+              <span class="liw-chip active" onclick="switchBiz('agency')">&#128188; Agency</span>
+              <span class="liw-chip" onclick="switchBiz('ca')">&#128202; CA Firm</span>
+              <span class="liw-chip" onclick="switchBiz('startup')">&#128640; Startup</span>
+              <span class="liw-chip" onclick="switchBiz('realestate')">&#127968; Real Estate</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT STRIP -->
+<section style="padding:52px 0 0" data-r>
+  <div class="wrap">
+    <div class="stat-strip">
+      <div class="ss-cell"><div class="ss-n">1B+</div><div class="ss-l">LinkedIn members</div><div class="ss-s">Largest professional network globally</div></div>
+      <div class="ss-cell"><div class="ss-n">5</div><div class="ss-l">Hashtags max</div><div class="ss-s">LinkedIn penalises hashtag spam unlike Instagram</div></div>
+      <div class="ss-cell"><div class="ss-n">1.91:1</div><div class="ss-l">Optimal image ratio</div><div class="ss-s">Native image format for max feed real estate</div></div>
+      <div class="ss-cell"><div class="ss-n">3x</div><div class="ss-l">B2B reach vs other platforms</div><div class="ss-s">For professional services and B2B businesses</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="section" aria-labelledby="pain-h2" data-r>
+  <div class="wrap">
+    <div style="margin-bottom:48px">
+      <span class="sec-ey">The LinkedIn problem</span>
+      <h2 class="sec-h2" id="pain-h2">Most businesses post on LinkedIn like it&rsquo;s Instagram. It doesn&rsquo;t work.</h2>
+      <p class="sec-p">LinkedIn rewards different content than every other platform &mdash; personal insight over polished graphics, short paragraphs over long blocks, contrarian takes over congratulatory posts. Most businesses get this wrong and get ignored.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-ico">&#128444;&#65039;</div>
+        <div>
+          <div class="pain-title">Posting promotional content that no one engages with</div>
+          <div class="pain-desc">LinkedIn&rsquo;s algorithm heavily suppresses purely promotional posts. &ldquo;Check out our new service&rdquo; gets 8 impressions. A story about the client problem your service solved gets 8,000. Most businesses don&rsquo;t know this distinction and keep posting the wrong thing.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-ico">&#128221;</div>
+        <div>
+          <div class="pain-title">Writing walls of text that nobody reads on mobile</div>
+          <div class="pain-desc">80% of LinkedIn is accessed on mobile. A single paragraph of 5 sentences appears as an unreadable block. Posts that get 10,000+ impressions use one sentence per line, strategic white space, and a hook in the very first line before the &ldquo;see more&rdquo; truncation.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-ico">&#128347;</div>
+        <div>
+          <div class="pain-title">Posting too rarely to build a following</div>
+          <div class="pain-desc">LinkedIn creators who post 4&ndash;5 times a week grow 10x faster than those who post once or twice. But writing 5 story-driven, insight-led posts per week is genuinely hard when you&rsquo;re running a business. Most businesses fall to once every few weeks, which the algorithm ignores.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-ico">&#128517;</div>
+        <div>
+          <div class="pain-title">Using the wrong hashtag count and type</div>
+          <div class="pain-desc">Instagram needs 30 hashtags in a specific mix. LinkedIn recommends 3&ndash;5 maximum &mdash; highly specific, not broad. Using 20+ hashtags on LinkedIn actively flags your post as spam and reduces distribution. Using broad tags like #Business instead of #StartupIndia reaches no targeted audience.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-ico">&#128100;</div>
+        <div>
+          <div class="pain-title">Not distinguishing between personal and company page content</div>
+          <div class="pain-desc">Personal profile posts outperform company pages 5:1 on LinkedIn for organic reach. First-person founder stories drive comments, follows, and inbound leads in a way company updates never do. Most businesses only post on the company page and wonder why nobody sees it.</div>
+        </div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-ico">&#128200;</div>
+        <div>
+          <div class="pain-title">No system for consistent content week after week</div>
+          <div class="pain-desc">A great LinkedIn post on Monday, nothing for 3 weeks, then another post. That inconsistency kills follower growth. LinkedIn&rsquo;s algorithm rewards accounts that post consistently &mdash; but writing professional, story-driven content every day without a system is what stops most people from even trying.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt" id="how-it-works" aria-labelledby="hiw-h2" data-r>
+  <div class="wrap">
+    <div class="hiw-grid">
+      <div>
+        <span class="sec-ey">How it works</span>
+        <h2 class="sec-h2" id="hiw-h2">From your business brief to a month of LinkedIn content &mdash; automatically.</h2>
+        <p class="sec-p" style="margin-bottom:40px">You describe your business once. The AI knows LinkedIn&rsquo;s rules, formats, and what performs &mdash; and generates a full content calendar of professional posts in your voice.</p>
+        <div class="hiw-steps">
+          <div class="hiw-step">
+            <div class="hiw-num">1</div>
+            <div class="hiw-body">
+              <div class="hiw-title">Connect your LinkedIn account</div>
+              <div class="hiw-desc">Connect your personal profile and/or company page via the LinkedIn Marketing API. Official, secure, no third-party login. Shoutly AI only posts &mdash; it never reads your messages or contacts.</div>
+              <span class="hiw-time">&#8987; 2 minutes, one-time</span>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">2</div>
+            <div class="hiw-body">
+              <div class="hiw-title">Set your brand voice &amp; content brief</div>
+              <div class="hiw-desc">Describe your business, your industry, your clients, your tone (professional/warm, thought leader/founder, formal/conversational). The AI internalises this and writes every post in your voice, not a generic corporate one.</div>
+              <span class="hiw-time">&#8987; 5 minutes, once</span>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">3</div>
+            <div class="hiw-body">
+              <div class="hiw-title">AI generates your monthly content calendar</div>
+              <div class="hiw-desc">The AI plans a full month of LinkedIn content &mdash; the right mix of story posts, insight posts, client wins, thought leadership, and company updates. Posted at the times your audience is most active (typically Tue&ndash;Thu, 8&ndash;10am).</div>
+              <span class="hiw-time">&#8987; Under 2 minutes</span>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">4</div>
+            <div class="hiw-body">
+              <div class="hiw-title">Review &amp; approve in bulk</div>
+              <div class="hiw-desc">View the full month of posts in one screen. Edit any post, add a specific client story, or approve everything in one click. Most users approve 80%+ without edits. Everything else publishes on schedule automatically.</div>
+              <span class="hiw-time">&#8987; ~10 minutes per month</span>
+            </div>
+          </div>
+          <div class="hiw-step">
+            <div class="hiw-num">5</div>
+            <div class="hiw-body">
+              <div class="hiw-title">Analytics improve next month&rsquo;s content</div>
+              <div class="hiw-desc">Shoutly AI tracks impressions, engagement rate, comments, and follower growth for every LinkedIn post. The AI identifies what worked &mdash; story format, topic type, posting time &mdash; and adjusts next month&rsquo;s calendar automatically.</div>
+              <span class="hiw-time">&#8987; Automatic, every month</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LinkedIn format explainer -->
+      <div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r5);padding:32px;margin-bottom:16px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--p);margin-bottom:18px">&#128188; How Shoutly AI formats LinkedIn posts</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="font-size:11px;font-weight:700;color:var(--ink4);width:72px;flex-shrink:0;padding-top:2px">HOOK</div>
+              <div style="flex:1;background:var(--li-light);border:1px solid var(--li-border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">One sentence. Bold. Creates a question the reader must answer by tapping &ldquo;see more&rdquo;.</div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="font-size:11px;font-weight:700;color:var(--ink4);width:72px;flex-shrink:0;padding-top:2px">FORMAT</div>
+              <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">1&ndash;2 sentences per paragraph. Blank line between each. No bullets unless listing. Mobile-first always.</div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="font-size:11px;font-weight:700;color:var(--ink4);width:72px;flex-shrink:0;padding-top:2px">HASHTAGS</div>
+              <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">3&ndash;5 specific tags. Never broad. #StartupIndia over #Business. #TaxPlanning over #Finance.</div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="font-size:11px;font-weight:700;color:var(--ink4);width:72px;flex-shrink:0;padding-top:2px">IMAGES</div>
+              <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">1.91:1 aspect ratio. Branded with your logo and colours. Never stock photos &mdash; always original branded graphics.</div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="font-size:11px;font-weight:700;color:var(--ink4);width:72px;flex-shrink:0;padding-top:2px">TIMING</div>
+              <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:10px 14px;font-size:13px;color:var(--ink2);line-height:1.55">Tue&ndash;Thu outperform Mon &amp; Fri. 8&ndash;10am local time is peak professional scroll. AI schedules accordingly.</div>
+            </div>
+          </div>
+        </div>
+        <div style="background:var(--pg);border-radius:var(--r4);padding:22px 24px;color:#fff">
+          <div style="font-size:13.5px;font-weight:700;margin-bottom:8px">&#128188; Connected via LinkedIn Marketing API</div>
+          <div style="font-size:13px;color:rgba(255,255,255,.72);line-height:1.65">Official API. Not a browser extension or scraper. Posts publish natively to your personal profile and/or company page &mdash; your logo, your voice, your audience. LinkedIn treats it exactly like you posted manually.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POST TYPES -->
+<section class="section" id="post-types" aria-labelledby="pt-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:52px">
+      <span class="sec-ey">Every type of LinkedIn content</span>
+      <h2 class="sec-h2" id="pt-h2">6 post types &mdash; all written and scheduled by AI</h2>
+      <p class="sec-p">LinkedIn rewards variety. A content calendar that only posts one format plateaus. Shoutly AI plans the right mix of formats automatically &mdash; based on what your industry and audience respond to.</p>
+    </div>
+    <div class="posttype-grid">
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#fff7ed,#ffedd5)">
+          <span class="ptc-badge" style="background:var(--li-light);color:var(--p);border:1px solid var(--li-border)">&#128218; Story Post</span>
+          <div class="ptc-hook">Most startup founders I meet are leaving &#8377;3&ndash;8 lakhs on the table every year in tax savings they don&rsquo;t know exist.</div>
+          <div class="ptc-body">Here are 5 Section 80 deductions that most CAs don&rsquo;t proactively tell their clients about&hellip;</div>
+          <div class="ptc-tags"><span class="ptc-tag">#TaxPlanning</span><span class="ptc-tag">#StartupIndia</span><span class="ptc-tag">#FinanceIndia</span></div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Story &amp; Insight Posts</div>
+          <div class="ptc-desc">First-person narrative posts that open with a contrarian take, data point, or lived experience. Highest-performing post type on LinkedIn. Drives comments, follows, and inbound DMs for professional services businesses.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">Personal profile</span>
+            <span class="ptc-spec-item">3&ndash;5 hashtags</span>
+            <span class="ptc-spec-item">Short paragraphs</span>
+            <span class="ptc-spec-item">Hook-first</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+          <span class="ptc-badge" style="background:#fef3c7;color:#d97706;border:1px solid #fcd34d">&#128196; Carousel Post</span>
+          <div class="ptc-hook">5 LinkedIn mistakes killing your reach (Slide 1 of 6)</div>
+          <div class="ptc-body">Swipe to see each one &mdash; and what to do instead &rarr;</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">LinkedIn Carousels (PDF)</div>
+          <div class="ptc-desc">Multi-slide PDF carousels that users swipe through. Highest save rates on LinkedIn. Works best for listicles, step-by-step guides, before/after comparisons, and industry statistics. Each slide is branded with your logo and colours.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">PDF format</span>
+            <span class="ptc-spec-item">Up to 10 slides</span>
+            <span class="ptc-spec-item">Branded design</span>
+            <span class="ptc-spec-item">High saves</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)">
+          <span class="ptc-badge" style="background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0">&#127942; Client Win</span>
+          <div class="ptc-hook">A client came to us 8 months ago with 12 social accounts and 1 team member managing all of them.</div>
+          <div class="ptc-body">Today they have 22 clients, a 3-person team, and 0 hours spent on content creation per month.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Client Win &amp; Case Study Posts</div>
+          <div class="ptc-desc">Story-format posts that showcase client results without being promotional. The narrative structure &mdash; problem, journey, outcome &mdash; keeps readers engaged and builds credibility better than any testimonial card.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">Story format</span>
+            <span class="ptc-spec-item">Real results</span>
+            <span class="ptc-spec-item">No graphics needed</span>
+            <span class="ptc-spec-item">High inbound</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#fff7ed,#ffedd5)">
+          <span class="ptc-badge" style="background:#fff7ed;color:#c2410c;border:1px solid #fed7aa">&#127970; Company Update</span>
+          <div class="ptc-hook">We&rsquo;re expanding to Hyderabad &mdash; and we&rsquo;re looking for someone specific.</div>
+          <div class="ptc-body">3 years in Bengaluru. 47 clients. 1 team member who grew into a Head of Operations&hellip;</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Company Page Updates</div>
+          <div class="ptc-desc">Announcements, hiring posts, milestone celebrations, and brand updates published to your company page. Written in the company voice &mdash; warmer than a press release, more professional than a personal post. Drives page followers and job applications.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">Company page</span>
+            <span class="ptc-spec-item">Brand voice</span>
+            <span class="ptc-spec-item">CTA included</span>
+            <span class="ptc-spec-item">With image</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#fdf4ff,#fae8ff)">
+          <span class="ptc-badge" style="background:#fdf4ff;color:#a21caf;border:1px solid #f5d0fe)">&#128161; Thought Leadership</span>
+          <div class="ptc-hook">AI won&rsquo;t replace accountants. But accountants who use AI will replace those who don&rsquo;t.</div>
+          <div class="ptc-body">Here&rsquo;s what changes in 18 months &mdash; and what doesn&rsquo;t &mdash; for Indian CA firms adopting AI tools.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Thought Leadership &amp; Industry Takes</div>
+          <div class="ptc-desc">Contrarian takes, industry predictions, and opinionated commentary on trends in your field. Positions you as the expert people follow for perspective &mdash; not just information. Drives the highest comment rates and media mentions.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">Opinionated</span>
+            <span class="ptc-spec-item">Comment-driven</span>
+            <span class="ptc-spec-item">Personal profile</span>
+            <span class="ptc-spec-item">No images</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="posttype-card">
+        <div class="ptc-preview" style="background:linear-gradient(135deg,#f0f7fc,#dbeafe)">
+          <span class="ptc-badge" style="background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe">&#128202; Data Post</span>
+          <div class="ptc-hook">73% of Indian SMEs still don&rsquo;t have a consistent social media presence in 2026.</div>
+          <div class="ptc-body">That&rsquo;s the number. Here&rsquo;s what we&rsquo;ve found actually moves the needle for the 27% who do it well.</div>
+        </div>
+        <div class="ptc-body-area">
+          <div class="ptc-name">Data &amp; Statistic Posts</div>
+          <div class="ptc-desc">Posts anchored in a surprising or counterintuitive data point relevant to your audience. The number is the hook. The rest of the post unpacks what it means and why it matters to your specific reader. High share rates because people tag colleagues in data posts.</div>
+          <div class="ptc-spec">
+            <span class="ptc-spec-item">Industry data</span>
+            <span class="ptc-spec-item">High shares</span>
+            <span class="ptc-spec-item">Authority-building</span>
+            <span class="ptc-spec-item">Optional infographic</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LINKEDIN SPECS -->
+<section class="section section-alt" aria-labelledby="spec-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">LinkedIn-specific requirements</span>
+      <h2 class="sec-h2" id="spec-h2">Every LinkedIn format, correctly handled by Shoutly AI</h2>
+      <p class="sec-p">LinkedIn has different rules than every other platform. Shoutly AI knows them all &mdash; character limits, image ratios, hashtag counts, algorithm signals &mdash; and applies them automatically.</p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="sc-title">&#128203; Text post specs</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-label">Char limit</div><div class="sc-val"><strong>3,000 characters</strong> &mdash; AI targets 800&ndash;1,200 for max engagement</div></div>
+          <div class="sc-row"><div class="sc-label">Hook rule</div><div class="sc-val">First 210 characters shown before &ldquo;see more&rdquo; &mdash; hook must fit here <span class="sc-pill">Critical</span></div></div>
+          <div class="sc-row"><div class="sc-label">Paragraphs</div><div class="sc-val">1&ndash;2 sentences max. Blank line between each. Never a wall of text.</div></div>
+          <div class="sc-row"><div class="sc-label">Hashtags</div><div class="sc-val"><strong>3&ndash;5 maximum.</strong> Specific over broad. Placed at end of post.</div></div>
+          <div class="sc-row"><div class="sc-label">Best days</div><div class="sc-val">Tuesday, Wednesday, Thursday outperform Mon &amp; Fri by 2x</div></div>
+          <div class="sc-row"><div class="sc-label">Best time</div><div class="sc-val"><strong>8:00&ndash;10:00am</strong> local time &mdash; professional commute scroll window</div></div>
+        </div>
+      </div>
+      <div class="spec-card">
+        <div class="sc-title">&#128247; Image &amp; carousel specs</div>
+        <div class="sc-rows">
+          <div class="sc-row"><div class="sc-label">Feed image</div><div class="sc-val"><strong>1.91:1 ratio</strong> (1200&times;628px) &mdash; occupies max feed real estate <span class="sc-pill">Auto-sized</span></div></div>
+          <div class="sc-row"><div class="sc-label">Square image</div><div class="sc-val">1:1 (1080&times;1080px) also supported &mdash; auto-generated for each post type</div></div>
+          <div class="sc-row"><div class="sc-label">PDF carousel</div><div class="sc-val"><strong>Up to 10 slides</strong> &mdash; each branded, each with hook + content + logo</div></div>
+          <div class="sc-row"><div class="sc-label">Video</div><div class="sc-val">16:9 or 1:1 &mdash; native video uploads scheduled via API</div></div>
+          <div class="sc-row"><div class="sc-label">Branding</div><div class="sc-val">Your logo, colours, and fonts applied to every image &mdash; via your Brand Kit</div></div>
+          <div class="sc-row"><div class="sc-label">Alt text</div><div class="sc-val">AI auto-generates descriptive alt text for every image for accessibility</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL EXAMPLES -->
+<section class="section" id="examples" aria-labelledby="ex-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:52px">
+      <span class="sec-ey">Real AI-generated LinkedIn posts</span>
+      <h2 class="sec-h2" id="ex-h2">Exactly what Shoutly AI writes for Indian B2B businesses</h2>
+      <p class="sec-p">Not templates. Complete, specific, publish-ready posts for real business types &mdash; formatted correctly for LinkedIn, in a voice that actually sounds human.</p>
+    </div>
+    <div class="ex-grid">
+
+      <div class="ex-card">
+        <div class="exc-head">
+          <div class="exc-biz">
+            <div class="exc-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">AM</div>
+            <div><div class="exc-name">Anjali Mehta</div><div class="exc-role">Social Media Agency &middot; Delhi</div></div>
+          </div>
+          <span class="exc-type">Story post</span>
+        </div>
+        <div class="exc-body">
+          <div class="exc-hook">We went from 8 clients to 22 clients in 6 months. We hired 0 additional staff.</div>
+          <div class="exc-text">Everyone asked us how.<br><br>The honest answer: we stopped creating content manually.<br><br>Every hour our team spent writing captions, designing graphics, and researching hashtags was an hour we weren&rsquo;t spending on strategy, client relationships, or growth.<br><br>We moved our entire operation to AI-generated content. Every client&rsquo;s posts &mdash; written, designed, and scheduled automatically in their brand voice.<br><br>The team that used to spend 40 hours a month per client now spends 4.</div>
+          <div class="exc-cta">If you run an agency and content creation is eating your bandwidth &mdash; drop a &#128172; below. Happy to share what changed.</div>
+          <div class="exc-tags"><span class="exc-tag">#SocialMediaAgency</span><span class="exc-tag">#AgencyGrowth</span><span class="exc-tag">#ContentMarketing</span><span class="exc-tag">#AIMarketing</span></div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 5 sec</span><span class="exc-time">Wed 8:30am</span></div>
+      </div>
+
+      <div class="ex-card">
+        <div class="exc-head">
+          <div class="exc-biz">
+            <div class="exc-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">NP</div>
+            <div><div class="exc-name">Neeraj Patel</div><div class="exc-role">CA Firm Partner &middot; Mumbai</div></div>
+          </div>
+          <span class="exc-type">Insight post</span>
+        </div>
+        <div class="exc-body">
+          <div class="exc-hook">Most startup founders I meet are leaving &#8377;3&ndash;8 lakhs on the table every year in tax savings they don&rsquo;t know about.</div>
+          <div class="exc-text">It&rsquo;s not their fault. Their CA files the return correctly &mdash; but nobody sits down to do actual tax planning.<br><br>Filing and planning are two different services. Most people only pay for the first one.<br><br>Here are 4 deductions that almost every founder I meet has missed at least once:<br><br>&#8594; Section 80D: Health insurance for parents (up to &#8377;50,000)<br>&#8594; Section 80E: Education loan interest (no upper limit)<br>&#8594; Section 24(b): Home loan interest (up to &#8377;2 lakhs)<br>&#8594; HRA claim while paying rent (even without a formal receipt)</div>
+          <div class="exc-cta">Save this. Check against your last ITR. If you missed any of these, DM me &mdash; there&rsquo;s usually still time to file a revised return.</div>
+          <div class="exc-tags"><span class="exc-tag">#TaxPlanning</span><span class="exc-tag">#StartupIndia</span><span class="exc-tag">#ITR</span><span class="exc-tag">#FinanceIndia</span></div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 4 sec</span><span class="exc-time">Thu 9:00am</span></div>
+      </div>
+
+      <div class="ex-card">
+        <div class="exc-head">
+          <div class="exc-biz">
+            <div class="exc-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">SK</div>
+            <div><div class="exc-name">Suresh Kumar</div><div class="exc-role">Founder, TechStart Bengaluru</div></div>
+          </div>
+          <span class="exc-type">Thought leadership</span>
+        </div>
+        <div class="exc-body">
+          <div class="exc-hook">AI will not replace your sales team. It will replace sales teams who don&rsquo;t use AI to understand why deals are lost before they&rsquo;re lost.</div>
+          <div class="exc-text">The companies getting this right in 2026 are doing something specific.<br><br>They&rsquo;re not using AI to write more cold emails.<br><br>They&rsquo;re using AI to analyse every lost deal for patterns &mdash; what stage the conversation died at, what competitor came up, what objection was never answered.<br><br>The output isn&rsquo;t more outbound. It&rsquo;s a better inbound product, a sharper pitch, and a team that stops making the same mistake twice.<br><br>Outbound volume is not the problem most B2B startups think they have.</div>
+          <div class="exc-cta">If you&rsquo;re running a B2B team and you haven&rsquo;t done a structured deal analysis in the last 90 days &mdash; that&rsquo;s where I&rsquo;d start. What do you think?</div>
+          <div class="exc-tags"><span class="exc-tag">#B2BSales</span><span class="exc-tag">#StartupIndia</span><span class="exc-tag">#SalesStrategy</span><span class="exc-tag">#AITools</span></div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 5 sec</span><span class="exc-time">Tue 8:00am</span></div>
+      </div>
+
+      <div class="ex-card">
+        <div class="exc-head">
+          <div class="exc-biz">
+            <div class="exc-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">WP</div>
+            <div><div class="exc-name">Whitefield Properties</div><div class="exc-role">Company Page &middot; Bengaluru</div></div>
+          </div>
+          <span class="exc-type">Company update</span>
+        </div>
+        <div class="exc-body">
+          <div class="exc-hook">We just completed our 100th property transaction in Bengaluru&rsquo;s Whitefield corridor. Here&rsquo;s what we learned from the first 99.</div>
+          <div class="exc-text">The buyers who did well shared three things in common:<br><br>&#8594; They verified RERA registration before anything else<br>&#8594; They visited the site twice &mdash; once with a structural engineer<br>&#8594; They read the maintenance agreement before the sale agreement<br><br>The buyers who had problems skipped at least one of these.<br><br>We&rsquo;re sharing this because we think the market works better when buyers are informed &mdash; not because we&rsquo;re trying to sell you something today.</div>
+          <div class="exc-cta">If you&rsquo;re considering a property in Whitefield this year, follow our page for weekly market updates. No spam &mdash; just local data.</div>
+          <div class="exc-tags"><span class="exc-tag">#BengaluruRealestate</span><span class="exc-tag">#Whitefield</span><span class="exc-tag">#PropertyIndia</span></div>
+        </div>
+        <div class="exc-foot"><span class="exc-ai">&#10022; Generated in 5 sec</span><span class="exc-time">Wed 9:30am</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VS MANUAL -->
+<section class="section section-alt" aria-labelledby="vs-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">Manual vs automated</span>
+      <h2 class="sec-h2" id="vs-h2">Writing LinkedIn posts manually vs with Shoutly AI</h2>
+      <p class="sec-p">The difference isn&rsquo;t just time. It&rsquo;s the quality and consistency that&rsquo;s impossible to maintain manually at scale.</p>
+    </div>
+    <div class="vs-wrap">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th class="th-feat">Capability</th>
+            <th class="th-manual">&#9999;&#65039; Writing manually</th>
+            <th class="th-shoutly">&#128188; Shoutly AI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="vs-feat">Time to write one post</td><td class="td-m">20&ndash;45 minutes</td><td class="td-s">&#10003; Under 10 seconds</td></tr>
+          <tr><td class="vs-feat">Posting frequency sustainable</td><td class="td-m">1&ndash;2x per week (if that)</td><td class="td-s">&#10003; 4&ndash;5x per week, every week</td></tr>
+          <tr><td class="vs-feat">Hook quality under time pressure</td><td class="td-m"><span class="meh">Inconsistent</span> &mdash; strong some days, weak others</td><td class="td-s">&#10003; Consistently strong, every post</td></tr>
+          <tr><td class="vs-feat">LinkedIn format rules applied</td><td class="td-m"><span class="meh">Manual</span> &mdash; easy to forget short paragraphs, correct hashtag count</td><td class="td-s">&#10003; Auto-applied to every post</td></tr>
+          <tr><td class="vs-feat">Correct hashtag count &amp; type</td><td class="td-m"><span class="no">&#10007;</span> Most people use too many or wrong ones</td><td class="td-s">&#10003; 3&ndash;5 specific hashtags, every time</td></tr>
+          <tr><td class="vs-feat">1.91:1 branded image included</td><td class="td-m"><span class="no">&#10007;</span> Canva, 20&ndash;30 mins per image</td><td class="td-s">&#10003; AI-generated, branded, auto-sized</td></tr>
+          <tr><td class="vs-feat">Optimal posting time</td><td class="td-m"><span class="meh">Manual</span> &mdash; easy to miss the Tue&ndash;Thu 8&ndash;10am window</td><td class="td-s">&#10003; Auto-scheduled at peak times</td></tr>
+          <tr><td class="vs-feat">Content variety (6 formats)</td><td class="td-m"><span class="meh">Usually 1&ndash;2 formats</span> &mdash; whatever&rsquo;s easiest</td><td class="td-s">&#10003; Full mix planned automatically</td></tr>
+          <tr><td class="vs-feat">Posting when you&rsquo;re too busy</td><td class="td-m"><span class="no">&#10007;</span> Nothing goes out</td><td class="td-s">&#10003; Always publishes, no matter what</td></tr>
+          <tr><td class="vs-feat">Learns from what performs</td><td class="td-m"><span class="no">&#10007;</span> You have to track manually and remember</td><td class="td-s">&#10003; Auto-adjusts next month&rsquo;s calendar</td></tr>
+          <tr><td class="vs-feat">Personal brand vs company page</td><td class="td-m"><span class="meh">Usually one or the other</span></td><td class="td-s">&#10003; Both, simultaneously, different voice</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" aria-labelledby="feat-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">What&rsquo;s included</span>
+      <h2 class="sec-h2" id="feat-h2">Everything built into Shoutly AI&rsquo;s LinkedIn generator</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="fc-ico">&#128218;</div>
+        <div class="fc-title">Story-driven post writing</div>
+        <div class="fc-desc">Every post opens with a hook that earns the &ldquo;see more&rdquo; tap &mdash; contrarian take, surprising data, or personal insight. Single-sentence paragraphs. The format LinkedIn&rsquo;s algorithm rewards in 2026.</div>
+      </div>
+      <div class="feat-card">
+        <div class="fc-ico">&#128196;</div>
+        <div class="fc-title">PDF carousel generation</div>
+        <div class="fc-desc">Branded PDF carousels (up to 10 slides) with your logo, colours, and fonts. Cover slide, content slides, and a CTA closing slide &mdash; generated and uploaded automatically as a native LinkedIn document post.</div>
+      </div>
+      <div class="feat-card">
+        <div class="fc-ico">&#127970;</div>
+        <div class="fc-title">Personal profile + company page</div>
+        <div class="fc-desc">Post to your personal LinkedIn profile and your company page simultaneously &mdash; with different voices. Founder posts are first-person and personal. Company updates are authoritative and brand-voice-aligned.</div>
+      </div>
+      <div class="feat-card">
+        <div class="fc-ico">&#128247;</div>
+        <div class="fc-title">1.91:1 branded images</div>
+        <div class="fc-desc">AI generates branded images in the correct 1.91:1 LinkedIn ratio &mdash; your logo, your colours, your fonts. No Canva. No manual resizing. Images pair with each post automatically and upload natively via the API.</div>
+      </div>
+      <div class="feat-card">
+        <div class="fc-ico">&#128200;</div>
+        <div class="fc-title">Analytics &amp; content optimisation</div>
+        <div class="fc-desc">Impressions, engagement rate, comments, shares, and follower growth tracked across all LinkedIn posts in Shoutly AI&rsquo;s unified dashboard. AI identifies top-performing post types and adjusts your next month automatically.</div>
+      </div>
+      <div class="feat-card">
+        <div class="fc-ico">&#128197;</div>
+        <div class="fc-title">Optimal scheduling built in</div>
+        <div class="fc-desc">Posts automatically scheduled for Tue&ndash;Thu between 8&ndash;10am &mdash; the peak professional scroll window. As your analytics build, the AI recalibrates to your specific audience&rsquo;s most active hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-alt" aria-labelledby="test-h2" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:48px">
+      <span class="sec-ey">What businesses say</span>
+      <h2 class="sec-h2" id="test-h2">Indian professionals who use Shoutly AI for LinkedIn</h2>
+    </div>
+    <div class="test-grid">
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;I tried writing LinkedIn posts for 3 months on my own. I&rsquo;d spend 40 minutes on one post, get 200 impressions, and give up for two weeks. Shoutly AI generates posts in my CA firm&rsquo;s voice that sound exactly how I&rsquo;d write if I had the time. My last post got 14,000 impressions and 3 inbound calls in the same week.&rdquo;</blockquote>
+        <div class="test-author">
+          <div class="ta-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">NP</div>
+          <div><span class="ta-name">Neeraj Patel</span><span class="ta-biz">CA Partner &middot; Mumbai</span></div>
+        </div>
+      </article>
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;LinkedIn was always the platform I knew I should be on for agency business development &mdash; and the one I avoided because writing 5 professional posts a week felt impossible alongside client work. Now it publishes automatically every week. I&rsquo;ve had 7 inbound agency enquiries from LinkedIn in the past 2 months.&rdquo;</blockquote>
+        <div class="test-author">
+          <div class="ta-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">AM</div>
+          <div><span class="ta-name">Anjali Mehta</span><span class="ta-biz">Social Media Agency &middot; Delhi</span></div>
+        </div>
+      </article>
+      <article class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote class="test-quote">&ldquo;The AI nails the LinkedIn format. Short paragraphs, strong hooks, the right hashtag count. Every post looks like something a proper content strategist wrote &mdash; not a business owner who&rsquo;s figuring it out. I went from 800 to 4,200 followers in 4 months posting 4 times a week on autopilot.&rdquo;</blockquote>
+        <div class="test-author">
+          <div class="ta-av" style="background:linear-gradient(135deg,#F97316,#EF4444)">SK</div>
+          <div><span class="ta-name">Suresh Kumar</span><span class="ta-biz">Startup Founder &middot; Bengaluru</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" aria-labelledby="faq-h2" data-r>
+  <div class="wrap center">
+    <span class="sec-ey">Common questions</span>
+    <h2 class="sec-h2" id="faq-h2">Everything you need to know about Shoutly AI&rsquo;s LinkedIn generator</h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Does Shoutly AI post to my personal LinkedIn profile or just the company page?<span class="faq-arr">+</span></button><div class="faq-a"><p>Both. Shoutly AI connects to your personal LinkedIn profile and/or your company page via the LinkedIn Marketing API. You can schedule different content to each &mdash; first-person founder posts to your personal profile, and company voice updates to your company page. Both are managed from one Shoutly AI dashboard. Personal profile posts consistently outperform company page posts 5:1 on organic reach, so most professionals use both simultaneously.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Why does Shoutly AI use only 3&ndash;5 hashtags when Instagram uses 30?<span class="faq-arr">+</span></button><div class="faq-a"><p>LinkedIn and Instagram have completely different hashtag algorithms. LinkedIn&rsquo;s algorithm explicitly discourages hashtag spam &mdash; posts with 20+ hashtags are suppressed. LinkedIn recommends 3&ndash;5 highly specific hashtags placed at the end of the post. Specific tags like #StartupIndia or #TaxPlanning India outperform broad tags like #Business by routing your post to genuinely interested audiences. Shoutly AI applies the correct count and specificity for each platform automatically &mdash; never copying Instagram&rsquo;s hashtag logic to LinkedIn.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Will LinkedIn posts sound like me &mdash; or like generic AI?<span class="faq-arr">+</span></button><div class="faq-a"><p>They sound like you. You describe your professional background, your clients, your areas of expertise, and your tone preference (formal, conversational, thought leader, founder-voice) once in the Brand Kit. Every post is generated in that voice consistently. A CA firm&rsquo;s posts sound authoritative and expertise-led. A startup founder&rsquo;s posts sound personal and growth-focused. An agency&rsquo;s posts sound strategic. The difference between generic AI content and Shoutly AI&rsquo;s output is the business brief you provide upfront.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">How does Shoutly AI connect to LinkedIn? Is it safe?<span class="faq-arr">+</span></button><div class="faq-a"><p>Shoutly AI connects via the official LinkedIn Marketing API &mdash; not a browser extension, bot, or scraper. This is the same API used by enterprise tools like HubSpot, Hootsuite, and Sprout Social. You authenticate once through LinkedIn&rsquo;s own OAuth flow, granting Shoutly AI permission to post on your behalf. Shoutly AI can only publish &mdash; it cannot read your messages, view your connections, or access your profile information. You can revoke access at any time from LinkedIn&rsquo;s settings.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">What is the optimal LinkedIn posting frequency?<span class="faq-arr">+</span></button><div class="faq-a"><p>LinkedIn creators who post 4&ndash;5 times per week grow significantly faster than those who post 1&ndash;2 times. However, quality matters more than quantity on LinkedIn &mdash; one strong story post outperforms five weak updates. Shoutly AI plans 4&ndash;5 posts per week by default, mixing post types (story, insight, company update, carousel, thought leadership) to avoid repetition. The schedule is set to Tuesday through Thursday to align with peak professional engagement windows, with Monday and Friday reserved for higher-effort content types.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Does Shoutly AI generate LinkedIn carousel (PDF) posts?<span class="faq-arr">+</span></button><div class="faq-a"><p>Yes. Shoutly AI generates branded PDF carousels &mdash; the native slide format that outperforms static images on LinkedIn for saves and reach. Each carousel includes a cover slide with your headline, up to 10 content slides, and a closing CTA slide &mdash; all branded with your logo, colours, and fonts from your Brand Kit. The PDF is uploaded directly to LinkedIn via the API, appearing as a native swipeable document post &mdash; not a link to an external file.</p></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="faq(this)" aria-expanded="false">Is LinkedIn included in the standard Shoutly AI plan?<span class="faq-arr">+</span></button><div class="faq-a"><p>Yes. LinkedIn is one of the 10 platforms included in the standard &#8377;10,000/month Shoutly AI plan. The plan also includes Instagram, Facebook, X/Twitter, TikTok, YouTube, Google Business Profile, Pinterest, Threads, and Bluesky &mdash; all managed from one dashboard, all AI-generated content, all published via their official APIs. There are no extra charges per platform and no platform-specific add-ons.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNEL LINKS -->
+<section class="section section-alt" data-r>
+  <div class="wrap">
+    <div class="center" style="margin-bottom:36px">
+      <span class="sec-ey">More channels</span>
+      <h2 class="sec-h2" style="font-size:clamp(22px,2.8vw,34px)">Shoutly AI generates content for all 10 platforms</h2>
+    </div>
+    <div class="links-grid">
+      <a href="https://shoutlyai.com/channel/instagram" class="link-card"><span style="font-size:18px">&#128247;</span> Instagram <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/twitter-x" class="link-card"><span style="font-size:18px">&#10006;</span> X / Twitter <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/facebook-post-generator" class="link-card"><span style="font-size:18px">&#128153;</span> Facebook <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/tiktok" class="link-card"><span style="font-size:18px">&#127925;</span> TikTok <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/youtube" class="link-card"><span style="font-size:18px">&#9654;&#65039;</span> YouTube <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/google-business" class="link-card"><span style="font-size:18px">&#128205;</span> Google Business <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/pinterest" class="link-card"><span style="font-size:18px">&#128204;</span> Pinterest <span class="link-arr">&#8594;</span></a>
+      <a href="https://shoutlyai.com/channel/threads" class="link-card"><span style="font-size:18px">&#64;</span> Threads <span class="link-arr">&#8594;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" aria-labelledby="cta-h2">
+  <div class="wrap">
+    <h2 id="cta-h2">Start building your<br><span class="grad">LinkedIn presence today.</span></h2>
+    <p>Story posts, carousels, company updates, and thought leadership &mdash; written in your voice, published at the right time, every week. 14-day free trial. No credit card.</p>
+    <div class="cta-btns">
+      <a href="https://shoutlyai.com/sign-up" class="btn btn-li btn-xl">Start free trial <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+      <a href="https://shoutlyai.com/demo" class="btn btn-wh-ghost btn-xl">Book a live demo</a>
+    </div>
+    <div class="cta-trust">
+      <span class="ct"><span class="ct-check">&#10003;</span>Official LinkedIn Marketing API</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>14-day free trial &mdash; no credit card</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>All 10 platforms in one plan</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>&#8377;10,000/month &mdash; everything included</span>
+      <span class="ct"><span class="ct-check">&#10003;</span>4.9&#9733; &mdash; 41,000+ businesses</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+var posts = {
+  agency: {
+    story: { av:'AM', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Anjali Mehta', role:'Founder, Growth Media Agency', hook:'We went from 8 clients to 22 in 6 months. We hired 0 additional staff.', text:'Everyone asked how we scaled without hiring.<br><br>We stopped creating content manually.<br><br>Every hour spent writing captions and designing graphics was an hour not spent on strategy or growth.<br><br>The team that used to spend 40 hours per client per month now spends 4.', tags:['#AgencyGrowth','#ContentMarketing','#AIMarketing','#SocialMedia'], showImg:false },
+    insight: { av:'AM', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Anjali Mehta', role:'Founder, Growth Media Agency', hook:'Most agencies price themselves out of growth by charging for hours, not outcomes.', text:'I made this mistake for 2 years.<br><br>&#8377;500/hour for content creation.<br>&#8377;800/hour for strategy.<br><br>Then we switched to a monthly retainer with a defined scope. Revenue tripled. Client churn dropped to nearly zero.<br><br>Clients don’t buy hours. They buy certainty.', tags:['#AgencyLife','#PricingStrategy','#FreelanceIndia'], showImg:false },
+    company: { av:'AM', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Growth Media Agency', role:'Company Page &middot; Delhi', hook:'We’re hiring our first Social Media Strategist in Delhi NCR.', text:'After 3 years of being a 2-person operation, we’re growing the team.<br><br>We’re looking for someone who understands LinkedIn better than most people understand their own city.<br><br>If that’s you — DM us directly or apply via the link in comments.', tags:['#HiringDelhi','#SocialMediaJobs','#AgencyJobs'], showImg:true, imgIco:'&#127970;', imgLabel:'Company update' },
+    carousel: { av:'AM', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Anjali Mehta', role:'Founder, Growth Media Agency', hook:'5 LinkedIn mistakes killing your agency’s reach (Slide 1 of 6)', text:'Swipe to see each one — and what we changed to fix them →<br><br>Used by 200+ agencies in our network. Save this.', tags:['#LinkedInTips','#AgencyGrowth','#ContentStrategy'], showImg:true, imgIco:'&#128196;', imgLabel:'PDF Carousel · 6 slides' }
+  },
+  ca: {
+    story: { av:'NP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Neeraj Patel', role:'Partner, Mehta & Associates', hook:'Most startup founders are leaving ₹3–8 lakhs on the table in tax savings every year.', text:'It’s not their fault. Their CA files correctly — but nobody does actual tax planning.<br><br>Filing and planning are two different services. Most people only pay for the first.<br><br>Here are 4 deductions almost every founder misses:→ Section 80D, 80E, 24(b), and HRA claims.', tags:['#TaxPlanning','#StartupIndia','#ITR','#FinanceIndia'], showImg:false },
+    insight: { av:'NP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Neeraj Patel', role:'Partner, Mehta & Associates', hook:'The best time to do tax planning is October. Not March.', text:'By March, most options are closed.<br><br>ELSS investments need time to lock in. HRA documentation needs to be filed with HR. Advance tax payments have deadlines in September and December.<br><br>March is for panic. October is for strategy.', tags:['#TaxPlanning','#ITR','#FinanceIndia'], showImg:false },
+    company: { av:'NP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Mehta & Associates', role:'Company Page &middot; Mumbai', hook:'We’re extending our consultation hours for the March filing season.', text:'Weekday appointments now available from 8am. Saturday mornings from 10am to 1pm.<br><br>First consultation is always free — no commitment, no pressure.<br><br>Call 98765 43210 or DM us to schedule.', tags:['#TaxFiling','#CAMumbai','#ITR'], showImg:true, imgIco:'&#128202;', imgLabel:'Company update · Branded' },
+    carousel: { av:'NP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Neeraj Patel', role:'Partner, Mehta & Associates', hook:'6 ITR mistakes that trigger notices from the Income Tax Department (Slide 1 of 7)', text:'We’ve seen all 6 of these in the past 2 months alone. Swipe before March 31st.→<br><br>Save this and share with anyone filing their own returns.', tags:['#IncomeTax','#ITR','#TaxIndia'], showImg:true, imgIco:'&#128196;', imgLabel:'PDF Carousel · 7 slides' }
+  },
+  startup: {
+    story: { av:'SK', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Suresh Kumar', role:'Founder, TechStart Bengaluru', hook:'AI will not replace your sales team. It will replace sales teams who don’t use AI to understand why deals are lost.', text:'Companies getting this right aren’t using AI to write more cold emails.<br><br>They’re using it to analyse every lost deal for patterns — what stage the conversation died at, what objection was never answered.<br><br>The output isn’t more outbound. It’s a sharper pitch.', tags:['#B2BSales','#StartupIndia','#SalesStrategy','#AITools'], showImg:false },
+    insight: { av:'SK', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Suresh Kumar', role:'Founder, TechStart Bengaluru', hook:'The first &#8377;50 lakh in startup revenue is harder than the next &#8377;5 crore. Here’s the only reason.', text:'The first &#8377;50L comes from people who trust you personally.<br><br>The next &#8377;5Cr comes from people who trust your brand, your case studies, and your system.<br><br>The transition between these two phases is where most B2B startups stall. Not because of the product. Because of the positioning.', tags:['#StartupIndia','#B2BGrowth','#Entrepreneurship'], showImg:false },
+    company: { av:'SK', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'TechStart Bengaluru', role:'Company Page &middot; Bengaluru', hook:'We just crossed 50 enterprise clients. Here’s what the first 49 taught us.', text:'Every single deal came from a referral, a LinkedIn post, or an inbound enquiry from content.<br><br>Zero from cold outreach. Zero from paid ads.<br><br>Build in public. Document the journey. Let your clients be your sales team.', tags:['#StartupIndia','#EnterpriseSales','#Bengaluru'], showImg:true, imgIco:'&#128640;', imgLabel:'Milestone update' },
+    carousel: { av:'SK', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Suresh Kumar', role:'Founder, TechStart Bengaluru', hook:'How we built a 50-client enterprise SaaS in Bengaluru without a sales team (Slide 1 of 8)', text:'Full breakdown. No fluff. Swipe →<br><br>The playbook we wish existed when we started 3 years ago.', tags:['#StartupIndia','#SaaS','#Bengaluru'], showImg:true, imgIco:'&#128196;', imgLabel:'PDF Carousel · 8 slides' }
+  },
+  realestate: {
+    story: { av:'WP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Whitefield Properties', role:'Company Page &middot; Bengaluru', hook:'We just completed our 100th property transaction in Whitefield. Here’s what the first 99 taught us.', text:'Buyers who did well shared 3 things:<br><br>→ Verified RERA registration before anything else<br>→ Visited the site twice — once with a structural engineer<br>→ Read the maintenance agreement before the sale agreement<br><br>Buyers who had problems skipped at least one of these.', tags:['#BengaluruRealestate','#Whitefield','#PropertyIndia'], showImg:false },
+    insight: { av:'WP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Suresh Kapoor', role:'Director, Whitefield Properties', hook:'Bengaluru property prices in Whitefield are up 34% since 2022. Here is what’s actually driving it.', text:'It’s not just demand. It’s supply compression.<br><br>New approvals in Whitefield take 18–24 months to convert to liveable inventory. Demand moved faster than the pipeline could.<br><br>The next 2 years look the same unless the ORR extension opens new corridors.', tags:['#BengaluruProperty','#RealEstateIndia','#Whitefield'], showImg:false },
+    company: { av:'WP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Whitefield Properties', role:'Company Page &middot; Bengaluru', hook:'New 2BHK listings in Whitefield — ₹78L onwards. 3 properties added this week.', text:'All RERA verified. All within 2km of the Outer Ring Road.<br><br>DM us or call 98765 43210 for site visit availability. Saturday and Sunday slots open this weekend.', tags:['#BengaluruProperty','#Whitefield','#2BHK'], showImg:true, imgIco:'&#127968;', imgLabel:'1.91:1 · Branded' },
+    carousel: { av:'WP', avC:'linear-gradient(135deg,#F97316,#EF4444)', name:'Suresh Kapoor', role:'Director, Whitefield Properties', hook:'10 things to check before buying a flat in Bengaluru in 2026 (Slide 1 of 11)', text:'We see buyers miss at least 3 of these every month.→<br><br>Save this before you sign anything.', tags:['#BengaluruRealestate','#PropertyBuying','#RERAIndia'], showImg:true, imgIco:'&#128196;', imgLabel:'PDF Carousel · 11 slides' }
+  }
+};
+
+var currentBiz = 'agency';
+var currentType = 'story';
+var genTimer = null;
+
+function renderPost(d) {
+  document.getElementById('lp-av').style.background = d.avC;
+  document.getElementById('lp-av').textContent = d.av;
+  document.getElementById('lp-name').textContent = d.name;
+  document.getElementById('lp-role').textContent = d.role;
+  document.getElementById('lp-hook').innerHTML = d.hook;
+  document.getElementById('lp-text').innerHTML = d.text;
+  var tagsEl = document.getElementById('lp-tags');
+  tagsEl.innerHTML = d.tags.map(function(t){return '<span class="lp-tag">'+t+'</span>';}).join('');
+  var imgEl = document.getElementById('lp-img');
+  if (d.showImg) {
+    imgEl.style.display = 'flex';
+    document.getElementById('lp-img-icon').innerHTML = d.imgIco;
+    document.getElementById('lp-img-label').textContent = d.imgLabel;
+  } else {
+    imgEl.style.display = 'none';
+  }
+}
+
+function triggerGen() {
+  if (genTimer) clearTimeout(genTimer);
+  var genEl = document.getElementById('liw-gen');
+  var post = document.getElementById('li-post');
+  var names = {agency:'Growth Media Agency',ca:'Mehta & Associates',startup:'TechStart',realestate:'Whitefield Properties'};
+  document.getElementById('gen-lbl').textContent = names[currentBiz];
+  post.style.opacity = '0.3';
+  genEl.classList.add('show');
+  genTimer = setTimeout(function(){
+    genEl.classList.remove('show');
+    post.style.opacity = '1';
+    renderPost(posts[currentBiz][currentType]);
+  }, 1000);
+}
+
+function setType(type) {
+  currentType = type;
+  document.querySelectorAll('.liw-tab').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('onclick').includes("'"+type+"'"));
+  });
+  triggerGen();
+}
+
+function switchBiz(biz) {
+  if (biz === currentBiz) return;
+  currentBiz = biz;
+  document.querySelectorAll('.liw-chip').forEach(function(el){
+    el.classList.toggle('active', el.getAttribute('onclick').includes("'"+biz+"'"));
+  });
+  triggerGen();
+}
+
+window.addEventListener('load', function(){
+  renderPost(posts['agency']['story']);
+});
+
+function faq(btn) {
+  var item = btn.closest('.faq-item');
+  var open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', String(open));
+}
+
+if ('IntersectionObserver' in window) {
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);} });
+  }, {threshold:.06,rootMargin:'0px 0px -28px 0px'});
+  document.querySelectorAll('[data-r]').forEach(function(el){obs.observe(el);});
+} else {
+  document.querySelectorAll('[data-r]').forEach(function(el){el.classList.add('vis');});
+}
+</script>
+</body>
+</html>
